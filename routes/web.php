@@ -12,20 +12,15 @@
 */
 
 Route::get('/', function () {
-<<<<<<< HEAD
-    return view('welcome');
-});
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-=======
-    
     return view('home');
 });
 
+Route::get('/marca/{marca}', 'CarController@verMarca');
+
+Route::get('/carro/{id}', 'CarController@verCarro');
+
+Route::post('/carro', 'CarController@adicionarCarro');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/casa', 'HomeController@index')->name('home');
->>>>>>> 4add309d564b772aec646decbc534e949b13080c

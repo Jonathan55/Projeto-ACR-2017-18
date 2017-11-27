@@ -16,7 +16,7 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('marca');
+            $table->string('marca_id')->unsigned()->index();
             $table->string('modelo');
             $table->string('combustivel');
             $table->string('cor');
@@ -26,6 +26,8 @@ class CreateCarsTable extends Migration
             $table->integer('ano');
             $table->decimal('preco', 8, 2);
             $table->integer('lugares');
+            $table->text('description');
+            $table->integer('user_id')->unsigned()->index();
         });
     }
 
