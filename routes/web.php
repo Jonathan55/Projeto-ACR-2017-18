@@ -14,11 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/test', function () {
-    echo 'TEST';
-});
-
-Route::get('/t', function(){
-	echo 'teste';
-});
