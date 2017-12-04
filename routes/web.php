@@ -15,12 +15,20 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/carro/adicionar', 'CarController@formAdicionarCarro');
+
 Route::get('/marca/{marca}', 'CarController@verMarca');
 
 Route::get('/carro/{id}', 'CarController@verCarro');
+
+Route::get('/carro/pesquisa', 'CarController@pesquisarCarro');
 
 Route::post('/carro', 'CarController@adicionarCarro');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+/*
+Slider mais recentes
+Mais vistos
+*/
