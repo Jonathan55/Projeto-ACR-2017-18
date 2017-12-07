@@ -23,10 +23,13 @@ class CreateCarsTable extends Migration
             $table->string('cilindrada');
             $table->boolean('usado');
             $table->integer('quantidade');
+            $table->integer('potencia');
+            $table->integer('quilometros');
             $table->integer('ano');
             $table->decimal('preco', 8, 2);
             $table->integer('lugares');
-            $table->text('description');
+            $table->text('foto');
+            $table->integer('visualizacoes');
             $table->integer('user_id')->unsigned()->index();
         });
     }

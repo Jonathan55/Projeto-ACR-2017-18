@@ -196,7 +196,7 @@
 
             <img id="div1" src="{{asset('storage/'.$carro->description)}}" alt="anuncio">
 
-            <h2>{{$carro->modelo}}</h2>
+            <h2>Marca {{$carro->modelo}}</h2>
 
             <hr>
 
