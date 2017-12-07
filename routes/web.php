@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/marca/{marca}', 'CarController@verMarca');
+Route::get('/marca/{marca_id}', 'CarController@verMarca');
 
 Route::get('/carro/{id}', 'CarController@verCarro');
 

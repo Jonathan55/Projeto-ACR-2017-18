@@ -13,7 +13,7 @@ class CreateCarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cars', function (Blueprint $table) {
+        Schema::create('carros', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->integer('marca_id')->unsigned()->index();
