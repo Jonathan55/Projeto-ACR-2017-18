@@ -6,15 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Marca;
 use App\Carro;
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
 class CarController extends Controller
 {
 
-<<<<<<< Updated upstream
 
 
     public function verCarro($id) {
@@ -27,7 +22,6 @@ class CarController extends Controller
 
     	}
         
-=======
     public function formAdicionarCarro(Request $request) {
         $marcas = Marca::all();
         return view('adicionarCarro', compact('marcas'));
@@ -44,7 +38,6 @@ class CarController extends Controller
         $carro->marca($marca);
         $user->carros()->save($carro);
         return redirect("/");
->>>>>>> Stashed changes
     }
 
     public function verMarca($marca_id) {
