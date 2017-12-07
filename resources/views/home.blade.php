@@ -190,11 +190,13 @@
 
     <ul class="flex-container">
 
+        @foreach($carros as $carro)
+
         <div class="flex-item">
 
-            <img id="div1" src="img/pic1.jpg" alt="anuncio">
+            <img id="div1" src="{{asset('storage/'.$carro->description)}}" alt="anuncio">
 
-            <h2>Porsche 356</h2>
+            <h2>{{$carro->modelo}}</h2>
 
             <hr>
 
@@ -202,19 +204,12 @@
 
                 <tbody class="table-hover">
 
-                    <tr>
-
-                        <td class="text-left">Modelo</td>
-
-                        <td class="text-left">356</td>
-
-                    </tr>
 
                     <tr>
 
                         <td class="text-left">Combustível</td>
 
-                        <td class="text-left">Gasolina</td>
+                        <td class="text-left">{{$carro->combustivel}}</td>
 
                     </tr>
 
@@ -222,7 +217,7 @@
 
                         <td class="text-left">Quilómetros</td>
 
-                        <td class="text-left">110.000 km</td>
+                        <td class="text-left">1722</td>
 
                     </tr>
 
@@ -230,7 +225,7 @@
 
                         <td class="text-left">Potência</td>
 
-                        <td class="text-left">75 cv</td>
+                        <td class="text-left">75</td>
 
                     </tr>
 
@@ -238,7 +233,7 @@
 
                         <td class="text-left">Cilindrada</td>
 
-                        <td class="text-left">1600 cm3</td>
+                        <td class="text-left">{{$carro->cilindrada}}</td>
 
                     </tr>
 
@@ -247,449 +242,7 @@
             </table>
 
         </div>
-
-        <div class="flex-item">
-            <img id="div1" src="img/pic2.jpg" alt="anuncio ">
-
-            <h2>Porsche 356</h2>
-
-            <hr>
-
-            <table class="table-fill">
-
-                <tbody class="table-hover">
-
-                    <tr>
-
-                        <td class="text-left">Modelo</td>
-
-                        <td class="text-left">356</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Combustível</td>
-
-                        <td class="text-left">Gasolina</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Quilómetros</td>
-
-                        <td class="text-left">110.000 km</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Potência</td>
-
-                        <td class="text-left">75 cv</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Cilindrada</td>
-
-                        <td class="text-left">1600 cm3</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-        </div>
-
-        <div class="flex-item">
-            <img id="div1" src="img/pic3.jpg" alt="anuncio ">
-            <h2>Porsche 356</h2>
-
-            <hr>
-
-            <table class="table-fill">
-
-                <tbody class="table-hover">
-
-                    <tr>
-
-                        <td class="text-left">Modelo</td>
-
-                        <td class="text-left">356</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Combustível</td>
-
-                        <td class="text-left">Gasolina</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Quilómetros</td>
-
-                        <td class="text-left">110.000 km</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Potência</td>
-
-                        <td class="text-left">75 cv</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Cilindrada</td>
-
-                        <td class="text-left">1600 cm3</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-        </div>
-
-        <div class="flex-item">
-            <img id="div1" src="img/pic4.jpg" alt="anuncio ">
-            <h2>Porsche 356</h2>
-
-            <hr>
-
-            <table class="table-fill">
-
-                <tbody class="table-hover">
-
-                    <tr>
-
-                        <td class="text-left">Modelo</td>
-
-                        <td class="text-left">356</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Combustível</td>
-
-                        <td class="text-left">Gasolina</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Quilómetros</td>
-
-                        <td class="text-left">110.000 km</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Potência</td>
-
-                        <td class="text-left">75 cv</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Cilindrada</td>
-
-                        <td class="text-left">1600 cm3</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-        </div>
-
-        <div class="flex-item">
-            <img id="div1" src="img/pic5.jpg" alt="anuncio ">
-            <h2>Porsche 356</h2>
-
-            <hr>
-
-            <table class="table-fill">
-
-                <tbody class="table-hover">
-
-                    <tr>
-
-                        <td class="text-left">Modelo</td>
-
-                        <td class="text-left">356</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Combustível</td>
-
-                        <td class="text-left">Gasolina</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Quilómetros</td>
-
-                        <td class="text-left">110.000 km</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Potência</td>
-
-                        <td class="text-left">75 cv</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Cilindrada</td>
-
-                        <td class="text-left">1600 cm3</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-        </div>
-
-        <div class="flex-item">
-            <img id="div1" src="img/pic6.jpg" alt="anuncio ">
-            <h2>Porsche 356</h2>
-
-            <hr>
-
-            <table class="table-fill">
-
-                <tbody class="table-hover">
-
-                    <tr>
-
-                        <td class="text-left">Modelo</td>
-
-                        <td class="text-left">356</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Combustível</td>
-
-                        <td class="text-left">Gasolina</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Quilómetros</td>
-
-                        <td class="text-left">110.000 km</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Potência</td>
-
-                        <td class="text-left">75 cv</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Cilindrada</td>
-
-                        <td class="text-left">1600 cm3</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-        </div>
-
-        <div class="flex-item">
-            <img id="div1" src="img/pic1.jpg" alt="anuncio ">
-            <h2>Porsche 356</h2>
-
-            <hr>
-
-            <table class="table-fill">
-
-                <tbody class="table-hover">
-
-                    <tr>
-
-                        <td class="text-left">Modelo</td>
-
-                        <td class="text-left">356</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Combustível</td>
-
-                        <td class="text-left">Gasolina</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Quilómetros</td>
-
-                        <td class="text-left">110.000 km</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Potência</td>
-
-                        <td class="text-left">75 cv</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Cilindrada</td>
-
-                        <td class="text-left">1600 cm3</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-        </div>
-
-        <div class="flex-item">
-            <img id="div1" src="img/pic2.jpg" alt="anuncio ">
-            <h2>Porsche 356</h2>
-
-            <hr>
-
-            <table class="table-fill">
-
-                <tbody class="table-hover">
-
-                    <tr>
-
-                        <td class="text-left">Modelo</td>
-
-                        <td class="text-left">356</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Combustível</td>
-
-                        <td class="text-left">Gasolina</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Quilómetros</td>
-
-                        <td class="text-left">110.000 km</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Potência</td>
-
-                        <td class="text-left">75 cv</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Cilindrada</td>
-
-                        <td class="text-left">1600 cm3</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-        </div>
-
-        <div class="flex-item">
-            <img id="div1" src="img/pic3.jpg" alt="anuncio ">
-            <h2>Porsche 356</h2>
-
-            <hr>
-
-            <table class="table-fill">
-
-                <tbody class="table-hover">
-
-                    <tr>
-
-                        <td class="text-left">Modelo</td>
-
-                        <td class="text-left">356</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Combustível</td>
-
-                        <td class="text-left">Gasolina</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Quilómetros</td>
-
-                        <td class="text-left">110.000 km</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Potência</td>
-
-                        <td class="text-left">75 cv</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Cilindrada</td>
-
-                        <td class="text-left">1600 cm3</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
+        @endforeach
 
 
     </ul>

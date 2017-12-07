@@ -21,6 +21,7 @@ class CarController extends Controller
     		return "Id incorreto";
 
     	}
+    }
         
     public function formAdicionarCarro(Request $request) {
         $marcas = Marca::all();
@@ -49,6 +50,7 @@ class CarController extends Controller
     	}else{
     		"Não existe essa marca!";
     	}
+    }
 
 
 }
