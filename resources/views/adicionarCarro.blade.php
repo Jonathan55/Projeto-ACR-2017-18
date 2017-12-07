@@ -1,33 +1,55 @@
-@extends('layouts.app')
+@extends('layouts.app') @section('content')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Adicionar Carro</div>
+<div id="middle">
+    <h2>Adicionar Anuncio</h2>
 
-                <div class="panel-body">
-                    Marca:
-                    <select name="marca_id">
-                    @foreach($marcas as $marca)
-                    <option value="{{$marca->id}}">{{$marca->marca}}</option>
-                    @endforeach
-                    </select>
-                    <br>
-                    Modelo:
-                    <input type="text" name="modelo">
-                    <br>
-                    Combustivel:
-                    <select name="combustivel">
-                    <option value="gasolina">gasolina</option>
-                    </select>
-                    Cor:
-                    <input type="text" name="cor">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+    <form class="form-horizontal" method="POST" action="{{ route('adicionarCarro') }}" enctype="multipart/form-data">
+        {{ csrf_field() }}
+        Marca:
+        <br>
+        <select id="campreg" name="marca">
+            @foreach ($marcas as $marca)
+                <option value="{{ $marca->id }}" {{ (old('marca') == $marca->id ? 'selected' : '' ) }}>{{ $marca->marca }}</option>
+            @endforeach
+        </select>
+        <br>
+        Modelo:
+        <br>
+        <input id="campreg" type="text" name="modelo" value="{{ old('modelo') }}">
+        <br>
+        Combustível:
+        <br>
+        <select id="campreg" name="combustivel">
+            <option {{ old('marca') == 'Gasolina' ? 'selected' : '' }}>Gasolina</option>
+            <option {{ old('marca') == 'Diesel' ? 'selected' : '' }}>Diesel</option>
+        </select>
+        <br>
+        Quilómetros:
+        <br>
+        <input id="campreg" type="text" name="quilometros" value="{{ old('quilometros') }}">
+        <br>
+        Potência:
+        <br>
+        <input id="campreg" type="text" name="potencia" value="{{ old('potencia') }}">
+        <br>
+        Cilindrada:
+        <br>
+        <input id="campreg" type="text" name="cilindrada" value="{{ old('cilindrada') }}">
+        <br>
+        Preço:
+        <br>
+        <input id="campreg" type="text" name="preco" value="{{ old('preco') }}">
+        <br>
+        Foto:
+        <br>
+        <input type="file" name="foto" value="Submeter Foto">
+        <br>
+        <br>
+        <input type="submit" value="Submeter Anuncio">
+    </form>
+
+
+
 </div>
+
 @endsection
