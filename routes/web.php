@@ -15,6 +15,18 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/utilizador/login', function () {
+    return view('login');
+})->name('utilizador.login');
+
+Route::get('/utilizador/registar', function () {
+    return view('registar');
+});
+
+Route::get('/anuncio/criar', function () {
+    return view('criarAnuncio');
+});
+
 Route::get('/carro/adicionar', 'CarController@formAdicionarCarro');
 
 Route::get('/marca/{marca}', 'CarController@verMarca');

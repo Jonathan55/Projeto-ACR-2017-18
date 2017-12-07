@@ -1,0 +1,726 @@
+#shopping-cart{
+ 
+  float:right;
+ 
+
+ 
+  margin:5px;
+ 
+}
+ 
+
+ 
+#user{
+ 
+  float:right;
+ 
+
+ 
+  margin:5px;
+ 
+}
+ 
+
+ 
+body { 
+ 
+  font-family: 'Open Sans', sans-serif;
+ 
+  color: #666;
+ 
+  margin:0px;
+ 
+  
+ 
+
+ 
+}
+ 
+
+ 
+/* STRUCTURE */
+ 
+
+ 
+#pagewrap {
+ 
+  width: auto;
+ 
+  
+ 
+}
+ 
+header {
+ 
+  padding: 10px;
+ 
+  background-color:#2C2E30;
+ 
+  
+ 
+  
+ 
+  
+ 
+}
+ 
+#content {
+ 
+  width: 180px;
+ 
+  float: left;
+ 
+  padding: 5px 45px 0px 45px;
+ 
+  margin-left: 0px;
+ 
+  border-radius: 5px;
+ 
+    
+ 
+    
+ 
+}
+ 
+
+ 
+#middle {
+ 
+  width: 75%; /* Account for margins + border values */
+ 
+  float: right;
+ 
+  padding: 5px 15px;
+ 
+  margin: 0px 0px 5px 10px;
+ 
+}
+ 
+
+ 
+#sidebar {
+ 
+  width: 270px;
+ 
+  padding: 5px 15px;
+ 
+  float: left;
+ 
+  
+ 
+  
+ 
+}
+ 
+footer {
+ 
+  clear: both;
+ 
+  padding: 5px 15px;
+ 
+  background-color:#2C2E30;
+ 
+  text-align:center;
+ 
+}
+ 
+
+ 
+#pesquisa{
+ 
+  padding: 0 15px;
+ 
+  margin: 0px 0px 5px 0px;
+ 
+  background-color:#3B4044;
+ 
+}
+ 
+#destaques{
+ 
+  margin: -5px 0px 5px 0px;
+ 
+
+ 
+  width:100%;
+ 
+  height:300px;
+ 
+  
+ 
+}
+ 
+#campreg{
+ 
+  width:60%;
+ 
+}
+ 
+/************************************************************************************
+ 
+MEDIA QUERIES
+ 
+*************************************************************************************/
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+/* for 1024px or less */
+ 
+@media screen and (max-width: 1024px) {
+ 
+  #campreg{
+ 
+    width:100%;
+ 
+  }
+ 
+  
+ 
+  #content {
+ 
+    width: 20%;
+ 
+    padding: 1% 4%;
+ 
+  }
+ 
+  #middle {
+ 
+    width: 63%;
+ 
+    padding: 1% 4%;
+ 
+    margin: 0px 0px 5px 5px;
+ 
+    float: right;
+ 
+  }
+ 
+  
+ 
+  #sidebar {
+ 
+    clear: both;
+ 
+    padding: 1% 4%;
+ 
+    width: auto;
+ 
+    float: none;
+ 
+  }
+ 
+
+ 
+  header, footer {
+ 
+    padding: 1% 4%;
+ 
+  }
+ 
+  #pesquisa {
+ 
+    padding: 4% 4%;
+ 
+  }
+ 
+  #imgBanner{
+ 
+  object-fit: cover;
+ 
+  width: 100%;
+ 
+  
+ 
+}
+ 
+}
+ 
+
+ 
+/* for 700px or less */
+ 
+@media screen and (max-width: 600px) {
+ 
+
+ 
+  #content {
+ 
+    width: auto;
+ 
+    float: none;
+ 
+  }
+ 
+  
+ 
+  #middle {
+ 
+    width: auto;
+ 
+    float: none;
+ 
+    margin-left: 0px;
+ 
+  }
+ 
+  
+ 
+  #sidebar {
+ 
+    width: auto;
+ 
+    float: none;
+ 
+  }
+ 
+  #imgBanner{
+ 
+  
+ 
+  
+ 
+  object-fit: cover;
+ 
+  width: 100%;
+ 
+  
+ 
+}
+ 
+
+ 
+}
+ 
+
+ 
+/* for 480px or less */
+ 
+@media screen and (max-width: 480px) {
+ 
+
+ 
+  header {
+ 
+    height: auto;
+ 
+  }
+ 
+  h1 {
+ 
+    font-size: 2em;
+ 
+  }
+ 
+  #sidebar {
+ 
+    display: none;
+ 
+  }
+ 
+  #imgBanner{
+ 
+  
+ 
+  
+ 
+  object-fit: cover;
+ 
+  width: 100%;
+ 
+  
+ 
+}
+ 
+
+ 
+
+ 
+}
+ 
+
+ 
+#content {
+ 
+  background: #f8f8f8;
+ 
+}
+ 
+#sidebar {
+ 
+  background: #f0efef;
+ 
+}
+ 
+
+ 
+#pagewrap, header, #content, #middle, #sidebar, footer, #pesquisa {
+ 
+  /*border: solid 1px #ccc;*/
+ 
+}
+ 
+
+ 
+
+ 
+/*galeria*/
+ 
+
+ 
+div.gallery {
+ 
+    border: 1px solid #ccc;
+ 
+  margin-top:30px;
+ 
+
+ 
+}
+ 
+
+ 
+div.gallery img {
+ 
+    width: 30%;
+ 
+    height: auto;
+ 
+}
+ 
+
+ 
+div.desc {
+ 
+    padding: 0px;
+ 
+    text-align: left;
+ 
+}
+ 
+
+ 
+.responsive {
+ 
+    padding: 0 20px;
+ 
+    float: left;
+ 
+    width: 24.99999%;
+ 
+}
+ 
+
+ 
+
+ 
+/*pesquisa*/
+ 
+input#pesquisa[type=text] {
+ 
+  margin:5px 5px 5px 5px;
+ 
+    width: 140px;
+ 
+    box-sizing: border-box;
+ 
+    border: 1px solid #2C2E30;
+ 
+    border-radius: 8px;
+ 
+    font-size: 18px;
+ 
+    background-color: #26292A;
+ 
+    background-image: url("../icons/pesquisa.png");
+ 
+  background-size: 30px;
+ 
+    background-position: 1px 1px; 
+ 
+    background-repeat: no-repeat;
+ 
+    padding: 5px 5px 5px 40px;
+ 
+    -webkit-transition: width 0.4s ease-in-out;
+ 
+    transition: width 0.4s ease-in-out;
+ 
+  color:white;
+ 
+  outline:none;
+ 
+   
+ 
+}
+ 
+
+ 
+input#pesquisa[type=text]:focus {
+ 
+    width: 20%;
+ 
+  
+ 
+}
+ 
+
+ 
+
+ 
+/*flexi qualquee coisa*/
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+.flex-container {
+ 
+  padding: 0;
+ 
+  margin: 0;
+ 
+  list-style: none;
+ 
+  font-size: 12px;
+ 
+  display: -webkit-box;
+ 
+  display: -moz-box;
+ 
+  display: -ms-flexbox;
+ 
+  display: -webkit-flex;
+ 
+  display: flex;
+ 
+  
+ 
+  -webkit-flex-flow: row wrap;
+ 
+  justify-content: space-around;
+ 
+}
+ 
+
+ 
+.flex-item {
+ 
+  background: #E1E1E1;
+ 
+  padding: 5px;
+ 
+  width: 290px;
+ 
+  height: 350px;
+ 
+  margin-top: 10px;
+ 
+  margin-bottom:20px;
+ 
+  border-radius:4px;
+ 
+  line-height: 10px;
+ 
+  color: #3B4044;
+ 
+  font-weight: bold;
+ 
+  
+ 
+  text-align: center;
+ 
+}
+ 
+
+ 
+/* *------------------------  */
+ 
+
+ 
+input[type=text], select , input[type=password] {
+ 
+    width: 100%;
+ 
+    padding: 12px 20px;
+ 
+    margin: 8px 0;
+ 
+    display: inline-block;
+ 
+    border: 1px solid #ccc;
+ 
+    border-radius: 4px;
+ 
+    box-sizing: border-box;
+ 
+}
+ 
+
+ 
+
+ 
+/*carrosel*/
+ 
+
+ 
+  #imgBanner{
+ 
+  
+ 
+  
+ 
+  object-fit: cover;
+ 
+  width: 100%;
+ 
+  height:305px;
+ 
+  
+ 
+}
+ 
+
+ 
+
+ 
+#div1{
+ 
+  max-width: 90%; height: auto;
+ 
+  margin-top:10px;
+ 
+  border-radius:4px;
+ 
+}
+ 
+
+ 
+div.table-title {
+ 
+   display: block;
+ 
+  margin: auto;
+ 
+  max-width: 600px;
+ 
+  padding:5px;
+ 
+  width: 100%;
+ 
+}
+ 
+
+ 
+.table-title h3 {
+ 
+   color: #fafafa;
+ 
+   font-size: 30px;
+ 
+   font-weight: 400;
+ 
+   font-style:normal;
+ 
+   font-family: "Roboto", helvetica, arial, sans-serif;
+ 
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+ 
+   text-transform:uppercase;
+ 
+}
+ 
+
+ 
+
+ 
+/*** Table Styles **/
+ 
+
+ 
+table.table-fill{
+ 
+  margin-left:auto; 
+ 
+    margin-right:auto;
+ 
+}
+ 
+tr {
+ 
+  border-top: 1px solid #C1C3D1;
+ 
+  border-bottom-: 1px solid #C1C3D1;
+ 
+  color:#666B85;
+ 
+  font-size:16px;
+ 
+  font-weight:normal;
+ 
+ 
+ 
+}
+ 
+  
+ 
+td {
+ 
+  background:#EBEBEB;
+ 
+  padding:5px;
+ 
+  text-align:left;
+ 
+  font-weight:300;
+ 
+  font-size:18px;
+ 
+ 
+ 
+}
+ 
+
+ 
+
+ 
+/*pagina registo */
+ 
+.registo {
+ 
+  background: #E1E1E1;
+ 
+  padding: 20px;
+ 
+  width: 650px;
+ 
+  height: 500px;
+ 
+  margin-top: 10px;
+ 
+  margin-bottom:20px;
+ 
+  border-radius:4px;
+ 
+  line-height: 10px;
+ 
+  color: #3B4044;
+ 
+  font-weight: bold;
+ 
+  text-align: left;
+ 
+}
+ 

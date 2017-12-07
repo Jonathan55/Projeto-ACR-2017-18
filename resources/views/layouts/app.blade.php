@@ -11,70 +11,79 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+<div id="pagewrap">
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
+<header>
+ 
+    <h1>{{ config('app.name', 'Laravel') }}</h1>
+ 
+    <!--Script imagens a passar de 5 em 5s-->
+ 
+    <script type="text/javascript">
+ 
+            var picPaths = ['img/pic1.jpg','img/pic2.jpg','img/pic3.jpg','img/pic4.jpg','img/pic5.jpg'];
+ 
+            var curPic = -1;
+ 
+            var imgO = new Array();
+ 
+            for(i=0; i < picPaths.length; i++) {
+ 
+                imgO[i] = new Image();
+ 
+                imgO[i].src = picPaths[i];
+ 
+            }
+ 
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+ 
+            function swapImage() {
+ 
+                curPic = (++curPic > picPaths.length-1)? 0 : curPic;
+ 
+                imgCont.src = imgO[curPic].src;
+ 
+                setTimeout(swapImage,5000);
+ 
+            }
+ 
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+ 
+            window.onload=function() {
+ 
+                imgCont = document.getElementById('imgBanner');
+ 
+                swapImage();
+ 
+            }
+ 
+    </script>
+ 
+</header>
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+<div id="pesquisa">
+ 
+    <input id="pesquisa" type="text" name="pesquisa" placeholder="Pesquisa...">
+ 
+    <a href=""> <img id="shopping-cart" src="./icons/shopping-cart.png" alt="shopping-cart"></a>
+ 
+    <a href="{{ route('utilizador.login') }}"> <img id="user" src="./icons/user.png" alt="user"></a>
+ 
+</div>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+@yield('content')
 
-        @yield('content')
-    </div>
+<footer>
+ 
+    <p>© 2017 ACR</p><p>
+ 
+</p></footer>
+ 
+</div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
