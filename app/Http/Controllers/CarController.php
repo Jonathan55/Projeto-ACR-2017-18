@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Marca;
 
 class CarController extends Controller
 {
 
-    public function adicionarCarro() {
-
+    public function formAdicionarCarro(Request $request) {
+        $marcas = Marca::all();
+        //return view('adicionarCarro', compact('marcas'));
+        dd($marcas);
     }
 
     public function verCarro(Request $request) {
-        dd($request);
+        return 'verCarro';
     }
 
 }
