@@ -24,23 +24,23 @@
 </header>
 
 <div id="pesquisa">
- 
+    
     <input id="pesquisa" type="text" name="pesquisa" placeholder="Pesquisa...">
  
     @guest
-        <a href="{{ route('login') }}" id="user">Entrar</a>
-        <a href="{{ route('register') }}" id="user">Registar</a>
+        <a href="{{ route('login') }}" id="user" style="color: white;">Entrar</a>
+        <a href="{{ route('register') }}" id="user" style="color: white;">Registar</a>
     @else
-        <a href="#" id="user">{{ Auth::user()->name }}</a>
-        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <a href="{{ route('logout') }}" id="user" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a>
+        <a href="#" id="user" style="color: white;">{{ Auth::user()->name }}</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
             {{ csrf_field() }}
         </form>
     @endguest
 
-    <a href=""> <img id="shopping-cart" src="./icons/shopping-cart.png" alt="shopping-cart"></a>
+    <a href=""> <img id="shopping-cart" src="{{ asset('icons/shopping-cart.png') }}" alt="shopping-cart"></a>
  
-    <a href="{{ route('login') }}"> <img id="user" src="./icons/user.png" alt="user"></a>
+    <a href="{{ route('login') }}"> <img id="user" src="{{ asset('icons/user.png') }}" alt="user"></a>
  
 </div>
 

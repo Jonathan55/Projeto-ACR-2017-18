@@ -80,25 +80,9 @@
 
         <select name="marca">
 
-            <option value="" selected=""> Marca </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-        </select>
-
-        <select name="modelo">
-
-            <option value="" selected=""> Modelo </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
+            @foreach($marcas as $marca)
+                <option>{{$marca->marca}}</option>
+            @endforeach
 
         </select>
 
@@ -180,6 +164,8 @@
 
         </select>
 
+        <input type="submit" value="Pesquisar">
+
     </form>
 
 </div>
@@ -194,7 +180,7 @@
 
         <div class="flex-item">
 
-            <img id="div1" src="{{asset('storage/'.$carro->description)}}" alt="anuncio">
+            <img id="div1" src="{{asset('storage/'.$carro->foto)}}" alt="anuncio">
 
             <h2>Marca {{$carro->modelo}}</h2>
 
@@ -204,6 +190,7 @@
 
                 <tbody class="table-hover">
 
+                    <!-- Só Marca, Modelo, Preço, Usado ou Novo -->
 
                     <tr>
 

@@ -10,19 +10,15 @@ use App\Carro;
 class CarController extends Controller
 {
 
-
-
     public function verCarro($id) {
     	$carro = Carro::find($id);
     	if($carro){
     		return "Existe o Carro";
-
     	}else{
     		return "Id incorreto";
-
     	}
     }
-        
+
     public function formAdicionarCarro(Request $request) {
         $marcas = Marca::all();
         return view('adicionarCarro', compact('marcas'));
@@ -30,14 +26,19 @@ class CarController extends Controller
 
     public function adicionarCarro(Request $request) {
         $marca = Marca::find($request->marca);
+
         $user = Auth::user();
+        // Implementar MultiFoto
         $foto = $request->file('foto')->store('carros', 'public');
         $carro = new Carro;
         $carro->modelo = $request->modelo;
         $carro->preco = $request->preco;
-        $carro->description = $foto;
-        $carro->marca($marca);
+        $carro->foto = $foto;
+        //$carro->marca()->associate($marca);
         $user->carros()->save($carro);
+        // $carro->marca($marca);
+     
+        
         return redirect("/");
     }
 
@@ -46,11 +47,9 @@ class CarController extends Controller
     	if($marca){
     		//return "Marca do carro";
     		dd($marca->carros());
-
     	}else{
     		"Não existe essa marca!";
     	}
     }
-
 
 }

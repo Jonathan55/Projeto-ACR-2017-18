@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Carro;
 use App\Http\Resources\User as UserResource;
 
 /*
@@ -21,4 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('auth:api')->get('/users', function() {
     return User::all();
+});
+
+Route::get('/carros', function() {
+    return Carro::all();
 });

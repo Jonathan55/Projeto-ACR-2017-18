@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use App\Marca;
 use App\Carro;
 
 class HomeController extends Controller
@@ -26,8 +27,11 @@ class HomeController extends Controller
     public function index()
     {
         $carros = Carro::all();
+        $marcas = Marca::all();
+        //$max_preco = DB::table('carros')->max('price');
+        //$min_preco = DB::table('carros')->min('price');
 
-        return view('home', compact('carros'));
+        return view('home', compact('carros','marcas'));
 
     }
 }
