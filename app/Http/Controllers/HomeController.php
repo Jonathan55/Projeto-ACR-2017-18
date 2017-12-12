@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
-use Illuminate\Http\Request;
-use App\Marca;
+use Illuminate\Support\Facades\DB;
 use App\Carro;
+use App\Marca;
 
 class HomeController extends Controller
 {
@@ -26,13 +24,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $carros = Carro::with(['marca','user'])->get();
-        //$carros = Carro::all();
+        $carros = Carro::with(['marca', 'user'])->get();
         $marcas = Marca::all();
-        //$max_preco = DB::table('carros')->max('price');
-        //$min_preco = DB::table('carros')->min('price');
-
-        return view('home', compact('carros','marcas'));
-
+        $preco_minimo = DB::table('carros')->min('preco');
+        $preco_maximo = DB::table('carros')->max('preco');
+        $ano_minimo = DB::table('carros')->min('ano');
+        $ano_maximo = DB::table('carros')->max('ano');
+        $quilometros_minimo = DB::table('carros')->min('quilometros');
+        $quilometros_maximo = DB::table('carros')->max('quilometros');
+        return view('home', compact(
+            'carros',
+            'marcas',
+            'preco_maximo',
+            'preco_minimo',
+            'ano_minimo',
+            'ano_maximo',
+            'quilometros_minimo',
+            'quilometros_maximo'
+        ));
+        
     }
 }
