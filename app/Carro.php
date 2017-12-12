@@ -9,7 +9,7 @@ class Carro extends Model
     
     public function marca()
     {
-        return $this->hasOne('App\Marca');
+        return $this->belongsTo('App\Marca');
     }
 
     public function user()

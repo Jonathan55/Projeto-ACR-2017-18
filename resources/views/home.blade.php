@@ -4,33 +4,27 @@
 
 <script type="text/javascript">
 
-    var picPaths = ['img/pic1.jpg', 'img/pic2.jpg', 'img/pic3.jpg', 'img/pic4.jpg', 'img/pic5.jpg'];
-    var curPic = -1;
-    var imgO = new Array();
-
-    for (i = 0; i < picPaths.length; i++) {
-        imgO[i] = new Image();
-        imgO[i].src = picPaths[i];
-    }
+    const fotos = ['img/pic1.jpg', 'img/pic2.jpg', 'img/pic3.jpg', 'img/pic4.jpg', 'img/pic5.jpg']
+    var fotoAtual = 0
 
     function swapImage() {
-        curPic = (++curPic > picPaths.length - 1) ? 0 : curPic;
-        imgCont.src = imgO[curPic].src;
-        setTimeout(swapImage, 5000);
+        let proximaFoto = ( fotoAtual == fotos.length-1 ) ? 0 : fotoAtual+1
+        document.getElementById('imgBanner').src = fotos[proximaFoto]
+        fotoAtual = proximaFoto
     }
 
     window.onload = function () {
-        imgCont = document.getElementById('imgBanner');
-        swapImage();
+        if (fotos.length) {
+            document.getElementById('imgBanner').src = fotos[fotoAtual]
+            setInterval(swapImage, 5000)
+        }
     }
 
 </script>
 
 <div id="destaques">
 
-    <!--codigo imagens a passar de 5 em 5s-->
-
-    <img id="imgBanner" src="http://localhost/public/img/pic4.jpg" alt="">
+    <img id="imgBanner" src="" alt="">
 
 </div>
 
@@ -182,7 +176,7 @@
 
             <img id="div1" src="{{asset('storage/'.$carro->foto)}}" alt="anuncio">
 
-            <h2>Marca {{$carro->modelo}}</h2>
+            <h2>{{$carro->marca->marca}} {{$carro->modelo}}</h2>
 
             <hr>
 
@@ -194,25 +188,17 @@
 
                     <tr>
 
+                        <td class="text-left">Utilizador</td>
+
+                        <td class="text-left">{{$carro->user->name}}</td>
+
+                    </tr>
+
+                    <tr>
+
                         <td class="text-left">Combustível</td>
 
                         <td class="text-left">{{$carro->combustivel}}</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Quilómetros</td>
-
-                        <td class="text-left">1722</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-left">Potência</td>
-
-                        <td class="text-left">75</td>
 
                     </tr>
 

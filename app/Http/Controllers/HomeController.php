@@ -26,7 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $carros = Carro::all();
+        $carros = Carro::with(['marca','user'])->get();
+        //$carros = Carro::all();
         $marcas = Marca::all();
         //$max_preco = DB::table('carros')->max('price');
         //$min_preco = DB::table('carros')->min('price');

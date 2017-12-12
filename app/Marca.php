@@ -8,7 +8,7 @@ class Marca extends Model
 {
     
     public function carros() {
-        return $this->belongsToMany('App\Carro');
+        return $this->hasMany('App\Carro');
     }
     
 }
