@@ -12,12 +12,8 @@ class CarController extends Controller
 
     public function verCarro($id)
     {
-        $carro = Carro::find($id);
-        if ($carro) {
-            return "Existe o Carro";
-        } else {
-            return "Id incorreto";
-        }
+        $carro = Carro::findOrFail($id);
+        return $carro;
     }
 
     public function formAdicionarCarro(Request $request)

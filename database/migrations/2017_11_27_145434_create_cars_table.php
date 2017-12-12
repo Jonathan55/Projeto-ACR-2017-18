@@ -17,20 +17,21 @@ class CreateCarsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('marca_id')->unsigned()->index();
-            $table->string('modelo');
-            $table->string('combustivel');
-            $table->string('cor');
-            $table->string('cilindrada');
-            $table->boolean('usado');
-            $table->integer('quantidade');
-            $table->integer('potencia');
-            $table->integer('quilometros');
-            $table->integer('ano');
-            $table->decimal('preco', 8, 2);
-            $table->integer('lugares');
-            $table->text('foto');
-            $table->integer('visualizacoes');
+            $table->string('modelo')->nullable();
+            $table->string('combustivel')->nullable();
+            $table->string('cor')->nullable();
+            $table->string('cilindrada')->nullable();
+            $table->boolean('usado')->nullable();
+            $table->integer('quantidade')->nullable();
+            $table->integer('potencia')->nullable();
+            $table->integer('quilometros')->nullable();
+            $table->integer('ano')->nullable();
+            $table->decimal('preco', 8, 2)->nullable();
+            $table->integer('lugares')->nullable();
+            $table->text('foto')->nullable();
+            $table->integer('visualizacoes')->nullable();
             $table->integer('user_id')->unsigned()->index();
+            $table->text('descricao')->nullable();
         });
     }
 

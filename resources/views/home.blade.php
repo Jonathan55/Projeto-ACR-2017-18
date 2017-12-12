@@ -86,11 +86,9 @@
 
             <option value="" selected=""> de </option>
 
-            <option value=""> </option>
+            <option value="">{{ $preco_minimo }}</option>
 
-            <option value=""> </option>
-
-            <option value=""> </option>
+            <option value="">{{ $preco_maximo }}</option>
 
         </select>
 
