@@ -31,9 +31,26 @@ class CarController extends Controller
         $user = Auth::user();
         $marca = Marca::findOrFail($request->marca);
 
+        $validatedData = $request->validate([
+                'modelo' => 'required',
+                
+        ]);
+
         $carro = new Carro;
         $carro->modelo = $request->modelo;
         $carro->preco = $request->preco;
+        $carro->cor = $request->cor;
+        $carro->quantidade = $request->quantidade;
+        $carro->ano = $request->ano;
+        $carro->potencia = $request->potencia;
+        $carro->cilindrada = $request->cilindrada;
+        $carro->lugares = $request->lugares;
+        $carro->combustivel = $request->combustivel;
+        $carro->usado = $request->usado;
+        $carro->quilometros = $request->quilometros;
+        $carro->descricao = $request->descricao;
+        $carro->caixa = $request->caixa;
+        $carro->visualizacoes=0;
         $carro->foto = $request->file('foto')->store('carros', 'public');
         $carro->marca()->associate($marca);
         $user->carros()->save($carro);

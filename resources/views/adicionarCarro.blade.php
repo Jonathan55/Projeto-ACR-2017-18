@@ -5,6 +5,16 @@
 
     <form class="form-horizontal" method="POST" action="{{ route('adicionarCarro') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
         Marca:
         <br>
         <select id="campreg" name="marca">
@@ -39,6 +49,41 @@
         Preço:
         <br>
         <input id="campreg" type="text" name="preco" value="{{ old('preco') }}">
+        <br>
+        Estado:
+        <br>
+        <select id="campreg" name="usado">
+            <option value="0" {{ old('marca') == '0' ? 'selected' : ''}}>Novo</option>
+            <option value="1" {{ old('marca') == '1' ? 'selected' : ''}}>Usado</option>
+        </select>
+        <br>
+        Ano:
+        <br>
+        <input id="campreg" type="text" name="ano" value="{{ old('ano')}}">
+        <br>
+        Lugares:
+        <br>
+        <input id="campreg" type="text" name="lugares" value="{{ old('ano')}}">
+        <br>
+        Quantidade:
+        <br>
+        <input id="campreg" type="text" name="quantidade" value="{{ old('quantidade')}}">
+        <br>
+        Cor:
+        <br>
+        <input id="campreg" type="text" name="cor" value="{{ old('cor')}}">
+        <br>
+        Caixa de Velocidades:
+        <br>
+        <select id="campreg" name="caixa">
+            <option {{ old('marca') == 'Manual' ? 'selected' : ''}}>Manual</option>
+            <option {{ old('marca') == 'Automatica' ? 'selected' : ''}}>Automática</option>
+            <option {{ old('marca') == 'Semi-Automatica' ? 'selected' : ''}}>Semi-Automática</option>
+        </select>
+        <br>
+        Descrição:
+        <br>
+        <input id="campreg" type="text" name="descricao" value="{{ old('descricao')}}">
         <br>
         Foto:
         <br>
