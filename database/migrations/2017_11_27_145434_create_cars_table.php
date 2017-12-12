@@ -32,6 +32,7 @@ class CreateCarsTable extends Migration
             $table->integer('visualizacoes')->nullable();
             $table->integer('user_id')->unsigned()->index();
             $table->text('descricao')->nullable();
+            $table->string('caixa')->nullable();
         });
     }
 
