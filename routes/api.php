@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\User;
 use App\Carro;
+use App\Marca;
 use App\Http\Resources\User as UserResource;
 
 /*
@@ -25,5 +26,9 @@ Route::middleware('auth:api')->get('/users', function() {
 });
 
 Route::get('/carros', function() {
-    return Carro::all();
+    return Carro::with(['marca','user'])->get();
+});
+
+Route::get('/marcas', function() {
+    return Marca::with(['carros'])->get();
 });
