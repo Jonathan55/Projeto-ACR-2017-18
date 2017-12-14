@@ -4,157 +4,78 @@
 
 <script type="text/javascript">
 
-    const fotos = ['img/pic1.jpg', 'img/pic2.jpg', 'img/pic3.jpg', 'img/pic4.jpg', 'img/pic5.jpg']
-    var fotoAtual = 0
+    const carros = {!! $carros_mais_vistos->toJson() !!}
+    var carro_atual = 0
 
     function swapImage() {
-        let proximaFoto = ( fotoAtual == fotos.length-1 ) ? 0 : fotoAtual+1
-        document.getElementById('imgBanner').src = fotos[proximaFoto]
-        fotoAtual = proximaFoto
+        carro_atual = ( carro_atual == carros.length-1 ) ? 0 : carro_atual+1
+        document.getElementById('imgBanner').src = './storage/'+carros[carro_atual].foto
+        document.getElementById('linkBanner').href = './carro/'+carros[carro_atual].id
     }
 
     window.onload = function () {
-        if (fotos.length) {
-            document.getElementById('imgBanner').src = fotos[fotoAtual]
+        if (carros.length) {
+            document.getElementById('imgBanner').src = './storage/'+carros[carro_atual].foto
+            document.getElementById('linkBanner').href = './carro/'+carros[carro_atual].id
             setInterval(swapImage, 5000)
         }
     }
 
 </script>
-
+@if($carros_mais_vistos->count() > 0)
 <div id="destaques">
-
-    <img id="imgBanner" src="" alt="">
-
+    <a id="linkBanner" href=""><img id="imgBanner" src="" alt=""></a>
 </div>
-
+@endif
 <div id="content">
 
-    <h2>Veiculos</h2>
+    <h2>Pesquisar</h2>
 
-    <form>
+    <form action="{{ route('pesquisarCarro') }}">
 
-        <table class="">
+        <h4>Tipo</h4>
 
-            <thead>
+        <select name="tipo">
+            <option value="todos" selected>Todos</option>
+            <option value="novos">Novos</option>
+            <option value="usados">Usados</option>
+        </select>
 
-                <tr>
-
-                    <th>
-
-                        <input type="checkbox" id="" name="Novos" value="">
-
-                        <label>Novos</label>
-
-                    </th>
-
-                    <th>
-
-                        <input type="checkbox" id="" name="Usados" value="">
-
-                        <label>Usados</label>
-
-                    </th>
-
-                    <th>
-
-                        <input type="checkbox" id="" name="Todos" value="">
-
-                        <label>Todos</label>
-
-                    </th>
-
-                </tr>
-
-            </thead>
-
-        </table>
-
-        <p>Marca e Modelo</p>
+        <h4>Marca</h4>
 
         <select name="marca">
 
             @foreach($marcas as $marca)
-                <option>{{$marca->marca}}</option>
+                <option value="{{ $marca->id }}">{{ $marca->marca }}</option>
             @endforeach
 
         </select>
 
-        <p>Preço</p>
+        <h4>Preço</h4>
 
-        <select name="preço">
+        <label>de</label><input type="text" name="preco_min" value="{{ $preco_min }}">
+        <label>até</label><input type="text" name="preco_max" value="{{ $preco_max }}">
 
-            <option value="" selected=""> de </option>
+        <h4>Ano</h4>
 
-            <option value="">{{ $preco_minimo }}</option>
+        <label>de</label><input type="text" name="ano_min" value="{{ $ano_min }}">
+        <label>até</label><input type="text" name="ano_max" value="{{ $ano_max }}">
 
-            <option value="">{{ $preco_maximo }}</option>
+        <h4>Quilómetros</h4>
 
+        <label>de</label><input type="text" name="quilometros_min" value="{{ $quilometros_min }}">
+        <label>até</label><input type="text" name="quilometros_max" value="{{ $quilometros_max }}">
+
+        <h4>Ordenar por</h4>
+        <select name="ordenar">
+            <option value="preco" selected>Preço</option>
+            <option value="ano">Ano</option>
+            <option value="quilometros">Quilometros</option>
         </select>
-
-        <select name="Icecream Flavours">
-
-            <option value="" selected=""> até </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-        </select>
-
-        <p>Ano</p>
-
-        <select name="ano">
-
-            <option value="" selected=""> de </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-        </select>
-
-        <select name="Icecream Flavours">
-
-            <option value="" selected=""> até </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-        </select>
-
-        <p>Quilómetros</p>
-
-        <select name="quilometros">
-
-            <option value="" selected=""> de </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-        </select>
-
-        <select name="Icecream Flavours">
-
-            <option value="" selected=""> até </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-            <option value=""> </option>
-
-        </select>
+        <br>
+        <input type="radio" name="ordem" value="ASC" checked="checked">ASC
+        <input type="radio" name="ordem" value="DESC">DESC
+        <br><br>
 
         <input type="submit" value="Pesquisar">
 
@@ -164,15 +85,17 @@
 
 <div id="middle">
 
-    <h2>Destaques</h2>
+    <h2>Mais Recentes</h2>
 
     <ul class="flex-container">
 
-        @foreach($carros as $carro)
+        @foreach($carros_mais_recentes as $carro)
 
         <div class="flex-item">
 
-            <img id="div1" src="{{asset('storage/'.$carro->foto)}}" alt="anuncio">
+            <a href="{{ route('verCarro', $carro->id) }}">
+                <img id="div1" src="{{asset('storage/'.$carro->foto)}}" alt="anuncio">
+            </a>
 
             <h2>{{$carro->marca->marca}} {{$carro->modelo}}</h2>
 
@@ -216,6 +139,11 @@
         @endforeach
 
 
+    </ul>
+
+    <h2>Recomendados</h2>
+
+    <ul class="flex-container">
     </ul>
 
 </div>

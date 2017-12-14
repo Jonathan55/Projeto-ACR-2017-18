@@ -550,7 +550,7 @@ input#pesquisa[type=text]:focus {
  
 
  
-input[type=text], select , input[type=password] {
+input[type=text], select, input[type=password], input[type=submit] {
  
     width: 100%;
  
@@ -662,7 +662,7 @@ tr {
  
   border-top: 1px solid #C1C3D1;
  
-  border-bottom-: 1px solid #C1C3D1;
+  border-bottom: 1px solid #C1C3D1;
  
   color:#666B85;
  

@@ -7,7 +7,8 @@
 	
     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
-        Nome:<br>
+        Nome:
+        <br>
         <input id="campreg" type="text" name="name" value="{{ old('name') }}" style="{{ $errors->has('name') ? ' border-color: red;' : '' }}">
         @if ($errors->has('name'))
             <br>
@@ -17,7 +18,8 @@
             <br>
         @endif
         <br>
-        Email:<br>
+        Email:
+        <br>
         <input id="campreg" type="text" name="email" value="{{ old('email') }}" style="{{ $errors->has('email') ? ' border-color: red;' : '' }}">
         @if ($errors->has('email'))
             <br>
@@ -27,7 +29,8 @@
             <br>
         @endif
         <br>
-        Password:<br>
+        Password:
+        <br>
         <input id="campreg" type="password" name="password" style="{{ $errors->has('password') ? ' border-color: red;' : '' }}">
         @if ($errors->has('password'))
             <br>
@@ -37,10 +40,11 @@
             <br>
         @endif
         <br>
-        Confirmar Password:<br>
+        Confirmar Password:
+        <br>
         <input id="campreg" type="password" name="password_confirmation" style="{{ $errors->has('password') ? ' border-color: red;' : '' }}">
         <br>
-        <input type="submit" value="Registar">
+        <input id="campreg" type="submit" value="Registar">
 	</form>
 
 	</div>

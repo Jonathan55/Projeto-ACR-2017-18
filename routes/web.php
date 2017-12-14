@@ -16,6 +16,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/carro/adicionar', 'CarController@formAdicionarCarro')->name('formAdicionarCarro')->middleware('auth');
 Route::post('/carro/adicionar', 'CarController@adicionarCarro')->name('adicionarCarro')->middleware('auth');
 Route::get('/carro/{id}', 'CarController@verCarro')->name('verCarro');
+Route::get('/pesquisa', 'CarController@pesquisarCarro')->name('pesquisarCarro');
+Route::get('/utilizador/{id}', 'UserController@verUtilizador')->name('verUtilizador');
 
 Auth::routes();
 

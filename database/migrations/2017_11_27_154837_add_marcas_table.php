@@ -17,7 +17,7 @@ class AddMarcasTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('marca');
-            $table->string('imagem');
+            $table->string('imagem')->nullable();
         });
     }
 
