@@ -53,18 +53,62 @@
 
         <h4>Preço</h4>
 
-        <label>de</label><input type="text" name="preco_min" value="{{ $preco_min }}">
-        <label>até</label><input type="text" name="preco_max" value="{{ $preco_max }}">
+        <label>de</label><input type="text" name="preco_min" value="{{ $preco_min }}" style="{{ $errors->has('preco_min') ? ' border-color: red;' : '' }}">
+         @if ($errors->has('preco_min'))
+            <br>
+            <span>
+                <small style="color: red;">{{ $errors->first('preco_min') }}</small>
+            </span>
+            <br>
+        @endif
+        <label>até</label><input type="text" name="preco_max" value="{{ $preco_max }}" style="{{ $errors->has('preco_max') ? ' border-color: red;' : '' }}">
+           @if ($errors->has('preco_max'))
+            <br>
+            <span>
+                <small style="color: red;">{{ $errors->first('preco_max') }}</small>
+            </span>
+            <br>
+        @endif
 
         <h4>Ano</h4>
 
-        <label>de</label><input type="text" name="ano_min" value="{{ $ano_min }}">
-        <label>até</label><input type="text" name="ano_max" value="{{ $ano_max }}">
+        <label>de</label><input type="text" name="ano_min" value="{{ $ano_min }}" style="{{ $errors->has('ano_min') ? ' border-color: red;' : '' }}">
+           @if ($errors->has('ano_min'))
+            <br>
+            <span>
+                <small style="color: red;">{{ $errors->first('ano_min') }}</small>
+            </span>
+            <br>
+        @endif
+        <label>até</label><input type="text" name="ano_max" value="{{ $ano_max }}" style="{{ $errors->has('ano_max') ? ' border-color: red;' : '' }}">
+           @if ($errors->has('ano_max'))
+            <br>
+            <span>
+                <small style="color: red;">{{ $errors->first('ano_max') }}</small>
+            </span>
+            <br>
+        @endif
 
         <h4>Quilómetros</h4>
 
-        <label>de</label><input type="text" name="quilometros_min" value="{{ $quilometros_min }}">
-        <label>até</label><input type="text" name="quilometros_max" value="{{ $quilometros_max }}">
+        <label>de</label><input type="text" name="quilometros_min" value="{{ $quilometros_min }}" style="{{ $errors->has('quilometros_min') ? ' border-color: red;' : '' }}">
+             @if ($errors->has('quilometros_min'))
+            <br>
+            <span>
+                <small style="color: red;">{{ $errors->first('quilometros_min') }}</small>
+            </span>
+            <br>
+        @endif
+
+        <label>até</label><input type="text" name="quilometros_max" value="{{ $quilometros_max }}" style="{{ $errors->has('quilometros_max') ? ' border-color: red;' : '' }}">
+             @if ($errors->has('quilometros_max'))
+            <br>
+            <span>
+                <small style="color: red;">{{ $errors->first('quilometros_max') }}</small>
+            </span>
+            <br>
+        @endif
+
 
         <h4>Ordenar por</h4>
         <select name="ordenar">

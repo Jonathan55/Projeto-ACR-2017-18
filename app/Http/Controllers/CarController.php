@@ -31,7 +31,18 @@ class CarController extends Controller
 
         $validatedData = $request->validate([
             'modelo' => 'required',
-            'foto' => 'required|image'
+            'foto' => 'required|image',
+            'quilometros'=> 'required|int',
+            'ano' => 'required|int',
+            'preco' => 'required|numeric',
+            'cilindrada' => 'int',
+            'potencia' => 'int',
+            'quantidade' => 'required|int|min:1',
+            'lugares' => 'int',
+            'cor' => 'alpha',
+            'caixa' => 'required',
+            'combustivel' => 'required',
+            'usado' => 'required'
         ]);
 
         $carro = new Carro;
@@ -61,11 +72,31 @@ class CarController extends Controller
     public function pesquisarCarro(Request $request)
     {
         $marca = Marca::findOrFail($request->marca);
+
+        $validatedData = $request->validate([
+            'marca' => 'required',
+            'preco_min' => 'numeric',
+            'preco_max'=> 'numeric',
+            'ano_min' => 'int',
+            'ano_max' => 'int',
+            'quilometros_min' => 'int',
+            'quilometros_max' => 'int'
+            
+        ]);
+
+        $preco_min = $request->preco_min ? : Carro::min('preco');
+        $preco_max = $request->preco_max ? : Carro::max('preco');
+        $ano_min = $request->ano_min ? : Carro::min('ano');
+        $ano_max = $request->ano_max ? : Carro::max('ano');
+        $quilometros_min = $request->quilometros_min ? : Carro::min('quilometros');
+        $quilometros_max = $request->quilometros_max ? : Carro::max('quilometros');
+
+        
         $carros = Carro::with(['marca', 'user'])
                         ->where('marca_id', $marca->id)
-                        ->whereBetween('preco', [$request->preco_min, $request->preco_max])
-                        ->whereBetween('ano', [$request->ano_min, $request->ano_max])
-                        ->whereBetween('quilometros', [$request->quilometros_min, $request->quilometros_max])
+                        ->whereBetween('preco', [$preco_min, $preco_max])
+                        ->whereBetween('ano', [$ano_min, $ano_max])
+                        ->whereBetween('quilometros', [$quilometros_min, $quilometros_max])
                         ->orderBy($request->ordenar, $request->ordem)
                         ->get();
         return $carros;
