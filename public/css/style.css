@@ -13,11 +13,7 @@
 #user{
  
   float:right;
- 
 
- 
-  margin:5px;
- 
 }
  
 
@@ -70,7 +66,7 @@ header {
  
   float: left;
  
-  padding: 5px 45px 0px 45px;
+  padding: 5px 45px 100px 45px;
  
   margin-left: 0px;
  
@@ -112,23 +108,20 @@ header {
  
 }
  
-footer {
- 
-  clear: both;
- 
-  padding: 5px 15px;
- 
+#footer {
   background-color:#2C2E30;
- 
   text-align:center;
- 
-}
+  position:fixed;
+  bottom:0;
+  width:100%;
+ }
  
 
  
 #pesquisa{
  
-  padding: 0 15px;
+ 
+  height: 42px;
  
   margin: 0px 0px 5px 0px;
  
@@ -524,7 +517,7 @@ input#pesquisa[type=text]:focus {
  
   width: 290px;
  
-  height: 350px;
+  
  
   margin-top: 10px;
  
@@ -550,7 +543,7 @@ input#pesquisa[type=text]:focus {
  
 
  
-input[type=text], select, input[type=password], input[type=submit] {
+input[type=text], select , input[type=password] {
  
     width: 100%;
  
@@ -662,7 +655,7 @@ tr {
  
   border-top: 1px solid #C1C3D1;
  
-  border-bottom: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
  
   color:#666B85;
  
@@ -724,3 +717,32 @@ td {
  
 }
  
+ 
+ /*botao editar*/
+ .bedid{
+	 float: right;
+	    
+ }
+ 
+ 
+ 
+ .topnav {
+  height:50px;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#center{
+	margin:10px;
+	margin-bottom:60px;
+}

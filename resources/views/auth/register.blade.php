@@ -45,7 +45,8 @@
         <input id="campreg" type="password" name="password_confirmation" style="{{ $errors->has('password') ? ' border-color: red;' : '' }}">
         <br>
         <input id="campreg" type="submit" value="Registar">
-	</form>
+    </form>
+    <br><br><br>
 
 	</div>
 

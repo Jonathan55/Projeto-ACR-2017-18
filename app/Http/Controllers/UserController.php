@@ -12,5 +12,10 @@ class UserController extends Controller
         $user = User::with(['carros.marca'])->findOrFail($id);
         return $user;
     }
+
+    public function verAdmin() {
+        return view('admin');
+    }
+
 }
 

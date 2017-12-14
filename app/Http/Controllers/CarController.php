@@ -15,7 +15,7 @@ class CarController extends Controller
         $carro = Carro::with(['marca','user'])->findOrFail($id);
         $carro->visualizacoes++;
         $carro->save();
-        return $carro;
+        return view('anunciodet', compact('carro'));
     }
 
     public function formAdicionarCarro(Request $request)

@@ -18,6 +18,8 @@ Route::post('/carro/adicionar', 'CarController@adicionarCarro')->name('adicionar
 Route::get('/carro/{id}', 'CarController@verCarro')->name('verCarro');
 Route::get('/pesquisa', 'CarController@pesquisarCarro')->name('pesquisarCarro');
 Route::get('/utilizador/{id}', 'UserController@verUtilizador')->name('verUtilizador');
+Route::get('/admin', 'UserController@verAdmin')->name('verAdmin');
+
 
 Auth::routes();
 
