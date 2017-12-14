@@ -6,14 +6,14 @@
     <form class="form-horizontal" method="POST" action="{{ route('adicionarCarro') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
         @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li style="color: red;">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         Marca:
         <br>
@@ -25,7 +25,14 @@
         <br>
         Modelo:
         <br>
-        <input id="campreg" type="text" name="modelo" value="{{ old('modelo') }}">
+        <input id="campreg" type="text" name="modelo" value="{{ old('modelo') }}" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
+        @if ($errors->has('modelo'))
+            <br>
+            <span>
+                <small style="color: red;">{{ $errors->first('modelo') }}</small>
+            </span>
+            <br>
+        @endif
         <br>
         Combustível:
         <br>
@@ -87,10 +94,17 @@
         <br>
         Foto:
         <br>
-        <input type="file" name="foto" value="Submeter Foto">
+        <input type="file" name="foto" value="Submeter Foto" style="{{ $errors->has('foto') ? ' color: red;' : '' }}">
+        @if ($errors->has('foto'))
+            <br>
+            <span>
+                <small style="color: red;">{{ $errors->first('foto') }}</small>
+            </span>
+            <br>
+        @endif
         <br>
         <br>
-        <input type="submit" value="Submeter Anuncio">
+        <input id="campreg" type="submit" value="Submeter Anuncio">
     </form>
 
 

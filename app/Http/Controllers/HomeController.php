@@ -24,23 +24,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $carros = Carro::with(['marca', 'user'])->get();
+        $carros_mais_vistos = Carro::with(['marca', 'user'])->orderBy('visualizacoes','desc')->take(3)->get();
+        $carros_mais_recentes = Carro::with(['marca', 'user'])->orderBy('created_at')->take(3)->get();
         $marcas = Marca::all();
-        $preco_minimo = DB::table('carros')->min('preco');
-        $preco_maximo = DB::table('carros')->max('preco');
-        $ano_minimo = DB::table('carros')->min('ano');
-        $ano_maximo = DB::table('carros')->max('ano');
-        $quilometros_minimo = DB::table('carros')->min('quilometros');
-        $quilometros_maximo = DB::table('carros')->max('quilometros');
+        $preco_min = Carro::min('preco');
+        $preco_max = Carro::max('preco');
+        $ano_min = Carro::min('ano');
+        $ano_max = Carro::max('ano');
+        $quilometros_min = Carro::min('quilometros');
+        $quilometros_max = Carro::max('quilometros');
         return view('home', compact(
-            'carros',
+            'carros_mais_vistos',
+            'carros_mais_recentes',
             'marcas',
-            'preco_maximo',
-            'preco_minimo',
-            'ano_minimo',
-            'ano_maximo',
-            'quilometros_minimo',
-            'quilometros_maximo'
+            'preco_max',
+            'preco_min',
+            'ano_min',
+            'ano_max',
+            'quilometros_min',
+            'quilometros_max'
         ));
         
     }

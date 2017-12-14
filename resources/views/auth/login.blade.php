@@ -28,7 +28,7 @@
             <br>
         @endif
         <br>
-        <input type="submit" value="Entrar">
+        <input id="campreg" type="submit" value="Entrar">
         <br>
         <br>
 	</form>

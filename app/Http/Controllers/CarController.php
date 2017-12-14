@@ -12,7 +12,9 @@ class CarController extends Controller
 
     public function verCarro($id)
     {
-        $carro = Carro::findOrFail($id);
+        $carro = Carro::with(['marca','user'])->findOrFail($id);
+        $carro->visualizacoes++;
+        $carro->save();
         return $carro;
     }
 
@@ -28,41 +30,45 @@ class CarController extends Controller
         $marca = Marca::findOrFail($request->marca);
 
         $validatedData = $request->validate([
-                'modelo' => 'required',
-                
+            'modelo' => 'required',
+            'foto' => 'required|image'
         ]);
 
         $carro = new Carro;
+
+        $carro->marca()->associate($marca);
         $carro->modelo = $request->modelo;
-        $carro->preco = $request->preco;
-        $carro->cor = $request->cor;
-        $carro->quantidade = $request->quantidade;
-        $carro->ano = $request->ano;
+        $carro->combustivel = $request->combustivel;
+        $carro->quilometros = $request->quilometros;
         $carro->potencia = $request->potencia;
         $carro->cilindrada = $request->cilindrada;
-        $carro->lugares = $request->lugares;
-        $carro->combustivel = $request->combustivel;
+        $carro->preco = $request->preco;
         $carro->usado = $request->usado;
-        $carro->quilometros = $request->quilometros;
-        $carro->descricao = $request->descricao;
+        $carro->ano = $request->ano;
+        $carro->lugares = $request->lugares;
+        $carro->quantidade = $request->quantidade;
+        $carro->cor = $request->cor;
         $carro->caixa = $request->caixa;
-        $carro->visualizacoes=0;
+        $carro->descricao = $request->descricao;
         $carro->foto = $request->file('foto')->store('carros', 'public');
-        $carro->marca()->associate($marca);
+        $carro->visualizacoes=0;
+
         $user->carros()->save($carro);
 
         return redirect("/");
     }
 
-    public function verMarca($marca_id)
+    public function pesquisarCarro(Request $request)
     {
-        $marca = Marca::find($marca_id);
-        if ($marca) {
-            //return "Marca do carro";
-            dd($marca->carros());
-        } else {
-            "Não existe essa marca!";
-        }
+        $marca = Marca::findOrFail($request->marca);
+        $carros = Carro::with(['marca', 'user'])
+                        ->where('marca_id', $marca->id)
+                        ->whereBetween('preco', [$request->preco_min, $request->preco_max])
+                        ->whereBetween('ano', [$request->ano_min, $request->ano_max])
+                        ->whereBetween('quilometros', [$request->quilometros_min, $request->quilometros_max])
+                        ->orderBy($request->ordenar, $request->ordem)
+                        ->get();
+        return $carros;
     }
 
 }
