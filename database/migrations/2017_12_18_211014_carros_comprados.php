@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Compras extends Migration
+class CarrosComprados extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class Compras extends Migration
      */
     public function up()
     {
-        Schema::create('compras', function (Blueprint $table) {
+         Schema::create('carros_comprados', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('carro_id')->unsigned()->index();
+            $table->integer('compra_id')->unsigned()->index();
+            
 
-           });
-    
+        });
     }
 
     /**
@@ -29,6 +28,6 @@ class Compras extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compras');
+        Schema::dropIfExists('carros_comprados');
     }
 }
