@@ -20,11 +20,7 @@ Route::get('/pesquisa', 'CarController@pesquisarCarro')->name('pesquisarCarro');
 Route::get('/utilizador/{id}', 'UserController@verUtilizador')->name('verUtilizador');
 Route::get('/admin', 'UserController@verAdmin')->name('verAdmin');
 
+Route::get('/facebook/login/{access_token}', 'UserController@facebookLogin');
+
 
 Auth::routes();
-
-
-/*
-Slider mais recentes
-Mais vistos
-*/
