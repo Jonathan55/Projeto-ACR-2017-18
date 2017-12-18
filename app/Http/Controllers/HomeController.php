@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $carros_mais_vistos = Carro::with(['marca', 'user'])->orderBy('visualizacoes','desc')->take(3)->get();
-        $carros_mais_recentes = Carro::with(['marca', 'user'])->orderBy('created_at')->take(3)->get();
+        $carros_mais_recentes = Carro::with(['marca', 'user'])->orderBy('created_at', 'desc')->take(3)->get();
         $marcas = Marca::all();
         $preco_min = Carro::min('preco');
         $preco_max = Carro::max('preco');

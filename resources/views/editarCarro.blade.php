@@ -3,7 +3,7 @@
 <div id="middle">
     <h2>Adicionar Anuncio</h2>
 
-    <form class="form-horizontal" method="POST" action="{{ route('adicionarCarro') }}" enctype="multipart/form-data">
+    <form class="form-horizontal" method="POST" action="{{ route('editarCarro',$carro->id) }}" enctype="multipart/form-data">
         {{ csrf_field() }}
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -19,13 +19,13 @@
         <br>
         <select id="campreg" name="marca">
             @foreach ($marcas as $marca)
-                <option value="{{ $marca->id }}" {{ (old('marca') == $marca->id ? 'selected' : '' ) }}>{{ $marca->marca }}</option>
+                <option value="{{ $marca->id }}" {{ ($carro->marca->id == $marca->id ? 'selected' : '' ) }}>{{ $marca->marca }}</option>
             @endforeach
         </select>
         <br>
         Modelo:
         <br>
-        <input id="campreg" type="text" name="modelo" value="{{ old('modelo') }}" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
+        <input id="campreg" type="text" name="modelo" value="{{ $carro->modelo }}" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
         @if ($errors->has('modelo'))
             <br>
             <span>
@@ -38,13 +38,13 @@
         <br>
         <select id="campreg" name="combustivel" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
             <option></option>
-            <option {{ old('combustivel') == 'Gasolina' ? 'selected' : '' }}>Gasolina</option>
-            <option {{ old('combustivel') == 'Diesel' ? 'selected' : '' }}>Diesel</option>
+            <option {{ $carro->combustivel == 'Gasolina' ? 'selected' : '' }}>Gasolina</option>
+            <option {{ $carro->combustivel == 'Diesel' ? 'selected' : '' }}>Diesel</option>
         </select>
         <br>
         Quilómetros:
         <br>
-        <input id="campreg" type="text" name="quilometros" value="{{ old('quilometros') }}" style="{{ $errors->has('quilometros') ? ' border-color: red;' : '' }}">
+        <input id="campreg" type="text" name="quilometros" value="{{ $carro->quilometros }}" style="{{ $errors->has('quilometros') ? ' border-color: red;' : '' }}">
          @if ($errors->has('quilometros'))
             <br>
             <span>
@@ -55,7 +55,7 @@
         <br>
         Potência:
         <br>
-        <input id="campreg" type="text" name="potencia" value="{{ old('potencia') }}" style="{{ $errors->has('potencia') ? ' border-color: red;' : '' }}">
+        <input id="campreg" type="text" name="potencia" value="{{ $carro->potencia }}" style="{{ $errors->has('potencia') ? ' border-color: red;' : '' }}">
          @if ($errors->has('potencia'))
             <br>
             <span>
@@ -66,7 +66,7 @@
         <br>
         Cilindrada:
         <br>
-        <input id="campreg" type="text" name="cilindrada" value="{{ old('cilindrada') }}" style="{{ $errors->has('cilindrada') ? ' border-color: red;' : '' }}">
+        <input id="campreg" type="text" name="cilindrada" value="{{ $carro->cilindrada }}" style="{{ $errors->has('cilindrada') ? ' border-color: red;' : '' }}">
          @if ($errors->has('cilindrada'))
             <br>
             <span>
@@ -77,7 +77,7 @@
         <br>
         Preço:
         <br>
-        <input id="campreg" type="text" name="preco" value="{{ old('preco') }}" style="{{ $errors->has('preco') ? ' border-color: red;' : '' }}">
+        <input id="campreg" type="text" name="preco" value="{{ $carro->preco }}" style="{{ $errors->has('preco') ? ' border-color: red;' : '' }}">
          @if ($errors->has('preco'))
             <br>
             <span>
@@ -90,13 +90,13 @@
         <br>
         <select id="campreg" name="usado">
             <option></option>
-            <option value="0" {{ old('usado') == '0' ? 'selected' : ''}}>Novo</option>
-            <option value="1" {{ old('usado') == '1' ? 'selected' : ''}}>Usado</option>
+            <option value="0" {{ $carro->usado == '0' ? 'selected' : ''}}>Novo</option>
+            <option value="1" {{ $carro->usado == '1' ? 'selected' : ''}}>Usado</option>
         </select>
         <br>
         Ano:
         <br>
-        <input id="campreg" type="text" name="ano" value="{{ old('ano')}}" style="{{ $errors->has('ano') ? ' border-color: red;' : '' }}">
+        <input id="campreg" type="text" name="ano" value="{{ $carro->ano}}" style="{{ $errors->has('ano') ? ' border-color: red;' : '' }}">
          @if ($errors->has('ano'))
             <br>
             <span>
@@ -107,7 +107,7 @@
         <br>
         Lugares:
         <br>
-        <input id="campreg" type="text" name="lugares" value="{{ old('lugares')}}" style="{{ $errors->has('lugares') ? ' border-color: red;' : '' }}">
+        <input id="campreg" type="text" name="lugares" value="{{ $carro->lugares}}" style="{{ $errors->has('lugares') ? ' border-color: red;' : '' }}">
          @if ($errors->has('lugares'))
             <br>
             <span>
@@ -118,7 +118,7 @@
         <br>
         Quantidade:
         <br>
-        <input id="campreg" type="text" name="quantidade" value="{{ old('quantidade')}}" style="{{ $errors->has('quantidade') ? ' border-color: red;' : '' }}">
+        <input id="campreg" type="text" name="quantidade" value="{{ $carro->quantidade}}" style="{{ $errors->has('quantidade') ? ' border-color: red;' : '' }}">
          @if ($errors->has('quantidade'))
             <br>
             <span>
@@ -129,7 +129,7 @@
         <br>
         Cor:
         <br>
-        <input id="campreg" type="text" name="cor" value="{{ old('cor')}}" style="{{ $errors->has('cor') ? ' border-color: red;' : '' }}">
+        <input id="campreg" type="text" name="cor" value="{{ $carro->cor}}" style="{{ $errors->has('cor') ? ' border-color: red;' : '' }}">
          @if ($errors->has('cor'))
             <br>
             <span>
@@ -143,25 +143,14 @@
         <br>
         <select id="campreg" name="caixa">
             <option></option>
-            <option {{ old('caixa') == 'Manual' ? 'selected' : ''}}>Manual</option>
-            <option {{ old('caixa') == 'Automatica' ? 'selected' : ''}}>Automática</option>
-            <option {{ old('caixa') == 'Semi-Automatica' ? 'selected' : ''}}>Semi-Automática</option>
+            <option {{ $carro->caixa == 'Manual' ? 'selected' : ''}}>Manual</option>
+            <option {{ $carro->caixa == 'Automatica' ? 'selected' : ''}}>Automática</option>
+            <option {{ $carro->caixa == 'Semi-Automatica' ? 'selected' : ''}}>Semi-Automática</option>
         </select>
         <br>
         Descrição:
         <br>
-        <input id="campreg" type="text" name="descricao" value="{{ old('descricao')}}">
-        <br>
-        Foto:
-        <br>
-        <input type="file" name="foto" value="Submeter Foto" style="{{ $errors->has('foto') ? ' color: red;' : '' }}">
-        @if ($errors->has('foto'))
-            <br>
-            <span>
-                <small style="color: red;">{{ $errors->first('foto') }}</small>
-            </span>
-            <br>
-        @endif
+        <input id="campreg" type="text" name="descricao" value="{{ $carro->descricao}}">
         <br>
         <br>
         <input id="campreg" type="submit" value="Submeter Anuncio">

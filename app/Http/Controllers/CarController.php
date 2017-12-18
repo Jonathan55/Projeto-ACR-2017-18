@@ -15,6 +15,12 @@ class CarController extends Controller
         $carro = Carro::with(['marca','user'])->findOrFail($id);
         $carro->visualizacoes++;
         $carro->save();
+        $user = Auth::user();
+        if($user && $carro->user->id != $user->id)
+        {
+            $user->carros_vistos()->attach($carro);
+        }
+        
         return view('anunciodet', compact('carro'));
     }
 
@@ -100,6 +106,96 @@ class CarController extends Controller
                         ->orderBy($request->ordenar, $request->ordem)
                         ->get();
         return $carros;
+    }
+
+    public function formEditarCarro($id)
+    {
+        $carro = Carro::findOrFail($id);
+        $marcas = Marca::all();
+        $user = Auth::user();
+        if($carro->user->id == $user->id)
+        {
+            return view('editarCarro', compact('carro','marcas'));
+
+        }else
+        {
+            abort(404);
+
+        }
+        
+
+
+    }
+
+    public function editarCarro(Request $request, $id)
+    {
+        $user = Auth::user();
+        $marca = Marca::findOrFail($request->marca);
+        $carro = Carro::findOrFail($id);
+
+        if($carro->user->id == $user->id)
+        {
+           $validatedData = $request->validate([
+            'modelo' => 'required',
+            'quilometros'=> 'required|int',
+            'ano' => 'required|int',
+            'preco' => 'required|numeric',
+            'cilindrada' => 'int',
+            'potencia' => 'int',
+            'quantidade' => 'required|int|min:1',
+            'lugares' => 'int',
+            'cor' => 'alpha',
+            'caixa' => 'required',
+            'combustivel' => 'required',
+            'usado' => 'required'
+        ]);
+
+        
+
+        $carro->marca()->associate($marca);
+        $carro->modelo = $request->modelo;
+        $carro->combustivel = $request->combustivel;
+        $carro->quilometros = $request->quilometros;
+        $carro->potencia = $request->potencia;
+        $carro->cilindrada = $request->cilindrada;
+        $carro->preco = $request->preco;
+        $carro->usado = $request->usado;
+        $carro->ano = $request->ano;
+        $carro->lugares = $request->lugares;
+        $carro->quantidade = $request->quantidade;
+        $carro->cor = $request->cor;
+        $carro->caixa = $request->caixa;
+        $carro->descricao = $request->descricao;
+        $carro->visualizacoes=0;
+
+        $carro->save();
+
+        return redirect("/"); 
+
+        }else
+        {
+            abort(404);
+
+        }
+
+        
+
+    } 
+
+    public function adicionarCarrinho($id)
+    {
+        $user = Auth::user();
+        $carro = Carro::findOrFail($id);
+        $user->carrinho_compras()->attach($carro);
+        return back();
+    }
+
+    public function eliminarCarrinho($id)
+    {
+        $user = Auth::user();
+        $carro = Carro::findOrFail($id);
+        $user->carrinho_compras()->detach($carro);
+        return back();
     }
 
 }
