@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     //
     public function verUtilizador($id) {
-        $user = User::with(['carros.marca'])->findOrFail($id);
+        $user = User::with(['carros.marca','carrosRecomendados'])->findOrFail($id);
         return $user;
     }
 
