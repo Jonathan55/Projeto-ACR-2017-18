@@ -24,10 +24,7 @@ Route::post('/carro/editar/{id}', 'CarController@editarCarro')->name('editarCarr
 Route::get('/carro/adicionar/carrinho/{id}', 'CarController@adicionarCarrinho')->name('adicionarCarrinho')->middleware('auth');
 Route::get('/carro/eliminar/carrinho/{id}', 'CarController@eliminarCarrinho')->name('eliminarCarrinho')->middleware('auth');
 
+Route::get('/facebook/login/{access_token}', 'UserController@facebookLogin');
+
+
 Auth::routes();
-
-
-/*
-Slider mais recentes
-Mais vistos
-*/
