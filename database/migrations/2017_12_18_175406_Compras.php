@@ -16,10 +16,8 @@ class Compras extends Migration
         Schema::create('compras', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('carro_id')->unsigned()->index();
-
-           });
-    
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**

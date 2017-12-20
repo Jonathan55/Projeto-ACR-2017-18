@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddMarcasTable extends Migration
+class CreateFotosCarrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class AddMarcasTable extends Migration
      */
     public function up()
     {
-        Schema::create('marcas', function (Blueprint $table) {
+        Schema::create('fotos_carros', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('marca');
-            $table->string('imagem')->nullable();
+            $table->integer('carro_id')->unsigned()->index();
+            $table->foreign('carro_id')->references('id')->on('carros')->onDelete('cascade');
+            $table->string('path');
         });
     }
 
@@ -28,6 +29,6 @@ class AddMarcasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('marcas');
+        Schema::dropIfExists('fotos_carros');
     }
 }

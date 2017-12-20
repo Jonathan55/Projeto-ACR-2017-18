@@ -5,6 +5,7 @@ use App\User;
 use App\Carro;
 use App\Marca;
 use App\Http\Resources\User as UserResource;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,14 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     echo $request->user();
 });
 
-Route::middleware('auth:api')->get('/users', function() {
-    return User::all();
-});
-
 Route::get('/carros', function() {
-    return Carro::with(['marca','user'])->get();
-});
-
-Route::get('/marcas', function() {
-    return Marca::with(['carros'])->get();
+    return Carro::with(['marca','user','fotos'])->get();
 });
