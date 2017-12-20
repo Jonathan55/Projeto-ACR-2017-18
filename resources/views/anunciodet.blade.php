@@ -1,11 +1,13 @@
 @extends('layouts.app') @section('content')
 
 <div id="center">
-    <h1>{{  $carro->marca->marca  }}, {{  $carro->modelo}}</h2>
+    <h1>{{  $carro->marca->marca  }} {{  $carro->modelo}}</h2>
     
 	 <ul class="flex-container">
         <div class="flex-item">
-            <img id="div1" src="{{asset('storage/'.$carro->foto)}}" alt="anuncio">      <!-- buscar a BD a foto -->
+            @if($carro->fotos->count() > 0)
+            <img id="div1" src="{{asset('storage/'.$carro->fotos[0]->path)}}" alt="anuncio">      <!-- buscar a BD a foto -->
+            @endif
             <h2><a href="{{  route('verUtilizador',$carro->user->id )}}">{{  $carro->user->name  }}</a> </h2>       								  <!-- buscar Marca e Modelo -->
             <hr>
 			

@@ -17,4 +17,9 @@ class Carro extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function fotos()
+    {
+        return $this->hasMany('App\FotoCarro');
+    }
+
 }

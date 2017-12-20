@@ -16,13 +16,15 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/carro/adicionar', 'CarController@formAdicionarCarro')->name('formAdicionarCarro')->middleware('auth');
 Route::post('/carro/adicionar', 'CarController@adicionarCarro')->name('adicionarCarro')->middleware('auth');
 Route::get('/carro/{id}', 'CarController@verCarro')->name('verCarro');
-Route::get('/pesquisa', 'CarController@pesquisarCarro')->name('pesquisarCarro');
+Route::get('/carros/pesquisa', 'CarController@pesquisarCarro')->name('pesquisarCarro');
 Route::get('/utilizador/{id}', 'UserController@verUtilizador')->name('verUtilizador');
 Route::get('/admin', 'UserController@verAdmin')->name('verAdmin');
-Route::get('/carro/editar/{id}', 'CarController@formEditarCarro')->name('formEditarCarro')->middleware('auth');
-Route::post('/carro/editar/{id}', 'CarController@editarCarro')->name('editarCarro')->middleware('auth');
-Route::get('/carro/adicionar/carrinho/{id}', 'CarController@adicionarCarrinho')->name('adicionarCarrinho')->middleware('auth');
-Route::get('/carro/eliminar/carrinho/{id}', 'CarController@eliminarCarrinho')->name('eliminarCarrinho')->middleware('auth');
+Route::get('/carro/{id}/editar', 'CarController@formEditarCarro')->name('formEditarCarro')->middleware('auth');
+Route::post('/carro/{id}/editar', 'CarController@editarCarro')->name('editarCarro')->middleware('auth');
+Route::get('/carro/{id}/adicionar/carrinho/', 'CarController@adicionarCarrinho')->name('adicionarCarrinho')->middleware('auth');
+Route::get('/carro/{id}/eliminar/carrinho/', 'CarController@eliminarCarrinho')->name('eliminarCarrinho')->middleware('auth');
+Route::post('/carro/{carro_id}/fotos/adicionar', 'CarController@adicionarFotos')->name('adicionarFotos')->middleware('auth');
+Route::get('/carro/{carro_id}/foto/{foto_id}/eliminar', 'CarController@eliminarFoto')->name('eliminarFoto')->middleware('auth');
 
 Route::get('/facebook/login/{access_token}', 'UserController@facebookLogin');
 

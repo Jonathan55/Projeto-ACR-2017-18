@@ -13,10 +13,11 @@ class CarrinhoCompras extends Migration
      */
     public function up()
     {
-          Schema::create('carrinho_compras', function (Blueprint $table) {
+        Schema::create('carrinho_compras', function (Blueprint $table) {
             $table->integer('carro_id')->unsigned()->index();
+            $table->foreign('carro_id')->references('id')->on('carros')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();
-          
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

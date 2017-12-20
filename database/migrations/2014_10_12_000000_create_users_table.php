@@ -19,8 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->nullable();
             $table->string('password')->nullable();
             $table->string('facebook_id')->nullable();
+            $table->boolean('admin')->default(0);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

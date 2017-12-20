@@ -10,7 +10,7 @@ class UserController extends Controller
 {
 
     public function verUtilizador($id) {
-        $user = User::with(['carros.marca','carrosRecomendados'])->findOrFail($id);
+        $user = User::with(['carros.marca','carrinho_compras.marca','carrinho_compras.user'])->findOrFail($id);
         return $user;
     }
 
@@ -28,11 +28,11 @@ class UserController extends Controller
             $facebook_response = $res->getBody();
             $facebook_user = json_decode($facebook_response);
             $user = User::where('facebook_id', $facebook_user->id)
-                        ->orWhere('email', $facebook_user->email)
-                        ->first();
+                ->orWhere('email', $facebook_user->email)
+                ->first();
 
-            // Se o utilizador existir, atualizar dados
             if($user) {
+                // Se o utilizador existir, atualizar dados
                 $user->name = $facebook_user->name;
                 $user->email = $facebook_user->email;
                 $user->facebook_id = $facebook_user->id;
@@ -46,11 +46,9 @@ class UserController extends Controller
                 ]);
             }
 
-            if($user) {
-                // Autenticar
-                Auth::login($user);
-                return redirect('/');
-            } else abort(404);
+            // Autenticar
+            Auth::login($user);
+            return redirect('/');
 
         } else abort(404);
 

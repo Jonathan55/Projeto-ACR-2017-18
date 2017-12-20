@@ -17,6 +17,7 @@ class CreateCarsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('marca_id')->unsigned()->index();
+            $table->foreign('marca_id')->references('id')->on('marcas')->onDelete('cascade');
             $table->string('modelo')->nullable();
             $table->string('combustivel')->nullable();
             $table->string('cor')->nullable();
@@ -28,9 +29,9 @@ class CreateCarsTable extends Migration
             $table->integer('ano')->nullable();
             $table->decimal('preco', 8, 2)->nullable();
             $table->integer('lugares')->nullable();
-            $table->text('foto')->nullable();
             $table->integer('visualizacoes')->nullable();
             $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('descricao')->nullable();
             $table->string('caixa')->nullable();
         });

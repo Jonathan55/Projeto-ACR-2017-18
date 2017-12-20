@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CarrosComprados extends Migration
+class AddMarcasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CarrosComprados extends Migration
      */
     public function up()
     {
-         Schema::create('carros_comprados', function (Blueprint $table) {
+        Schema::create('marcas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('carro_id')->unsigned()->index();
-            $table->integer('compra_id')->unsigned()->index();
-            $table->foreign('compra_id')->references('id')->on('compras')->onDelete('cascade');
+            $table->timestamps();
+            $table->string('marca');
+            $table->string('imagem')->nullable();
         });
     }
 
@@ -28,6 +28,6 @@ class CarrosComprados extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carros_comprados');
+        Schema::dropIfExists('marcas');
     }
 }

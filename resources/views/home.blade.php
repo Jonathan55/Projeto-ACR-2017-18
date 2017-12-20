@@ -9,13 +9,13 @@
 
     function swapImage() {
         carro_atual = ( carro_atual == carros.length-1 ) ? 0 : carro_atual+1
-        document.getElementById('imgBanner').src = './storage/'+carros[carro_atual].foto
+        document.getElementById('imgBanner').src = './storage/'+carros[carro_atual].fotos[0].path
         document.getElementById('linkBanner').href = './carro/'+carros[carro_atual].id
     }
 
     window.onload = function () {
         if (carros.length) {
-            document.getElementById('imgBanner').src = './storage/'+carros[carro_atual].foto
+            document.getElementById('imgBanner').src = './storage/'+carros[carro_atual].fotos[0].path
             document.getElementById('linkBanner').href = './carro/'+carros[carro_atual].id
             setInterval(swapImage, 5000)
         }
@@ -33,12 +33,12 @@
 
     <form action="{{ route('pesquisarCarro') }}">
 
-        <h4>Tipo</h4>
+        <h4>Estado</h4>
 
-        <select name="tipo">
-            <option value="todos" selected>Todos</option>
-            <option value="novos">Novos</option>
-            <option value="usados">Usados</option>
+        <select name="estado">
+            <option></option>
+            <option value="0">Novo</option>
+            <option value="1">Usado</option>
         </select>
 
         <h4>Marca</h4>
@@ -134,12 +134,13 @@
     <ul class="flex-container">
 
         @foreach($carros_mais_recentes as $carro)
-
         <div class="flex-item">
 
+            @if($carro->fotos->count() > 0)
             <a href="{{ route('verCarro', $carro->id) }}">
-                <img id="div1" src="{{asset('storage/'.$carro->foto)}}" alt="anuncio">
+                <img id="div1" src="{{asset('storage/'.$carro->fotos[0]->path)}}" alt="anuncio">
             </a>
+            @endif
 
             <h2>{{$carro->marca->marca}} {{$carro->modelo}}</h2>
 
@@ -152,27 +153,21 @@
                     <!-- Só Marca, Modelo, Preço, Usado ou Novo -->
 
                     <tr>
-
                         <td class="text-left">Utilizador</td>
-
                         <td class="text-left">{{$carro->user->name}}</td>
-
                     </tr>
-
                     <tr>
-
                         <td class="text-left">Combustível</td>
-
                         <td class="text-left">{{$carro->combustivel}}</td>
-
+                    </tr>
+                    <tr>
+                        <td class="text-left">Cilindrada</td>
+                        <td class="text-left">{{$carro->cilindrada}}</td>
                     </tr>
 
                     <tr>
-
-                        <td class="text-left">Cilindrada</td>
-
-                        <td class="text-left">{{$carro->cilindrada}}</td>
-
+                        <td class="text-left">Carrinho</td>
+                        <td class="text-left"><a href="{{ route('adicionarCarrinho', $carro->id) }}">Adicionar</a></td>
                     </tr>
 
                 </tbody>
@@ -182,13 +177,54 @@
         </div>
         @endforeach
 
-
     </ul>
 
+    @if(Auth::user() && Auth::user()->carros_recomendados()->count() > 0)
     <h2>Recomendados</h2>
 
     <ul class="flex-container">
+        
+        @foreach(Auth::user()->carros_recomendados() as $carro)
+        <div class="flex-item">
+
+            @if($carro->fotos->count() > 0)
+            <a href="{{ route('verCarro', $carro->id) }}">
+                <img id="div1" src="{{asset('storage/'.$carro->fotos[0]->path)}}" alt="anuncio">
+            </a>
+            @endif
+
+            <h2>{{$carro->marca->marca}} {{$carro->modelo}}</h2>
+
+            <hr>
+
+            <table class="table-fill">
+
+                <tbody class="table-hover">
+
+                    <!-- Só Marca, Modelo, Preço, Usado ou Novo -->
+
+                    <tr>
+                        <td class="text-left">Utilizador</td>
+                        <td class="text-left">{{$carro->user->name}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">Combustível</td>
+                        <td class="text-left">{{$carro->combustivel}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">Cilindrada</td>
+                        <td class="text-left">{{$carro->cilindrada}}</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+        @endforeach
+
     </ul>
+    @endif
 
 </div>
 
