@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Facades\DB;
 
 class CarController extends Controller
 {
@@ -100,6 +101,20 @@ class CarController extends Controller
 
     public function pesquisarCarro(Request $request)
     {
+        /*
+        // Valores Home
+        $carros_mais_vistos = Carro::with(['marca', 'user', 'fotos'])->orderBy('visualizacoes','desc')->take(3)->get();
+        $carros_mais_recentes = Carro::with(['marca', 'user', 'fotos'])->orderBy('created_at', 'desc')->take(3)->get();
+        $marcas = Marca::all();
+        $preco_min = Carro::min('preco');
+        $preco_max = Carro::max('preco');
+        $ano_min = Carro::min('ano');
+        $ano_max = Carro::max('ano');
+        $quilometros_min = Carro::min('quilometros');
+        $quilometros_max = Carro::max('quilometros');
+        */
+
+        // Pesquisa
         $marca = Marca::findOrFail($request->marca);
         $validatedData = $request->validate([
             'marca' => 'required',
@@ -207,7 +222,11 @@ class CarController extends Controller
     {
         $user = Auth::user();
         $carro = Carro::findOrFail($id);
-        $user->carrinho_compras()->detach($carro);
+        DB::table('carrinho_compras')
+            ->where('user_id', $user->id)
+            ->where('carro_id', $carro->id)
+            ->limit(1)
+            ->delete();
         return back();
     }
 
@@ -267,6 +286,10 @@ class CarController extends Controller
         } else {
             abort(404);
         }
+    }
+    public function verCarrinho()
+    {
+        return view('carrinho');
     }
 
 }
