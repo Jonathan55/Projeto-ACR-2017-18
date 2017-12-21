@@ -34,7 +34,7 @@
     <a href="{{ route('verAdmin') }}" id="user">Admin</a>
     <a href="{{ route('logout') }}" id="user" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a>
     <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="user">{{ Auth::user()->name }}</a>
-
+    <a href="{{ route('verCarrinho') }}" id="user">Carrinho</a>
 	<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
         {{ csrf_field() }}
     </form>

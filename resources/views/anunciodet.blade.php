@@ -3,15 +3,14 @@
 <div id="center">
 <h1>{{  $carro->marca->marca  }} {{  $carro->modelo}}</h2>
     <ul class="flex-container">
+
+        @foreach($carro->fotos as $foto)
         <div class="galeriaDet">
-            <img  src="{{asset('storage/'.$carro->foto)}}" alt="anuncio">
+           <a href="{{asset('storage/'.$foto->path)}}" ><img  src="{{asset('storage/'.$foto->path)}}" alt="anuncio"></a>
         </div>
-        <div class="galeriaDet">
-            <img  src="{{asset('storage/'.$carro->foto)}}" alt="anuncio">
-        </div>
-        <div class="galeriaDet">
-            <img  src="{{asset('storage/'.$carro->foto)}}" alt="anuncio">
-        </div>
+        @endforeach
+
+
         
         
 
@@ -32,7 +31,7 @@
                     <td class="text-left">{{  $carro->modelo}}</td>
                 </tr>
                 <tr>
-                    <td class="text-left">Combustivel</td>
+                    <td class="text-left">Combustível</td>
                     <td class="text-left">{{  $carro->combustivel  }}</td>
                 </tr>
                 <tr>
@@ -44,24 +43,29 @@
                     <td class="text-left"<{{  $carro->cilindrada  }}</td>
                 </tr>
                 <tr>
-                    <td class="text-left">potencia</td>
+                    <td class="text-left">Potencia</td>
                     <td class="text-left">{{  $carro->potencia  }}</td>
                 </tr>
                 <tr>
-                    <td class="text-left">quilometros</td>
+                    <td class="text-left">Quilómetros</td>
                     <td class="text-left">{{  $carro->quilometros  }}</td>
                 </tr>
                 <tr>
-                    <td class="text-left">ano</td>
+                    <td class="text-left">Ano</td>
                     <td class="text-left">{{  $carro->ano  }}</td>
                 </tr>
                 <tr>
-                    <td class="text-left">preco</td>
+                    <td class="text-left">Preço</td>
                     <td class="text-left">{{  $carro->preco  }}</td>
                 </tr>
                 <tr>
-                    <td class="text-left">descricao</td>
+                    <td class="text-left">Descrição</td>
                     <td class="text-left">{{  $carro->descricao  }}</td>
+
+                <tr>
+                    <td class="text-left">Carrinho</td>
+                    <td class="text-left"><a href="{{ route('adicionarCarrinho', $carro->id) }}">Adicionar</a></td>
+                </tr>
             </tbody>
         </table>
     </div>	

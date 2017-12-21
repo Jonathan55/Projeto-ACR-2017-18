@@ -11,8 +11,9 @@ class UserController extends Controller
 
     public function verUtilizador($id) {
         $user = User::with(['carros.marca','carrinho_compras.marca','carrinho_compras.user'])->findOrFail($id);
-        return $user;
+        return view('perfil');
     }
+    
 
     public function verAdmin() {
         return view('admin');

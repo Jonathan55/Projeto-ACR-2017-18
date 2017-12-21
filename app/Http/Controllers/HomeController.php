@@ -44,6 +44,5 @@ class HomeController extends Controller
             'quilometros_min',
             'quilometros_max'
         ));
-        
     }
 }
