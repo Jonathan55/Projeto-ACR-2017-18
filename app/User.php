@@ -84,4 +84,9 @@ class User extends Authenticatable
             ->take(3)
             ->get();
     }
+
+    public function compras()
+    {
+        return $this->hasMany('App\Compra');
+    }
 }
