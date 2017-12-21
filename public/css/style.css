@@ -30,7 +30,7 @@ header {
 }
 
 #middle {
-  width: 75%; /* Account for margins + border values */
+  width: 72%; /* Account for margins + border values */
   float: right;
   padding: 5px 15px;
   margin: 0px 0px 5px 10px;
