@@ -29,6 +29,7 @@ Route::get('/marca/eliminar', 'UserController@eliminarMarca')->name('eliminarMar
 Route::get('/marca/adicionar', 'UserController@adicionarMarca')->name('adicionarMarca')->middleware('auth');
 Route::get('/user/eliminar', 'UserController@eliminarUser')->name('eliminarUser')->middleware('auth');
 Route::get('/carrinho', 'CarController@verCarrinho')->name('verCarrinho')->middleware('auth');
+Route::get('/carrinho/comprar', 'CarController@comprar')->name('comprar')->middleware('auth');
 
 
 Route::get('/facebook/login/{access_token}', 'UserController@facebookLogin');

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Carro;
 use App\FotoCarro;
 use App\Marca;
+use App\User;
+use App\Compra;
+use App\CarroComprado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -290,6 +293,48 @@ class CarController extends Controller
     public function verCarrinho()
     {
         return view('carrinho');
+    }
+
+    public function comprar()
+    {
+        $user = Auth::user();
+        $carros = $user->carrinho_compras;
+        DB::beginTransaction();
+        $compra = new Compra();
+        $user->compras()->save($compra);
+        foreach($carros as $carro)
+        {
+            if($carro->quantidade>0)
+            {
+                $carro->quantidade--;
+                $carro->save();
+                $carroComprado = new CarroComprado();
+                $carroComprado->carro_id = $carro->id;
+                $carroComprado->preco = $carro->preco;
+                $carroComprado->marca = $carro->marca->marca;
+                $carroComprado->modelo = $carro->modelo;
+                $carroComprado->name = $carro->user->name;
+                $carroComprado->email = $carro->user->email;
+                $carroComprado->user_id = $carro->user->id;
+                $compra->carros_comprados()->save($carroComprado);
+                 DB::table('carrinho_compras')
+                     ->where('user_id', $user->id)
+                     ->where('carro_id', $carro->id)
+                     ->limit(1)
+                     ->delete();
+
+
+
+            }else
+            {
+                DB::rollback();
+                $errors = new MessageBag();
+                $errors->add('ERRO','O carro '.$carro->marca->marca. ' '.$carro->modelo. ' não existe em stock');
+                return redirect()->route('verCarrinho')->withErrors($errors);
+            }
+        }
+        DB::Commit();
+        return view('recibo');
     }
 
 }
