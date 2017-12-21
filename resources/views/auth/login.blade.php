@@ -33,14 +33,14 @@
 
 </script>
 
-<div id="middle">
+<div id="centrologregdd">
 
 	<h2>Login</h2>
-
+	
 	<form class="form-horizontal" method="POST" action="{{ route('login') }}">
         {{ csrf_field() }}
         Email:<br>
-        <input id="campreg" type="text" name="email" value="{{ old('email') }}" style="{{ $errors->has('email') ? ' border-color: red;' : '' }}">
+        <input  type="text" name="email" value="{{ old('email') }}" style="{{ $errors->has('email') ? ' border-color: red;' : '' }}">
         @if ($errors->has('email'))
             <br>
             <span>
@@ -50,7 +50,7 @@
         @endif
         <br>
         Password:<br>
-        <input id="campreg" type="password" name="password" style="{{ $errors->has('password') ? ' border-color: red;' : '' }}">
+        <input  type="password" name="password" style="{{ $errors->has('password') ? ' border-color: red;' : '' }}">
         @if ($errors->has('password'))
             <br>
             <span>
@@ -59,16 +59,15 @@
             <br>
         @endif
         <br>
-        <input id="campreg" type="submit" value="Entrar">
+        <input class="button" type="submit" value="Entrar">
         <br>
         <br>
         <fb:login-button
             scope="public_profile,email"
             onlogin="checkLoginState();">
         </fb:login-button>
-        <br>
 	</form>
-
+	
 </div>
 
 @endsection

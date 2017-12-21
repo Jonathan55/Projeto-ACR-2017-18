@@ -1,6 +1,6 @@
 @extends('layouts.app') @section('content')
 
-<div id="middle">
+<div id="centrologregdd">
     <h2>Adicionar Anuncio</h2>
 
     <form class="form-horizontal" method="POST" action="{{ route('adicionarCarro') }}" enctype="multipart/form-data">
@@ -8,24 +8,24 @@
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
-                    <li style="color: red;">{{ $errors->first() }}</li>
+                     
+                        <li style="color: red;">{{ $errors->first() }}</li>
+                    
                 </ul>
             </div>
         @endif 
 
         Marca:
         <br>
-        <select id="campreg" name="marca">
+        <select name="marca">
             @foreach ($marcas as $marca)
                 <option value="{{ $marca->id }}" {{ (old('marca') == $marca->id ? 'selected' : '' ) }}>{{ $marca->marca }}</option>
             @endforeach
         </select>
         <br>
-
-
         Modelo:
         <br>
-        <input id="campreg" type="text" name="modelo" value="{{ old('modelo') }}" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
+        <input type="text" name="modelo" value="{{ old('modelo') }}" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
         @if ($errors->has('modelo'))
             <br>
             <span>
@@ -34,29 +34,18 @@
             <br>
         @endif
         <br>
-
-
         Combustível:
         <br>
-        <select id="campreg" name="combustivel" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
+        <select name="combustivel" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
             <option></option>
             <option {{ old('combustivel') == 'Gasolina' ? 'selected' : '' }}>Gasolina</option>
             <option {{ old('combustivel') == 'Diesel' ? 'selected' : '' }}>Diesel</option>
         </select>
-        @if ($errors->has('combustivel'))
-            <br>
-            <span>
-                <small style="color: red;">{{ $errors->first('combustivel') }}</small>
-            </span>
-            <br>
-        @endif
         <br>
-
-
         Quilómetros:
         <br>
-        <input id="campreg" type="text" name="quilometros" value="{{ old('quilometros') }}" style="{{ $errors->has('quilometros') ? ' border-color: red;' : '' }}">
-        @if ($errors->has('quilometros'))
+        <input type="text" name="quilometros" value="{{ old('quilometros') }}" style="{{ $errors->has('quilometros') ? ' border-color: red;' : '' }}">
+         @if ($errors->has('quilometros'))
             <br>
             <span>
                 <small style="color: red;">{{ $errors->first('quilometros') }}</small>
@@ -64,12 +53,10 @@
             <br>
         @endif
         <br>
-
-
         Potência:
         <br>
-        <input id="campreg" type="text" name="potencia" value="{{ old('potencia') }}" style="{{ $errors->has('potencia') ? ' border-color: red;' : '' }}">
-        @if ($errors->has('potencia'))
+        <input type="text" name="potencia" value="{{ old('potencia') }}" style="{{ $errors->has('potencia') ? ' border-color: red;' : '' }}">
+         @if ($errors->has('potencia'))
             <br>
             <span>
                 <small style="color: red;">{{ $errors->first('potencia') }}</small>
@@ -77,12 +64,10 @@
             <br>
         @endif
         <br>
-
-
         Cilindrada:
         <br>
-        <input id="campreg" type="text" name="cilindrada" value="{{ old('cilindrada') }}" style="{{ $errors->has('cilindrada') ? ' border-color: red;' : '' }}">
-        @if ($errors->has('cilindrada'))
+        <input type="text" name="cilindrada" value="{{ old('cilindrada') }}" style="{{ $errors->has('cilindrada') ? ' border-color: red;' : '' }}">
+         @if ($errors->has('cilindrada'))
             <br>
             <span>
                 <small style="color: red;">{{ $errors->first('cilindrada') }}</small>
@@ -90,12 +75,10 @@
             <br>
         @endif
         <br>
-
-
         Preço:
         <br>
-        <input id="campreg" type="text" name="preco" value="{{ old('preco') }}" style="{{ $errors->has('preco') ? ' border-color: red;' : '' }}">
-        @if ($errors->has('preco'))
+        <input type="text" name="preco" value="{{ old('preco') }}" style="{{ $errors->has('preco') ? ' border-color: red;' : '' }}">
+         @if ($errors->has('preco'))
             <br>
             <span>
                 <small style="color: red;">{{ $errors->first('preco') }}</small>
@@ -103,29 +86,18 @@
             <br>
         @endif
         <br>
-
-
         Estado:
         <br>
-        <select id="campreg" name="usado" style="{{ $errors->has('usado') ? ' border-color: red;' : '' }}">
+        <select name="usado">
             <option></option>
             <option value="0" {{ old('usado') == '0' ? 'selected' : ''}}>Novo</option>
             <option value="1" {{ old('usado') == '1' ? 'selected' : ''}}>Usado</option>
         </select>
-        @if ($errors->has('usado'))
-            <br>
-            <span>
-                <small style="color: red;">{{ $errors->first('usado') }}</small>
-            </span>
-            <br>
-        @endif
         <br>
-
-
         Ano:
         <br>
-        <input id="campreg" type="text" name="ano" value="{{ old('ano')}}" style="{{ $errors->has('ano') ? ' border-color: red;' : '' }}">
-        @if ($errors->has('ano'))
+        <input type="text" name="ano" value="{{ old('ano')}}" style="{{ $errors->has('ano') ? ' border-color: red;' : '' }}">
+         @if ($errors->has('ano'))
             <br>
             <span>
                 <small style="color: red;">{{ $errors->first('ano') }}</small>
@@ -133,12 +105,10 @@
             <br>
         @endif
         <br>
-
-
         Lugares:
         <br>
-        <input id="campreg" type="text" name="lugares" value="{{ old('lugares')}}" style="{{ $errors->has('lugares') ? ' border-color: red;' : '' }}">
-        @if ($errors->has('lugares'))
+        <input type="text" name="lugares" value="{{ old('lugares')}}" style="{{ $errors->has('lugares') ? ' border-color: red;' : '' }}">
+         @if ($errors->has('lugares'))
             <br>
             <span>
                 <small style="color: red;">{{ $errors->first('lugares') }}</small>
@@ -146,12 +116,10 @@
             <br>
         @endif
         <br>
-
-
         Quantidade:
         <br>
-        <input id="campreg" type="text" name="quantidade" value="{{ old('quantidade')}}" style="{{ $errors->has('quantidade') ? ' border-color: red;' : '' }}">
-        @if ($errors->has('quantidade'))
+        <input type="text" name="quantidade" value="{{ old('quantidade')}}" style="{{ $errors->has('quantidade') ? ' border-color: red;' : '' }}">
+         @if ($errors->has('quantidade'))
             <br>
             <span>
                 <small style="color: red;">{{ $errors->first('quantidade') }}</small>
@@ -159,46 +127,32 @@
             <br>
         @endif
         <br>
-
-
         Cor:
         <br>
-        <input id="campreg" type="text" name="cor" value="{{ old('cor')}}" style="{{ $errors->has('cor') ? ' border-color: red;' : '' }}">
-        @if ($errors->has('cor'))
+        <input type="text" name="cor" value="{{ old('cor')}}" style="{{ $errors->has('cor') ? ' border-color: red;' : '' }}">
+         @if ($errors->has('cor'))
             <br>
             <span>
                 <small style="color: red;">{{ $errors->first('cor') }}</small>
             </span>
             <br>
         @endif
+
         <br>
-
-
         Caixa de Velocidades:
         <br>
-        <select id="campreg" name="caixa">
+        <select name="caixa">
             <option></option>
             <option {{ old('caixa') == 'Manual' ? 'selected' : ''}}>Manual</option>
             <option {{ old('caixa') == 'Automatica' ? 'selected' : ''}}>Automática</option>
             <option {{ old('caixa') == 'Semi-Automatica' ? 'selected' : ''}}>Semi-Automática</option>
         </select>
-        @if ($errors->has('caixa'))
-            <br>
-            <span>
-                <small style="color: red;">{{ $errors->first('caixa') }}</small>
-            </span>
-            <br>
-        @endif
         <br>
-
-
         Descrição:
         <br>
-        <input id="campreg" type="text" name="descricao" value="{{ old('descricao')}}">
+        <input type="text" name="descricao" value="{{ old('descricao')}}">
         <br>
-
-
-        Fotos:
+        Foto:
         <br>
         <input type="file" name="fotos[]" style="{{ $errors->has('fotos') ? ' color: red;' : '' }}" multiple>
         @if ($errors->has('fotos'))
@@ -209,12 +163,13 @@
             <br>
         @endif
         <br>
-
         <br>
-        <input id="campreg" type="submit" value="Submeter Anuncio">
-
+        <input class="button" type="submit" value="Submeter Anuncio">
     </form>
     <br>
+    <br>
+    <br>
+	<br>
     <br>
     <br>
 

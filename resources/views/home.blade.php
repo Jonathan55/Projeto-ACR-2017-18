@@ -121,7 +121,7 @@
         <input type="radio" name="ordem" value="DESC">DESC
         <br><br>
 
-        <input type="submit" value="Pesquisar">
+        <input class="button" type="submit" value="Pesquisar">
 
     </form>
 
