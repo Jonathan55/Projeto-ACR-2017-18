@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<div id="pagewrap">
+<div id="paginaTotal">
 
 <header>
  
@@ -26,16 +26,16 @@
 <div class="topnav" id="myTopnav">
 
 @guest
-
-    <a href="{{ route('login') }}" id="user" style="color: white;">Entrar</a>
-    <a href="{{ route('register') }}" id="user" style="color: white;">Registar</a>
+    <a href="{{ route('login') }}" id="user">Entrar</a>
+    <a href="{{ route('register') }}" id="user">Registar</a>
 @else
-    <a href="{{ route('home') }}" id="user" style="color: white;">Página Inicial</a>
-    <a href="{{ route('adicionarCarro') }}" id="user" style="color: white;">Adicionar Carro</a>
-    <a href="{{ route('verAdmin') }}" id="user" style="color: white;">Admin</a>
+    <a href="{{ route('home') }}" id="user">Página Inicial</a>
+    <a href="{{ route('adicionarCarro') }}" id="user">Adicionar Carro</a>
+    <a href="{{ route('verAdmin') }}" id="user">Admin</a>
     <a href="{{ route('logout') }}" id="user" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a>
-    <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="user" style="color: white;">{{ Auth::user()->name }}</a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
+    <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="user">{{ Auth::user()->name }}</a>
+
+	<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
         {{ csrf_field() }}
     </form>
 @endguest
