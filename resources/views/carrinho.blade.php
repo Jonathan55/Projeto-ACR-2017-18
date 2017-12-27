@@ -35,7 +35,7 @@
         @endforeach
 		<hr>
 		<div class="carrinhoT">
-		<h3>Valor Toral: {{ Auth::user()->carrinho_compras->reduce(function ($carry, $item) {
+		<h3>Valor Total: {{ Auth::user()->carrinho_compras->reduce(function ($carry, $item) {
             return $carry + $item->preco; }) }} </h3>
         <form action="{{ route('comprar') }}">
 		<input class="button" type="submit" value="Finalizar">
