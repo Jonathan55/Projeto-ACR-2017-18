@@ -61,6 +61,7 @@ class UserController extends Controller
 
     public function avaliar(Request $request)
     {
+        $user = Auth::user();
 
     }
 
