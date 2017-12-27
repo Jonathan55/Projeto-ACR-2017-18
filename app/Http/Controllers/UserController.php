@@ -59,6 +59,11 @@ class UserController extends Controller
 
     }
 
+    public function avaliar(Request $request)
+    {
+
+    }
+
     public function eliminarUser(Request $request)
     {
         $user = Auth::user();
