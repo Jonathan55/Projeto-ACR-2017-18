@@ -5,8 +5,8 @@
 		<div class="perfil2">
 			<div class="fotoperfil">
 			 <img id="div1" src="img/pic1.jpg" alt="Foto Perfil">
-			<p>Nome  {{ Auth::user()->name }}</p>
-            <p>Email {{ Auth::user()->email }}</p>
+			<p>Nome:  {{ Auth::user()->name }}</p>
+            <p>Email: {{ Auth::user()->email }}</p>
             <p>Avaliação Media: </p>
             
             <h3>Avaliação</h3>
