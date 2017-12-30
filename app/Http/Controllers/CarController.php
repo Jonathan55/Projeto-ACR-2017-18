@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Carro;
 use App\CarroComprado;
 use App\Compra;
@@ -129,7 +130,7 @@ class CarController extends Controller
         $ordenar = $request->ordenar ?: 'preco';
         $ordem = $request->ordem ?: 'ASC';
 
-        $carros_pesquisados = Carro::with(['marca', 'user'])
+        $carros_pesquisados = Carro::with(['marca', 'user', 'fotos'])
             ->where('marca_id', $marca_escolhida->id)
             ->whereIn('usado', $estado)
             ->whereBetween('preco', [$preco_min, $preco_max])
@@ -153,6 +154,48 @@ class CarController extends Controller
             'ordem',
             'estado'
         ));
+    }
+
+    public function pesquisarCarroAPI(Request $request) {
+        
+        $validator = Validator::make($request->all(), [
+            'marca_id' => 'int',
+            'preco_min' => 'numeric',
+            'preco_max' => 'numeric',
+            'ano_min' => 'int',
+            'ano_max' => 'int',
+            'quilometros_min' => 'int',
+            'quilometros_max' => 'int'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['erro' => $validator->errors()->first()], 401);
+        }
+
+        $todas_marcas_ids = Marca::all()->map(function($marca) {
+            return $marca->id;
+        });
+
+        $marca_id_escolhida = $request->marca_id ? [(int)$request->marca_id] : $todas_marcas_ids;
+
+        $preco_min = $request->preco_min ?: Carro::min('preco');
+        $preco_max = $request->preco_max ?: Carro::max('preco');
+        $ano_min = $request->ano_min ?: Carro::min('ano');
+        $ano_max = $request->ano_max ?: Carro::max('ano');
+        $quilometros_min = $request->quilometros_min ?: Carro::min('quilometros');
+        $quilometros_max = $request->quilometros_max ?: Carro::max('quilometros');
+        $ordenar = $request->ordenar ?: 'preco';
+        $ordem = $request->ordem ?: 'ASC';
+
+        $carros_pesquisados = Carro::with(['marca', 'user', 'fotos'])
+            ->whereIn('marca_id', $marca_id_escolhida)
+            ->whereBetween('preco', [$preco_min, $preco_max])
+            ->whereBetween('ano', [$ano_min, $ano_max])
+            ->whereBetween('quilometros', [$quilometros_min, $quilometros_max])
+            ->orderBy($ordenar, $ordem)
+            ->get();
+
+        return response()->json($carros_pesquisados);
     }
 
     public function formEditarCarro($id)

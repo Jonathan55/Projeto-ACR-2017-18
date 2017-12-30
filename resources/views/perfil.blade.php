@@ -1,12 +1,12 @@
 @extends('layouts.app') @section('content')
 
 <div id="center">
-    <h2>Perfil de {{ Auth::user()->name }}</h2>
+    <h2>Perfil de {{ $user->name }}</h2>
 		<div class="perfil2">
 			<div class="fotoperfil">
 			 <img id="div1" src="img/pic1.jpg" alt="Foto Perfil">
-			<p>Nome:  {{ Auth::user()->name }}</p>
-            <p>Email: {{ Auth::user()->email }}</p>
+			<p>Nome:  {{ $user->name }}</p>
+            <p>Email: {{ $user->email }}</p>
             <p>Avaliação Media: </p>
             
             <h3>Avaliação</h3>
@@ -25,7 +25,7 @@
 		<div class="perfil3">
 		<h3>Anuncios</h3>
         <ul class="flex-container">
-        @foreach(Auth::user()->carros as $carro)
+        @foreach($user->carros as $carro)
             <div class="flex-item">
 
                 @if($carro->fotos->count() > 0)
