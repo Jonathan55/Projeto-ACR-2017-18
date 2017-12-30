@@ -10,16 +10,26 @@
             <p>Avaliação Media: </p>
             
             <h3>Avaliação</h3>
+            <form method="POST" action="{{ route('avaliar') }}" enctype="multipart/form-data">
+                {{ csrf_field() }}
+             @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        <li style="color: red;">{{ $errors->first() }}</li>
+                    </ul>
+                </div>
+            @endif 
             <select>
-            <option value="" disabled selected>Avalie o Utilizador</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+            <option name="rating" style="{{ $errors->has('rating') ? ' border-color: red;' : '' }}" disabled selected>Avalie o Utilizador</option>
+                <option value="1" {{ old('rating') == '1' ? 'selected' : '' }}>1</option>
+                <option value="2" {{ old('rating') == '2' ? 'selected' : '' }}>2</option>
+                <option value="3" {{ old('rating') == '3' ? 'selected' : '' }}>3</option>
+                <option value="4" {{ old('rating') == '4' ? 'selected' : '' }}>4</option>
+                <option value="5" {{ old('rating') == '5' ? 'selected' : '' }}>5</option>
             </select>
-            <textarea class="comentarios"></textarea>
+            <textarea class="comentarios" name="avaliacao" value="{{ old('avaliacao')}}"></textarea>
             <input class="button" type="submit" value="Avaliar">
+            </form>
 		    </div>
 		</div>
 		<div class="perfil3">

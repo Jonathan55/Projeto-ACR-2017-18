@@ -62,6 +62,34 @@ class UserController extends Controller
     public function avaliar(Request $request)
     {
         $user = Auth::user();
+        $userAv = User::findOrFail($id);
+        dd($userAv);
+
+  
+
+        if($user->id != $userAv->id)
+        {
+                  
+            $rules = [
+                'rating' => 'required'
+            ];
+
+            $validatedData = $request->validate($rules);
+            $avaliacao = new Avaliacao;
+
+            
+            $avalicao->user_id = $userAv->id;
+            $avaliacao->from_user_id = $user->id;
+            $avaliacao->rating = $request->rating;
+            $avaliacao->avaliacao = $request->avaliacao;
+            $avaliacao->save();
+            return back();
+        }else
+        {
+            $errors = new MessageBag();
+            $errors = add('ERRO', 'O usuário não pode avaliar a si próprio');
+            
+        }
 
     }
 
