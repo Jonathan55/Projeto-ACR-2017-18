@@ -1,31 +1,33 @@
 @extends('layouts.app') @section('content')
 
 <div id="center">
-    <h2>Perfil de {{ Auth::user()->name }}</h2>
+    <h2>Perfil de {{ $user->name }}</h2>
 		<div class="perfil2">
 			<div class="fotoperfil">
 			 <img id="div1" src="img/pic1.jpg" alt="Foto Perfil">
-			<p>Nome:  {{ Auth::user()->name }}</p>
-            <p>Email: {{ Auth::user()->email }}</p>
+			<p>Nome:  {{ $user->name }}</p>
+            <p>Email: {{ $user->email }}</p>
             <p>Avaliação Media: </p>
             
             <h3>Avaliação</h3>
-            <form method="POST" action="{{ route('avaliar') }}" enctype="multipart/form-data">
+
+            <form method="POST" action="{{ route('avaliar',$user->id) }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
-             @if ($errors->any())
+            @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         <li style="color: red;">{{ $errors->first() }}</li>
                     </ul>
                 </div>
             @endif 
-            <select>
-            <option name="rating" style="{{ $errors->has('rating') ? ' border-color: red;' : '' }}" disabled selected>Avalie o Utilizador</option>
+        
+            <select name="rating" style="{{ $errors->has('rating') ? ' border-color: red;' : '' }}">
+            <option disabled selected>Avalie o Utilizador</option>
                 <option value="1" {{ old('rating') == '1' ? 'selected' : '' }}>1</option>
                 <option value="2" {{ old('rating') == '2' ? 'selected' : '' }}>2</option>
                 <option value="3" {{ old('rating') == '3' ? 'selected' : '' }}>3</option>
                 <option value="4" {{ old('rating') == '4' ? 'selected' : '' }}>4</option>
-                <option value="5" {{ old('rating') == '5' ? 'selected' : '' }}>5</option>
+                <option value="5" {( old('rating') == '5' ? 'selected' : '' }}>5</option>
             </select>
             <textarea class="comentarios" name="avaliacao" value="{{ old('avaliacao')}}"></textarea>
             <input class="button" type="submit" value="Avaliar">
@@ -74,7 +76,7 @@
     <div class="perfil1"> 
             <h3>Avaliações do Utilizador</h3>
             <p>Nota:</p>
-            <p>Comentário</p>
+            <p>Comentário:</p>
             <textarea class="comentarios"></textarea>
         </div>
 </div>
