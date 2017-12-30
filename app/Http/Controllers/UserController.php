@@ -15,7 +15,15 @@ class UserController extends Controller
         $user = User::with(['carros.marca','carrinho_compras.marca','carrinho_compras.user'])->findOrFail($id);
         return view('perfil', compact('user'));
     }
-    
+
+    public function verUtilizadorAPI(Request $request) {
+        $user = Auth::guard('api')->user();
+        if ($user) {
+            return User::with(['carros.marca','carrinho_compras.marca','carrinho_compras.user'])->findOrFail($user->id);
+        } else {
+            return response()->json(['erro' => 'Access-Token inválido.'], 401);
+        }
+    }
 
     public function verAdmin() {
         $marcas = Marca::all();

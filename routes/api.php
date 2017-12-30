@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Carro;
 use App\Marca;
 use App\Http\Resources\User as UserResource;
-use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +15,8 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    echo $request->user();
+Route::get('/utilizador', 'UserController@verUtilizadorAPI');
+Route::get('/marcas', function() {
+    return Marca::all();
 });
-
-Route::get('/carros', function() {
-    return Carro::with(['marca','user','fotos'])->get();
-});
+Route::get('/carro/pesquisar', 'CarController@pesquisarCarroAPI');

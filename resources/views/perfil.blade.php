@@ -36,7 +36,7 @@
 		<div style="flex-grow: 6">
 		<h3>Anuncios</h3>
         <ul class="flex-container">
-        @foreach(Auth::user()->carros as $carro)
+        @foreach($user->carros as $carro)
             <div class="flex-item">
 
                 @if($carro->fotos->count() > 0)
