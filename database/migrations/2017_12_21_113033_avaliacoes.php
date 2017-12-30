@@ -21,7 +21,7 @@ class Avaliacoes extends Migration
             $table->integer('from_user_id')->unsigned()->index();
             $table->foreign('from_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('rating');
-            $table->text('avaliacao');
+            $table->text('avaliacao')->nullable();
         });
     }
 

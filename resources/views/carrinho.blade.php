@@ -9,12 +9,12 @@
                 <li style="color: red;">{{ $errors->first() }}</li>
             </ul>
         </div>
-    @endif 
+    @endif
 		<hr>
         @foreach(Auth::user()->carrinho_compras as $carro)
 		<div class="carrinhoProduto">
-			<h3>Produto</h3>
-			<p>{{  $carro->marca->marca  }}</p>
+			<h3>Carro</h3>
+			<p>{{  $carro->marca->marca  }} {{  $carro->modelo  }}</p>
 		</div>
 		<div class="carrinhoUPR">
 			<h3></h3>
@@ -31,14 +31,20 @@
     @endforeach
 		<hr>
 		<div class="carrinhoTotal">
-		<h3>Valor Total: {{ Auth::user()->carrinho_compras->reduce(function ($carry, $item) {
-            return $carry + $item->preco; }) }} </h3>
+        @if(Auth::user()->carrinho_compras->count() > 0)
+        <h3>Valor Total: {{ Auth::user()->carrinho_compras->reduce(function ($carry, $item) {
+            return $carry + $item->preco; }) }} €</h3>
+        @else
+        <h3>Valor Total: 0.00 €</h3>
+        @endif
+
         <form action="{{ route('comprar') }}">
 		<input class="button" type="submit" value="Finalizar">
+        <br><br>
 		</form>
 
 		</div>
-   
+
 </div>
-        
+
 @endsection

@@ -2,49 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Auth;
-use App\Marca;
 use App\Avaliacao;
+use App\Marca;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\MessageBag;
 
 class UserController extends Controller
 {
 
-    public function verUtilizador($id) {
-        $user = User::with(['carros.marca','carrinho_compras.marca','carrinho_compras.user'])->findOrFail($id);
+    public function verUtilizador($id)
+    {
+        $user = User::with(['carros.marca', 'carrinho_compras.marca', 'carrinho_compras.user'])->findOrFail($id);
         return view('perfil', compact('user'));
     }
 
-    public function verUtilizadorAPI(Request $request) {
+    public function verUtilizadorAPI(Request $request)
+    {
         $user = Auth::guard('api')->user();
         if ($user) {
-            return User::with(['carros.marca','carrinho_compras.marca','carrinho_compras.user'])->findOrFail($user->id);
+            return User::with(['carros.marca', 'carrinho_compras.marca', 'carrinho_compras.user'])->findOrFail($user->id);
         } else {
             return response()->json(['erro' => 'Access-Token inválido.'], 401);
         }
     }
 
-    public function verAdmin() {
+    public function verAdmin()
+    {
         $marcas = Marca::all();
         $users = User::all();
 
         return view('admin', compact('marcas', 'users'));
     }
 
-
     public function eliminarMarca(Request $request)
     {
         $user = Auth::user();
         $marca = Marca::findOrFail($request->marca);
 
-
-        if($user->admin)
-        {
+        if ($user->admin) {
             $marca->delete();
             return back();
-        }else
-        {
+        } else {
             return abort(404);
         }
 
@@ -55,14 +55,12 @@ class UserController extends Controller
         $user = Auth::user();
         $marca = Marca::where('marca', $request->marca)->first();
 
-        if($user->admin && $marca == null)
-        {
+        if ($user->admin && $marca == null) {
             $marca = new Marca;
             $marca->marca = $request->marca;
             $marca->save();
             return back();
-        }else
-        {
+        } else {
             return abort(404);
         }
 
@@ -72,30 +70,25 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $userAv = User::findOrFail($user_id);
-        
 
+        if ($user->id != $userAv->id) {
 
-        if($user->id != $userAv->id)
-        {
-                  
             $validatedData = $request->validate([
                 'rating' => 'required',
-            
             ]);
             $avaliacao = new Avaliacao();
 
-            
             $avaliacao->user_id = $user_id;
-            $avaliacao->from_user_id = Auth::user()->id;
+            $avaliacao->from_user_id = $user->id;
             $avaliacao->rating = $request->rating;
             $avaliacao->avaliacao = $request->avaliacao;
+
             $avaliacao->save();
             return back();
-        }else
-        {
+        } else {
             $errors = new MessageBag();
-            $errors = add('ERRO', 'O usuário não pode avaliar a si próprio');
-            
+            $errors->add('ERRO', 'O usuário não pode avaliar a si próprio');
+            return redirect()->route('verUtilizador', $user_id)->withErrors($errors);
         }
 
     }
@@ -111,32 +104,27 @@ class UserController extends Controller
         $user = Auth::user();
         $userToDelete = User::findOrFail($request->utilizador);
 
-        if($user->admin)
-        {
+        if ($user->admin) {
             $carros = $userToDelete->carros;
-            foreach($carros as $carro)
-            {
+            foreach ($carros as $carro) {
                 $carro->delete();
             }
-            
-            
 
             $userToDelete->delete();
 
             return back();
-        }else
-        {
+        } else {
             return abort(404);
         }
     }
 
-
-    public function facebookLogin($access_token) {
+    public function facebookLogin($access_token)
+    {
 
         $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', 'https://graph.facebook.com/v2.11/me?fields=id,name,email&format=json&access_token='.$access_token);
+        $res = $client->request('GET', 'https://graph.facebook.com/v2.11/me?fields=id,name,email&format=json&access_token=' . $access_token);
 
-        if($res->getStatusCode() == 200) {
+        if ($res->getStatusCode() == 200) {
 
             $facebook_response = $res->getBody();
             $facebook_user = json_decode($facebook_response);
@@ -144,7 +132,7 @@ class UserController extends Controller
                 ->orWhere('email', $facebook_user->email)
                 ->first();
 
-            if($user) {
+            if ($user) {
                 // Se o utilizador existir, atualizar dados
                 $user->name = $facebook_user->name;
                 $user->email = $facebook_user->email;
@@ -155,7 +143,7 @@ class UserController extends Controller
                 $user = User::create([
                     'name' => $facebook_user->name,
                     'email' => $facebook_user->email,
-                    'facebook_id' => $facebook_user->id
+                    'facebook_id' => $facebook_user->id,
                 ]);
             }
 
@@ -163,9 +151,10 @@ class UserController extends Controller
             Auth::login($user);
             return redirect('/');
 
-        } else abort(404);
+        } else {
+            abort(404);
+        }
 
     }
 
 }
-

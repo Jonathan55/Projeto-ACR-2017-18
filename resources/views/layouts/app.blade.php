@@ -26,39 +26,46 @@
 				  </a>
 				</span>
 				<ul class="navbar-nav">
-				@guest
-					<li><a href="{{ route('login') }}" id="menu">Entrar</a></li>
-					<li><a href="{{ route('register') }}" id="menu">Registar</a></li>
-				@else
-					<li><a href="{{ route('home') }}" >Página Inicial</a></li>
-					<li><a href="{{ route('adicionarCarro') }}" id="menu">Adicionar Carro</a></li>
-					<li><a href="{{ route('verAdmin') }}" id="menu">Admin</a></li>
-					<li><a href="{{ route('logout') }}" id="menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a></li>
-					<li><a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="menu">{{ Auth::user()->name }}</a></li>
-					<li><a href="{{ route('verCarrinho') }}" id="menu">Carrinho</a></li>
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
-					{{ csrf_field() }}
-					</form>
-				@endguest
+                @guest
+                <a href="{{ route('login') }}" id="menu">Entrar</a>
+                <a href="{{ route('register') }}" id="menu">Registar</a>
+                <a href="{{ route('home') }}">Página Inicial</a>
+                @else
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
+                        {{ csrf_field() }}
+                    </form>
+                    <a href="{{ route('logout') }}" id="menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a>
+                    <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="menu">{{ Auth::user()->name }}</a>
+                    <a href="{{ route('verCarrinho') }}" id="menu">Carrinho ({{ Auth::user()->carrinho_compras()->count() }})</a>
+                    <a href="{{ route('adicionarCarro') }}" id="menu">Adicionar Carro</a>
+                    <a href="{{ route('home') }}">Página Inicial</a>
+                    @if(Auth::user()->admin)
+                    <a href="{{ route('verAdmin') }}" id="menu">Admin</a>
+                    @endif
+                @endguest
 				</ul>
 			</nav>
 
 			<div id="side-menu" class="side-nav">
 				<a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-				@guest
-					<a href="{{ route('login') }}" id="menu">Entrar</a>
-					<a href="{{ route('register') }}" id="menu">Registar</a>
-				@else
-					<a href="{{ route('home') }}" id="menu">Página Inicial</a>
-					<a href="{{ route('adicionarCarro') }}" id="menu">Adicionar Carro</a>
-					<a href="{{ route('verAdmin') }}" id="menu">Admin</a>
-					<a href="{{ route('logout') }}" id="menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a>
-					<a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="menu">{{ Auth::user()->name }}</a>
-					<a href="{{ route('verCarrinho') }}" id="menu">Carrinho</a>
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
-					{{ csrf_field() }}
-					</form>
-				@endguest
+                @guest
+                <a href="{{ route('login') }}" id="menu">Entrar</a>
+                <a href="{{ route('register') }}" id="menu">Registar</a>
+                <a href="{{ route('home') }}">Página Inicial</a>
+                @else
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
+                        {{ csrf_field() }}
+                    </form>
+                    <a href="{{ route('verAdmin') }}" id="menu">Admin</a>
+                    <a href="{{ route('home') }}" id="menu">Página Inicial</a>
+                    <a href="{{ route('adicionarCarro') }}" id="menu">Adicionar Carro</a>
+                    <a href="{{ route('verCarrinho') }}" id="menu">Carrinho ({{ Auth::user()->carrinho_compras()->count() }})</a>
+                    <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="menu">{{ Auth::user()->name }}</a>
+                    <a href="{{ route('logout') }}" id="menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a>
+                    @if(Auth::user()->admin)
+                    
+                    @endif
+                @endguest
 			</div>
 		<script>
 			function openSlideMenu(){
