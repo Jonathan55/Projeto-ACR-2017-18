@@ -19,6 +19,15 @@
                     </ul>
                 </div>
             @endif 
+	<div class="flez-container">
+		<div style="flex-grow: 2">
+		<h3>Perfil</h3>
+			<h6>Nome:</h6>  <p>{{ Auth::user()->name }}</p>
+			<h6>Email:</h6> <p>{{ Auth::user()->email }}</p>
+			<h6>Avaliação Media:</h6><p> </p>
+		</div>
+		<div style="flex-grow: 2">
+		<h3>Avaliação</h3>
             <select>
             <option name="rating" style="{{ $errors->has('rating') ? ' border-color: red;' : '' }}" disabled selected>Avalie o Utilizador</option>
                 <option value="1" {{ old('rating') == '1' ? 'selected' : '' }}>1</option>
@@ -32,25 +41,20 @@
             </form>
 		    </div>
 		</div>
-		<div class="perfil3">
+		<div style="flex-grow: 6">
 		<h3>Anuncios</h3>
         <ul class="flex-container">
         @foreach(Auth::user()->carros as $carro)
             <div class="flex-item">
-
                 @if($carro->fotos->count() > 0)
                 <a href="{{ route('verCarro', $carro->id) }}">
                     <img id="div1" src="{{asset('storage/'.$carro->fotos[0]->path)}}" alt="anuncio">
                 </a>
                 @endif
                 <hr>
-
                 <table class="table-fill">
-
                     <tbody class="table-hover">
-
                         <!-- Só Marca, Modelo, Preço, Usado ou Novo -->
-
                         <tr>
                             <td class="text-left">Utilizador</td>
                             <td class="text-left">{{$carro->user->name}}</td>
@@ -68,15 +72,14 @@
             </div>      
             @endforeach
         </ul>
-        
-    <br><br><br><br>		
-    </div>
+ 		</div>
+	</div>
     <div class="perfil1"> 
-            <h3>Avaliações do Utilizador</h3>
-            <p>Nota:</p>
-            <p>Comentário</p>
-            <textarea class="comentarios"></textarea>
-        </div>
+        <h3>Avaliações do Utilizador</h3>
+        <p>Nota:</p>
+        <p>Comentário</p>
+        <textarea class="comentarios"></textarea>
+    </div>
 </div>
 
 @endsection
