@@ -4,7 +4,7 @@
 
     <ul class="flex-container">
 
-        @foreach($carros_mais_recentes as $carro)
+        @foreach($carros_pesquisados as $carro)
         <div class="flex-item">
 
             @if($carro->fotos->count() > 0)
