@@ -60,6 +60,10 @@
                 </tr>
             </tbody>
         </table>
+        @if(Auth::user() && Auth::user()->id == $carro->user->id)
+           <br><br>
+           <a href="{{ route('eliminarCarro', $carro->id) }}"><button class="button">Eliminar</button></a>
+        @endif
     </div>
     </div>
 

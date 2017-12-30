@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
 use App\Carro;
 use App\CarroComprado;
 use App\Compra;
@@ -14,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\MessageBag;
+use Validator;
 
 class CarController extends Controller
 {
@@ -112,10 +112,10 @@ class CarController extends Controller
             'ano_min' => 'int',
             'ano_max' => 'int',
             'quilometros_min' => 'int',
-            'quilometros_max' => 'int'
+            'quilometros_max' => 'int',
         ]);
-        
-        $carros_mais_vistos = Carro::with(['marca', 'user', 'fotos'])->orderBy('visualizacoes','desc')->take(3)->get();
+
+        $carros_mais_vistos = Carro::with(['marca', 'user', 'fotos'])->orderBy('visualizacoes', 'desc')->take(3)->get();
         $marcas = Marca::all();
 
         // Valores do formulário ou da Base de Dados
@@ -156,8 +156,9 @@ class CarController extends Controller
         ));
     }
 
-    public function pesquisarCarroAPI(Request $request) {
-        
+    public function pesquisarCarroAPI(Request $request)
+    {
+
         $validator = Validator::make($request->all(), [
             'marca_id' => 'int',
             'preco_min' => 'numeric',
@@ -165,18 +166,18 @@ class CarController extends Controller
             'ano_min' => 'int',
             'ano_max' => 'int',
             'quilometros_min' => 'int',
-            'quilometros_max' => 'int'
+            'quilometros_max' => 'int',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['erro' => $validator->errors()->first()], 401);
         }
 
-        $todas_marcas_ids = Marca::all()->map(function($marca) {
+        $todas_marcas_ids = Marca::all()->map(function ($marca) {
             return $marca->id;
         });
 
-        $marca_id_escolhida = $request->marca_id ? [(int)$request->marca_id] : $todas_marcas_ids;
+        $marca_id_escolhida = $request->marca_id ? [(int) $request->marca_id] : $todas_marcas_ids;
 
         $preco_min = $request->preco_min ?: Carro::min('preco');
         $preco_max = $request->preco_max ?: Carro::max('preco');
@@ -289,7 +290,7 @@ class CarController extends Controller
 
             // Validação
             $rules = [
-                'fotos' => 'required|min:1'
+                'fotos' => 'required|min:1',
             ];
             $fotos_count = count($request->fotos);
             foreach (range(0, $fotos_count) as $index) {
@@ -348,6 +349,11 @@ class CarController extends Controller
     {
         $user = Auth::user();
         $carros = $user->carrinho_compras;
+        if ($carros->count() == 0) {
+            $errors = new MessageBag();
+            $errors->add('ERRO', 'Não existem carros no carrinho de compras.');
+            return redirect()->route('verCarrinho')->withErrors($errors);
+        }
         DB::beginTransaction();
         $compra = new Compra();
         $user->compras()->save($compra);
@@ -375,12 +381,113 @@ class CarController extends Controller
             } else {
                 DB::rollback();
                 $errors = new MessageBag();
-                $errors->add('ERRO', 'O utilizador '.$carro->user->name.' não tem a quantidade suficiente de carros '.$carro->marca->marca.' '.$carro->modelo.'.');
+                $errors->add('ERRO', 'O utilizador ' . $carro->user->name . ' não tem a quantidade suficiente de carros ' . $carro->marca->marca . ' ' . $carro->modelo . '.');
                 return redirect()->route('verCarrinho')->withErrors($errors);
             }
         }
         DB::Commit();
-        return view('recibo');
+        return redirect()->route('verRecibo', $compra->id);
+    }
+
+    public function verRecibo($compra_id)
+    {
+
+        $user = Auth::user();
+        $compra = Compra::with(['user', 'carros_comprados'])->findOrFail($compra_id);
+
+        return view('recibo', compact('compra'));
+
+    }
+
+    public function adicionarCarroAPI(Request $request)
+    {
+        // Verificar Utilizador
+        $user = Auth::guard('api')->user();
+        if (!$user) {
+            return response()->json(['erro' => 'Access-Token inválido.'], 401);
+        }
+
+        // Verificar Marca
+        $marca = Marca::find($request->marca);
+        if (!$marca) {
+            return response()->json(['erro' => 'A marca_id escolhida não existe.'], 400);
+        }
+
+        // Validações
+        $rules = [
+            'modelo' => 'required',
+            'fotos' => 'required|min:1',
+            'quilometros' => 'required|int',
+            'ano' => 'required|int',
+            'preco' => 'required|numeric',
+            'cilindrada' => 'nullable|int',
+            'potencia' => 'nullable|int',
+            'quantidade' => 'required|int|min:1',
+            'lugares' => 'nullable|int',
+            'cor' => 'nullable|alpha',
+            'caixa' => 'required|in:Manual,Automática,Semi-Automática',
+            'combustivel' => 'required|in:Gasolina,Diesel',
+            'usado' => 'required',
+        ];
+
+        if ($request->usado == 1 && $request->quilometros == 0) {
+            $errors = new MessageBag();
+            $errors->add('quilometros', 'Com o estado usado, deve introduzir os quilometros');
+            return response()->json(['erro' => $errors->first()], 400);
+        }
+        if ($request->usado == 0 && $request->quilometros > 0) {
+            $errors = new MessageBag();
+            $errors->add('quilometros', 'Com o estado novo, o campo quilometros deve ser 0');
+            return response()->json(['erro' => $errors->first()], 400);
+        }
+
+        $fotos_count = count($request->fotos);
+        foreach (range(0, $fotos_count) as $index) {
+            $rules['fotos.' . $index] = 'image';
+        }
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json(['erro' => $validator->errors()->first()], 400);
+        }
+
+        // Sem problemas
+        $carro = new Carro;
+
+        $carro->marca()->associate($marca);
+        $carro->modelo = $request->modelo;
+        $carro->combustivel = $request->combustivel;
+        $carro->quilometros = $request->quilometros;
+        $carro->potencia = $request->potencia;
+        $carro->cilindrada = $request->cilindrada;
+        $carro->preco = $request->preco;
+        $carro->usado = $request->usado;
+        $carro->ano = $request->ano;
+        $carro->lugares = $request->lugares;
+        $carro->quantidade = $request->quantidade;
+        $carro->cor = $request->cor;
+        $carro->caixa = $request->caixa;
+        $carro->descricao = $request->descricao;
+        $carro->visualizacoes = 0;
+        $user->carros()->save($carro);
+
+        // Fotos
+        foreach ($request->fotos as $foto) {
+            $foto_carro = new FotoCarro();
+            $foto_carro->path = $foto->store('carros', 'public');
+            $carro->fotos()->save($foto_carro);
+        }
+
+        return response()->json($carro, 201);
+    }
+
+    public function eliminarCarro($carro_id) {
+        $user = Auth::user();
+        $carro = Carro::findOrFail($carro_id);
+        if ($carro->user->id == $user->id) {
+            $carro->delete();
+            return redirect('/');
+        } else abort(404);
     }
 
 }

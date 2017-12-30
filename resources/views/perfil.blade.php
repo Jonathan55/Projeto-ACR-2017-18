@@ -3,8 +3,6 @@
 <div id="center">
     <h2>Perfil de {{ $user->name }}</h2>
 		<div class="perfil2">
-			<div class="fotoperfil">
-			 <img id="div1" src="img/pic1.jpg" alt="Foto Perfil">
 			<p>Nome:  {{ $user->name }}</p>
             <p>Email: {{ $user->email }}</p>
             <p>Avaliação Media: </p>

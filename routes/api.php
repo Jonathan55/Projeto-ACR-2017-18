@@ -20,3 +20,4 @@ Route::get('/marcas', function() {
     return Marca::all();
 });
 Route::get('/carro/pesquisar', 'CarController@pesquisarCarroAPI');
+Route::post('/carro', 'CarController@adicionarCarroAPI');

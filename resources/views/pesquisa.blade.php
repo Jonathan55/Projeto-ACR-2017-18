@@ -25,25 +25,30 @@
 
                     <tr>
                         <td class="text-left">Utilizador</td>
-                        <td class="text-left">{{$carro->user->name}}</td>
+                        <td class="text-right"><a href="{{ route('verUtilizador', $carro->user->id) }}">{{$carro->user->name}}</a></td>
                     </tr>
                     <tr>
-                        <td class="text-left">Combustível</td>
-                        <td class="text-left">{{$carro->combustivel}}</td>
+                        <td class="text-left">Preço</td>
+                        <td class="text-right">{{$carro->preco}}</td>
                     </tr>
                     <tr>
-                        <td class="text-left">Cilindrada</td>
-                        <td class="text-left">{{$carro->cilindrada}}</td>
+                        <td class="text-left">Ano</td>
+                        <td class="text-right">{{$carro->ano}}</td>
                     </tr>
-
                     <tr>
-                        <td class="text-left">Carrinho</td>
-                        <td class="text-left"><a href="{{ route('adicionarCarrinho', $carro->id) }}">Adicionar</a></td>
+                        <td class="text-left">Quilómetros</td>
+                        <td class="text-right">{{$carro->quilometros}}</td>
                     </tr>
 
                 </tbody>
 
             </table>
+
+            @if (Auth::user() && Auth::user()->id != $carro->user->id)
+            <br>
+            <a href="{{ route('adicionarCarrinho', $carro->id) }}"><button>Adicionar ao carrinho</button></a>
+            <br><br>
+            @endif
 
         </div>
         @endforeach
