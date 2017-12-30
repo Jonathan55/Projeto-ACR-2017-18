@@ -7,3 +7,9 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+ #sidebar {
+  width: 270px;
+  padding: 5px 15px;
+  float: left;
+}
