@@ -94,7 +94,7 @@ class UserController extends Controller
 
     public function verAvaliacoes($user_id)
     {
-        $avaliacao = Avaliacao::u
+        //$avaliacao = Avaliacao::u
 
     }
 
