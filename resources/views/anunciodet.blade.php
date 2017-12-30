@@ -1,22 +1,14 @@
 @extends('layouts.app') @section('content')
 
 <div id="center">
-<h1>{{  $carro->marca->marca  }} {{  $carro->modelo}}</h2>
+<h1>{{  $carro->marca->marca  }} {{  $carro->modelo}}</h1>
+
     <ul class="flex-container">
 
-        @foreach($carro->fotos as $foto)
         <div class="galeriaDet">
-           <a href="{{asset('storage/'.$foto->path)}}" ><img  src="{{asset('storage/'.$foto->path)}}" alt="anuncio"></a>
-        </div>
-        @endforeach
-
-
-        
-        
-
         <div class="descricaoDet">
-        <!-- buscar a BD a foto -->	
-        <h2><a href="{{  route('verUtilizador',$carro->user->id )}}">{{  $carro->user->name  }}</a> </h2>       								  
+        <!-- buscar a BD a foto -->
+        <h2><a href="{{  route('verUtilizador',$carro->user->id )}}">{{  $carro->user->name  }}</a> </h2>
         <!-- buscar Marca e Modelo -->
         <hr>
         <table class="table-fill">
@@ -68,7 +60,41 @@
                 </tr>
             </tbody>
         </table>
-    </div>	
+    </div>
+    </div>
+
+    @foreach($carro->fotos as $foto)
+        <div class="galeriaDet">
+           <a href="{{asset('storage/'.$foto->path)}}" ><img  src="{{asset('storage/'.$foto->path)}}" alt="anuncio"></a>
+           @if(Auth::user() && Auth::user()->id == $carro->user->id && $carro->fotos->count() > 1)
+           <br><br>
+           <a href="{{ route('eliminarFoto', [$carro->id, $foto->id]) }}"><button>Eliminar</button></a>
+           @endif
+        </div>
+    @endforeach
+
+    @if(Auth::user() && Auth::user()->id == $carro->user->id)
+
+        <div class="galeriaDet">
+            <form class="form-horizontal" method="POST" action="{{ route('adicionarFotos', $carro->id) }}" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                Adicionar Fotos
+                <br><br>
+                <input type="file" name="fotos[]" style="{{ $errors->has('fotos') ? ' color: red;' : '' }}" multiple>
+                @if ($errors->has('fotos'))
+                    <br><br>
+                    <span>
+                        <small style="color: red;">{{ $errors->first('fotos') }}</small>
+                    </span>
+                    <br>
+                @endif
+                <br><br>
+                <input type="submit" value="Adicionar">
+            </form>
+        </div>
+
+    @endif
+
 </ul>
 </div>
 

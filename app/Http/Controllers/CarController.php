@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Carro;
+use App\CarroComprado;
+use App\Compra;
 use App\FotoCarro;
 use App\Marca;
 use App\User;
-use App\Compra;
-use App\CarroComprado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\MessageBag;
-use Illuminate\Support\Facades\DB;
 
 class CarController extends Controller
 {
@@ -58,11 +58,11 @@ class CarController extends Controller
 
         $errors = new MessageBag();
         if ($request->usado == 1 && $request->quilometros == 0) {
-            $errors->add('quilometros','Com o estado usado, deve introduzir os quilometros');
+            $errors->add('quilometros', 'Com o estado usado, deve introduzir os quilometros');
             return redirect()->route('adicionarCarro')->withInput()->withErrors($errors);
         }
         if ($request->usado == 0 && $request->quilometros > 0) {
-            $errors->add('quilometros','Com o estado novo, o campo quilometros deve ser 0');
+            $errors->add('quilometros', 'Com o estado novo, o campo quilometros deve ser 0');
             return redirect()->route('adicionarCarro')->withInput()->withErrors($errors);
         }
 
@@ -104,21 +104,6 @@ class CarController extends Controller
 
     public function pesquisarCarro(Request $request)
     {
-        /*
-        // Valores Home
-        $carros_mais_vistos = Carro::with(['marca', 'user', 'fotos'])->orderBy('visualizacoes','desc')->take(3)->get();
-        $carros_mais_recentes = Carro::with(['marca', 'user', 'fotos'])->orderBy('created_at', 'desc')->take(3)->get();
-        $marcas = Marca::all();
-        $preco_min = Carro::min('preco');
-        $preco_max = Carro::max('preco');
-        $ano_min = Carro::min('ano');
-        $ano_max = Carro::max('ano');
-        $quilometros_min = Carro::min('quilometros');
-        $quilometros_max = Carro::max('quilometros');
-        */
-
-        // Pesquisa
-        $marca = Marca::findOrFail($request->marca);
         $validatedData = $request->validate([
             'marca' => 'required',
             'preco_min' => 'numeric',
@@ -126,26 +111,48 @@ class CarController extends Controller
             'ano_min' => 'int',
             'ano_max' => 'int',
             'quilometros_min' => 'int',
-            'quilometros_max' => 'int',
+            'quilometros_max' => 'int'
         ]);
+        
+        $carros_mais_vistos = Carro::with(['marca', 'user', 'fotos'])->orderBy('visualizacoes','desc')->take(3)->get();
+        $marcas = Marca::all();
 
+        // Valores do formulário ou da Base de Dados
         $estado = is_null($request->estado) ? [0, 1] : [$request->estado];
+        $marca_escolhida = Marca::findOrFail($request->marca);
         $preco_min = $request->preco_min ?: Carro::min('preco');
         $preco_max = $request->preco_max ?: Carro::max('preco');
         $ano_min = $request->ano_min ?: Carro::min('ano');
         $ano_max = $request->ano_max ?: Carro::max('ano');
         $quilometros_min = $request->quilometros_min ?: Carro::min('quilometros');
         $quilometros_max = $request->quilometros_max ?: Carro::max('quilometros');
+        $ordenar = $request->ordenar ?: 'preco';
+        $ordem = $request->ordem ?: 'ASC';
 
-        $carros = Carro::with(['marca', 'user'])
-            ->where('marca_id', $marca->id)
+        $carros_pesquisados = Carro::with(['marca', 'user'])
+            ->where('marca_id', $marca_escolhida->id)
             ->whereIn('usado', $estado)
             ->whereBetween('preco', [$preco_min, $preco_max])
             ->whereBetween('ano', [$ano_min, $ano_max])
             ->whereBetween('quilometros', [$quilometros_min, $quilometros_max])
-            ->orderBy($request->ordenar, $request->ordem)
+            ->orderBy($ordenar, $ordem)
             ->get();
-        return $carros;
+
+        return view('pesquisa', compact(
+            'carros_mais_vistos',
+            'carros_pesquisados',
+            'marcas',
+            'preco_max',
+            'preco_min',
+            'ano_min',
+            'ano_max',
+            'quilometros_min',
+            'quilometros_max',
+            'marca_escolhida',
+            'ordenar',
+            'ordem',
+            'estado'
+        ));
     }
 
     public function formEditarCarro($id)
@@ -155,12 +162,9 @@ class CarController extends Controller
         $user = Auth::user();
         if ($carro->user->id == $user->id) {
             return view('editarCarro', compact('carro', 'marcas'));
-
         } else {
             abort(404);
-
         }
-
     }
 
     public function editarCarro(Request $request, $id)
@@ -241,7 +245,9 @@ class CarController extends Controller
         if ($carro->user->id == $user->id) {
 
             // Validação
-            $rules = [];
+            $rules = [
+                'fotos' => 'required|min:1'
+            ];
             $fotos_count = count($request->fotos);
             foreach (range(0, $fotos_count) as $index) {
                 $rules['fotos.' . $index] = 'image';
@@ -302,10 +308,10 @@ class CarController extends Controller
         DB::beginTransaction();
         $compra = new Compra();
         $user->compras()->save($compra);
-        foreach($carros as $carro)
-        {
-            if($carro->quantidade>0)
-            {
+        foreach ($carros as $carro) {
+            // Obter o carro novamente da base de dados para ter a quantidade atualizada
+            $carro = Carro::findOrFail($carro->id);
+            if ($carro->quantidade > 0) {
                 $carro->quantidade--;
                 $carro->save();
                 $carroComprado = new CarroComprado();
@@ -317,19 +323,16 @@ class CarController extends Controller
                 $carroComprado->email = $carro->user->email;
                 $carroComprado->user_id = $carro->user->id;
                 $compra->carros_comprados()->save($carroComprado);
-                 DB::table('carrinho_compras')
-                     ->where('user_id', $user->id)
-                     ->where('carro_id', $carro->id)
-                     ->limit(1)
-                     ->delete();
-
-
-
-            }else
-            {
+                // Eliminar do carrinho
+                DB::table('carrinho_compras')
+                    ->where('user_id', $user->id)
+                    ->where('carro_id', $carro->id)
+                    ->limit(1)
+                    ->delete();
+            } else {
                 DB::rollback();
                 $errors = new MessageBag();
-                $errors->add('ERRO','O carro '.$carro->marca->marca. ' '.$carro->modelo. ' não existe em stock');
+                $errors->add('ERRO', 'O utilizador '.$carro->user->name.' não tem a quantidade suficiente de carros '.$carro->marca->marca.' '.$carro->modelo.'.');
                 return redirect()->route('verCarrinho')->withErrors($errors);
             }
         }
