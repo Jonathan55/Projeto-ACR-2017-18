@@ -93,13 +93,24 @@ Botão*/
 Anuncio Detalhado*/
   
 .galeriaDet {
-  width: 400px;
+  width: 450px;
   margin-top: 10px;
   margin-bottom: 20px;
   line-height: 10px;
   color: #3B4044;
   font-weight: bold;
   text-align: center; }
+  
+.galeriaDet img {
+	  border-radius: 4px;
+  line-height: 10px;
+	background: #E1E1E1;
+	padding: 5px;
+  max-width: 100%;
+  height: 270px;
+  margin-top: 10px;
+  border-radius: 4px; }
+
  
 .descricaoDet {
   background: #E1E1E1;
@@ -112,7 +123,22 @@ Anuncio Detalhado*/
   color: #3B4044;
   font-weight: bold;
   text-align: center; }
-
+  
+ #text-left{
+	float:left;
+	background: #EBEBEB;
+	text-align: left;
+	width: 90%;
+	font-size: 20px;
+	
+ }
+ #text-right{
+	background: #EBEBEB;
+	text-align: left;
+	width: 90%;
+	font-size: 20px;
+	float:right;
+ }
 /***************************************************************************/  
 /* *------------------------  */
 input[type=text], select, input[type=password] {
@@ -136,11 +162,6 @@ input[type=text], select, input[type=password] {
   margin-top: 10px;
   border-radius: 4px; }
 
-.galeriaDet img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-  border-radius: 4px; }
 
 div.table-title {
   display: block;
@@ -159,9 +180,8 @@ div.table-title {
   text-transform: uppercase; }
 
 /*** Table Styles **/
-table.table-fill {
-  margin-left: auto;
-  margin-right: auto; }
+.table-fill {
+  width: 100%; }
 
 tr {
   border-top: 1px solid #C1C3D1;
@@ -174,15 +194,33 @@ td {
   background: #EBEBEB;
   padding: 5px;
   text-align: left;
-  font-weight: 300;
-  font-size: 18px; }
+  
+  font-size: 13px; }
 
-.descricaoDet td {
-  background: #EBEBEB;
-  text-align: left;
-  width: 90%;
-  font-size: 20px; }
+.flez-container {
+  display: flex;
+  align-items: stretch;
+  background-color: #f1f1f1;
+}
 
+.flez-container>div {
+		  border-radius: 4px;
+  line-height: 10px;
+background-color:#eadede;
+ 
+  margin: 10px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 30px;
+}
+.flez-container p{
+	font-size: 16px;
+	margin: 0;
+	padding:0;
+}
+.flez-container h6 {
+	margin:0;
+}
 /************************************************************************************
 Pagina Admin*/
 
@@ -267,7 +305,7 @@ Perfil*/
   padding: 0px 10px 0px 10px; }
 
 .comentarios {
-  margin-left: 1%;
+ 
   width: 98%;
   height: 100px;
   resize: none; }
@@ -368,7 +406,12 @@ MEDIA QUERIES
 *************************************************************************************/
 /* for 1024px or less */
 @media screen and (max-width: 1024px) {
-  #campreg {
+ .flez-container {
+  display: inline-block;
+
+}
+
+ #campreg {
     width: 100%; }
 
   #content {

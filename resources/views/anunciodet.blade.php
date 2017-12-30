@@ -16,47 +16,47 @@
                 <!-- Só Marca, Modelo, Preço, Usado ou Novo -->
                 <tr>
                     <td class="text-left">Marca</td>
-                    <td class="text-left">{{  $carro->marca->marca  }}</td>
+                    <td class="text-right">{{  $carro->marca->marca  }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Modelo</td>
-                    <td class="text-left">{{  $carro->modelo}}</td>
+                    <td class="text-right">{{  $carro->modelo}}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Combustível</td>
-                    <td class="text-left">{{  $carro->combustivel  }}</td>
+                    <td class="text-right">{{  $carro->combustivel  }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Cor</td>
-                    <td class="text-left">{{  $carro->cor  }}</td>
+                    <td class="text-right">{{  $carro->cor  }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Cilindrada</td>
-                    <td class="text-left"<{{  $carro->cilindrada  }}</td>
+                    <td class="text-right"<{{  $carro->cilindrada  }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Potencia</td>
-                    <td class="text-left">{{  $carro->potencia  }}</td>
+                    <td class="text-right">{{  $carro->potencia  }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Quilómetros</td>
-                    <td class="text-left">{{  $carro->quilometros  }}</td>
+                    <td class="text-right">{{  $carro->quilometros  }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Ano</td>
-                    <td class="text-left">{{  $carro->ano  }}</td>
+                    <td class="text-right">{{  $carro->ano  }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Preço</td>
-                    <td class="text-left">{{  $carro->preco  }}</td>
+                    <td class="text-right">{{  $carro->preco  }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Descrição</td>
-                    <td class="text-left">{{  $carro->descricao  }}</td>
+                    <td class="text-right">{{  $carro->descricao  }}</td>
 
                 <tr>
                     <td class="text-left">Carrinho</td>
-                    <td class="text-left"><a href="{{ route('adicionarCarrinho', $carro->id) }}">Adicionar</a></td>
+                    <td class="text-right"><a href="{{ route('adicionarCarrinho', $carro->id) }}">Adicionar</a></td>
                 </tr>
             </tbody>
         </table>
@@ -68,7 +68,7 @@
            <a href="{{asset('storage/'.$foto->path)}}" ><img  src="{{asset('storage/'.$foto->path)}}" alt="anuncio"></a>
            @if(Auth::user() && Auth::user()->id == $carro->user->id && $carro->fotos->count() > 1)
            <br><br>
-           <a href="{{ route('eliminarFoto', [$carro->id, $foto->id]) }}"><button>Eliminar</button></a>
+           <a href="{{ route('eliminarFoto', [$carro->id, $foto->id]) }}"><button class="button">Eliminar</button></a>
            @endif
         </div>
     @endforeach
@@ -78,9 +78,9 @@
         <div class="galeriaDet">
             <form class="form-horizontal" method="POST" action="{{ route('adicionarFotos', $carro->id) }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
-                Adicionar Fotos
+                <h3>Adicionar Fotos<h3>
                 <br><br>
-                <input type="file" name="fotos[]" style="{{ $errors->has('fotos') ? ' color: red;' : '' }}" multiple>
+                <input  type="file" name="fotos[]" style="{{ $errors->has('fotos') ? ' color: red;' : '' }}" multiple>
                 @if ($errors->has('fotos'))
                     <br><br>
                     <span>
@@ -89,7 +89,7 @@
                     <br>
                 @endif
                 <br><br>
-                <input type="submit" value="Adicionar">
+                <input class="button" type="submit" value="Adicionar">
             </form>
         </div>
 

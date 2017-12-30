@@ -25,20 +25,20 @@
 
                     <tr>
                         <td class="text-left">Utilizador</td>
-                        <td class="text-left">{{$carro->user->name}}</td>
+                        <td class="text-right">{{$carro->user->name}}</td>
                     </tr>
                     <tr>
                         <td class="text-left">Combustível</td>
-                        <td class="text-left">{{$carro->combustivel}}</td>
+                        <td class="text-right">{{$carro->combustivel}}</td>
                     </tr>
                     <tr>
                         <td class="text-left">Cilindrada</td>
-                        <td class="text-left">{{$carro->cilindrada}}</td>
+                        <td class="text-right">{{$carro->cilindrada}}</td>
                     </tr>
 
                     <tr>
                         <td class="text-left">Carrinho</td>
-                        <td class="text-left"><a href="{{ route('adicionarCarrinho', $carro->id) }}">Adicionar</a></td>
+                        <td class="text-right"><a href="{{ route('adicionarCarrinho', $carro->id) }}">Adicionar</a></td>
                     </tr>
 
                 </tbody>
@@ -76,15 +76,15 @@
 
                     <tr>
                         <td class="text-left">Utilizador</td>
-                        <td class="text-left">{{$carro->user->name}}</td>
+                        <td class="text-right">{{$carro->user->name}}</td>
                     </tr>
                     <tr>
                         <td class="text-left">Combustível</td>
-                        <td class="text-left">{{$carro->combustivel}}</td>
+                        <td class="text-right">{{$carro->combustivel}}</td>
                     </tr>
                     <tr>
                         <td class="text-left">Cilindrada</td>
-                        <td class="text-left">{{$carro->cilindrada}}</td>
+                        <td class="text-right">{{$carro->cilindrada}}</td>
                     </tr>
 
                 </tbody>
