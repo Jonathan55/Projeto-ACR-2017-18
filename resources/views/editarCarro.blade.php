@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('content')
 
 <div id="middle">
-    <h2>Adicionar Anuncio</h2>
+    <h2>Editar Anuncio</h2>
 
     <form class="form-horizontal" method="POST" action="{{ route('editarCarro',$carro->id) }}" enctype="multipart/form-data">
         {{ csrf_field() }}

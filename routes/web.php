@@ -30,8 +30,8 @@ Route::get('/marca/adicionar', 'UserController@adicionarMarca')->name('adicionar
 Route::get('/user/eliminar', 'UserController@eliminarUser')->name('eliminarUser')->middleware('auth');
 Route::get('/carrinho', 'CarController@verCarrinho')->name('verCarrinho')->middleware('auth');
 Route::get('/carrinho/comprar', 'CarController@comprar')->name('comprar')->middleware('auth');
-Route::post('/carro/avaliar', 'UserController@avaliar')->name('avaliar')->middleware('auth');
-
+Route::post('/utilizador/{user_id}/avaliar', 'UserController@avaliar')->name('avaliar')->middleware('auth');
+Route::get('/utizador/{user_id}/avaliacoes', 'UserController@verAvaliacoes')->name('verAvaliacoes')->middleware('auth');
 
 Route::get('/facebook/login/{access_token}', 'UserController@facebookLogin');
 

@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Marca;
+use App\Avaliacao;
 
 class UserController extends Controller
 {
 
     public function verUtilizador($id) {
         $user = User::with(['carros.marca','carrinho_compras.marca','carrinho_compras.user'])->findOrFail($id);
-        return view('perfil');
+        return view('perfil', compact('user'));
     }
     
 
@@ -59,27 +60,25 @@ class UserController extends Controller
 
     }
 
-    public function avaliar(Request $request)
+    public function avaliar(Request $request, $user_id)
     {
         $user = Auth::user();
-        $userAv = User::findOrFail($id);
-        dd($userAv);
+        $userAv = User::findOrFail($user_id);
+        
 
-  
 
         if($user->id != $userAv->id)
         {
                   
-            $rules = [
-                'rating' => 'required'
-            ];
-
-            $validatedData = $request->validate($rules);
-            $avaliacao = new Avaliacao;
+            $validatedData = $request->validate([
+                'rating' => 'required',
+            
+            ]);
+            $avaliacao = new Avaliacao();
 
             
-            $avalicao->user_id = $userAv->id;
-            $avaliacao->from_user_id = $user->id;
+            $avaliacao->user_id = $user_id;
+            $avaliacao->from_user_id = Auth::user()->id;
             $avaliacao->rating = $request->rating;
             $avaliacao->avaliacao = $request->avaliacao;
             $avaliacao->save();
@@ -90,6 +89,12 @@ class UserController extends Controller
             $errors = add('ERRO', 'O usuário não pode avaliar a si próprio');
             
         }
+
+    }
+
+    public function verAvaliacoes($user_id)
+    {
+        $avaliacao = Avaliacao::u
 
     }
 
