@@ -93,13 +93,18 @@ Botão*/
 Anuncio Detalhado*/
   
 .galeriaDet {
+<<<<<<< Updated upstream
   width: 450px;
+=======
+  width: 400px;
+>>>>>>> Stashed changes
   margin-top: 10px;
   margin-bottom: 20px;
   line-height: 10px;
   color: #3B4044;
   font-weight: bold;
   text-align: center; }
+<<<<<<< Updated upstream
   
 .galeriaDet img {
 	  border-radius: 4px;
@@ -111,6 +116,8 @@ Anuncio Detalhado*/
   margin-top: 10px;
   border-radius: 4px; }
 
+=======
+>>>>>>> Stashed changes
  
 .descricaoDet {
   background: #E1E1E1;
@@ -123,6 +130,7 @@ Anuncio Detalhado*/
   color: #3B4044;
   font-weight: bold;
   text-align: center; }
+<<<<<<< Updated upstream
   
  #text-left{
 	float:left;
@@ -139,6 +147,9 @@ Anuncio Detalhado*/
 	font-size: 20px;
 	float:right;
  }
+=======
+
+>>>>>>> Stashed changes
 /***************************************************************************/  
 /* *------------------------  */
 input[type=text], select, input[type=password] {
@@ -162,6 +173,14 @@ input[type=text], select, input[type=password] {
   margin-top: 10px;
   border-radius: 4px; }
 
+<<<<<<< Updated upstream
+=======
+.galeriaDet img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 4px; }
+>>>>>>> Stashed changes
 
 div.table-title {
   display: block;
@@ -180,8 +199,14 @@ div.table-title {
   text-transform: uppercase; }
 
 /*** Table Styles **/
+<<<<<<< Updated upstream
 .table-fill {
   width: 100%; }
+=======
+table.table-fill {
+  margin-left: auto;
+  margin-right: auto; }
+>>>>>>> Stashed changes
 
 tr {
   border-top: 1px solid #C1C3D1;
@@ -194,6 +219,7 @@ td {
   background: #EBEBEB;
   padding: 5px;
   text-align: left;
+<<<<<<< Updated upstream
   
   font-size: 13px; }
 
@@ -221,6 +247,17 @@ background-color:#eadede;
 .flez-container h6 {
 	margin:0;
 }
+=======
+  font-weight: 300;
+  font-size: 18px; }
+
+.descricaoDet td {
+  background: #EBEBEB;
+  text-align: left;
+  width: 90%;
+  font-size: 20px; }
+
+>>>>>>> Stashed changes
 /************************************************************************************
 Pagina Admin*/
 
@@ -305,7 +342,11 @@ Perfil*/
   padding: 0px 10px 0px 10px; }
 
 .comentarios {
+<<<<<<< Updated upstream
  
+=======
+  margin-left: 1%;
+>>>>>>> Stashed changes
   width: 98%;
   height: 100px;
   resize: none; }
@@ -406,12 +447,16 @@ MEDIA QUERIES
 *************************************************************************************/
 /* for 1024px or less */
 @media screen and (max-width: 1024px) {
+<<<<<<< Updated upstream
  .flez-container {
   display: inline-block;
 
 }
 
  #campreg {
+=======
+  #campreg {
+>>>>>>> Stashed changes
     width: 100%; }
 
   #content {
