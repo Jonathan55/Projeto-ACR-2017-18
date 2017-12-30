@@ -20,7 +20,6 @@
                     </ul>
                 </div>
             @endif 
-			<h3>Avaliação</h3>
 				<select>
 				<option name="rating" style="{{ $errors->has('rating') ? ' border-color: red;' : '' }}" disabled selected>Avalie o Utilizador</option>
 					<option value="1" {{ old('rating') == '1' ? 'selected' : '' }}>1</option>
