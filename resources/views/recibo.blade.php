@@ -16,24 +16,22 @@
 
 					<div class="recibo">
 						<h4>Preço</h4>
-                        <p>{{ $carro->preco }}</p>
-                        <small></small>           
+                        <p>{{ $carro->preco }}</p>  
                    </div>
 					<div class="recibo">
 						<h4>Utilizador</h4>
-                        <p>{{ $carro->name }}<p>
-                        <small>{{ $carro->email }}</small>
+                        <p><a href="{{ route('verUtilizador', $carro->user_id) }}">{{ $carro->name }}</a><p>
                    </div>
                    <div class="recibo">
                         <h4>Carro</h4>
-                        <p>{{ $carro->marca }} {{ $carro->modelo }}</p>
-                        <small></small>
+                        <p><a href="{{ route('verCarro', $carro->carro_id) }}">{{ $carro->marca }} {{ $carro->modelo }}</a></p>
 					</div>
                     @endforeach		
             </div>
 			<section> 
 				<h3>
-                    Valor Total:    {{ $compra->carros_comprados->reduce(function ($carry, $item) {
+                    Valor Total:    {{ 
+                                        $compra->carros_comprados->reduce(function ($carry, $item) {
 				                            return $carry + $item->preco; 
                                         })
                                     }}

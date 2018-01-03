@@ -14,7 +14,7 @@
 	<div id="paginaTotal">
 		<header>
 			<!--<h1>{{ config('app.name', 'Laravel') }}</h1>-->
-			<img src="img\logo.png" alt="logo">
+			<img src="{{ asset('img/logo.png') }}" alt="logo">
 		</header>
 			<nav class="navbar">
 				<span class="open-slide">
@@ -37,6 +37,7 @@
                     </form>
                     <a href="{{ route('logout') }}" id="menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a>
                     <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="menu">{{ Auth::user()->name }}</a>
+                    <a href="{{ route('verComprasVendas') }}" id="menu">Compras/Vendas</a>
                     <a href="{{ route('verCarrinho') }}" id="menu">Carrinho ({{ Auth::user()->carrinho_compras()->count() }})</a>
                     <a href="{{ route('adicionarCarro') }}" id="menu">Adicionar Carro</a>
                     <a href="{{ route('home') }}">Página Inicial</a>
@@ -57,10 +58,13 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
                         {{ csrf_field() }}
                     </form>
+                    @if(Auth::user()->admin)
                     <a href="{{ route('verAdmin') }}" id="menu">Admin</a>
+                    @endif
                     <a href="{{ route('home') }}" id="menu">Página Inicial</a>
                     <a href="{{ route('adicionarCarro') }}" id="menu">Adicionar Carro</a>
                     <a href="{{ route('verCarrinho') }}" id="menu">Carrinho ({{ Auth::user()->carrinho_compras()->count() }})</a>
+                    <a href="{{ route('verComprasVendas') }}" id="menu">Compras/Vendas</a>
                     <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="menu">{{ Auth::user()->name }}</a>
                     <a href="{{ route('logout') }}" id="menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a>
                     @if(Auth::user()->admin)

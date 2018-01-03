@@ -16,7 +16,7 @@
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
-                        <li style="color: red;">{{ $errors->first() }}</li>
+                        <li style="color: red; font-size: 15px; text-align: left;">{{ $errors->first() }}</li>
                     </ul>
                 </div>
             @endif 
