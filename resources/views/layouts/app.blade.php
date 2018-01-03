@@ -13,7 +13,8 @@
 <body>
 	<div id="paginaTotal">
 		<header>
-			<h1>{{ config('app.name', 'Laravel') }}</h1>
+			<!--<h1>{{ config('app.name', 'Laravel') }}</h1>-->
+			<img src="img\logo.png" alt="logo">
 		</header>
 			<nav class="navbar">
 				<span class="open-slide">

@@ -56,7 +56,7 @@
 
                 <tr>
                     <td class="text-left">Carrinho</td>
-                    <td class="text-right"><a href="{{ route('adicionarCarrinho', $carro->id) }}">Adicionar</a></td>
+                    <td class="text-right"><a href="{{ route('adicionarCarrinho', $carro->id) }}"><button class="button">Adicionar</button></a></td>
                 </tr>
             </tbody>
         </table>

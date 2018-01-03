@@ -12,11 +12,6 @@ header {
   padding: 10px;
   background-color: #2C2E30; }
 
-header img {
-	width:14%;
-  }
-
-  
 body {
   font-family: $font-body;
   color: $primary-color;
@@ -26,9 +21,7 @@ body {
   margin: 10px;
   margin-bottom: 60px; }
   
-#center hr {
-	width:100%;
-}
+
 
 #paginaTotal {
   width: auto; }
@@ -102,13 +95,16 @@ Botão*/
 Anuncio Detalhado*/
   
 .galeriaDet {
+
   width: 450px;
+
   margin-top: 10px;
   margin-bottom: 20px;
   line-height: 10px;
   color: #3B4044;
   font-weight: bold;
   text-align: center; }
+
   
 .galeriaDet img {
 	  border-radius: 4px;
@@ -132,7 +128,7 @@ Anuncio Detalhado*/
   color: #3B4044;
   font-weight: bold;
   text-align: center; }
-  
+
  #text-left{
 	float:left;
 	background: #EBEBEB;
@@ -148,6 +144,9 @@ Anuncio Detalhado*/
 	font-size: 20px;
 	float:right;
  }
+
+
+
 /***************************************************************************/  
 /* *------------------------  */
 input[type=text], select, input[type=password] {
@@ -172,6 +171,13 @@ input[type=text], select, input[type=password] {
   border-radius: 4px; }
 
 
+.galeriaDet img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 4px; }
+
+
 div.table-title {
   display: block;
   margin: auto;
@@ -189,8 +195,14 @@ div.table-title {
   text-transform: uppercase; }
 
 /*** Table Styles **/
+
 .table-fill {
   width: 100%; }
+
+table.table-fill {
+  margin-left: auto;
+  margin-right: auto; }
+
 
 tr {
   border-top: 1px solid #C1C3D1;
@@ -203,7 +215,6 @@ td {
   background: #EBEBEB;
   padding: 5px;
   text-align: left;
-  
   font-size: 13px; }
 
 .flez-container {
@@ -230,6 +241,15 @@ background-color:#eadede;
 .flez-container h6 {
 	margin:0;
 }
+
+
+.descricaoDet td {
+  background: #EBEBEB;
+  text-align: left;
+  width: 90%;
+  font-size: 20px; }
+
+
 /************************************************************************************
 Pagina Admin*/
 
@@ -285,12 +305,13 @@ Carrinho de Compras*/
   padding: 10px 10px 10px 10px;
   box-sizing: border-box;
   float: left;
-  width: 55%; }
+  width: 55%; 
+  }
 
 .carrinhoUPR {
   padding: 10px 10px 10px 10px;
   box-sizing: border-box;
-  float: right;
+  float: left;
   width: 15%; }
 
 .carrinhoTotal {
@@ -314,7 +335,10 @@ Perfil*/
   padding: 0px 10px 0px 10px; }
 
 .comentarios {
- 
+
+
+  margin-left: 1%;
+
   width: 98%;
   height: 100px;
   resize: none; }
@@ -415,20 +439,33 @@ MEDIA QUERIES
 *************************************************************************************/
 /* for 1024px or less */
 @media screen and (max-width: 1024px) {
-header img {
-	width:35%;
+.carrinhoProduto {
+
+  float: none;
+   ;
+
   }
- 
+
+.carrinhoUPR {
+  float: none;
+width: 100% ;  }
+
+.carrinhoTotal {
+  float: none;
+ ; }
+
+
+
+
  .flez-container {
   display: inline-block;
 
 }
-.carrinhoUPR {
-  width:100%;
-  float: left;
-  }
 
- #campreg {
+
+
+  #campreg {
+
     width: 100%; }
 
   #content {
