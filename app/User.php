@@ -97,7 +97,7 @@ class User extends Authenticatable
         return $this->hasMany('App\CarroComprado');
     }
 
-    public function avaliar()
+    public function avaliacoes()
     {
         return $this->hasMany('App\Avaliacao');
     }
