@@ -92,6 +92,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Compra');
     }
 
+    public function carros_vendidos()
+    {
+        return $this->hasMany('App\CarroComprado');
+    }
+
     public function avaliar()
     {
         return $this->hasMany('App\Avaliacao');

@@ -14,7 +14,11 @@ class UserController extends Controller
 
     public function verUtilizador($id)
     {
-        $user = User::with(['carros.marca', 'carrinho_compras.marca', 'carrinho_compras.user'])->findOrFail($id);
+        $user = User::with([
+            'carros.marca',
+            'carrinho_compras.marca',
+            'carrinho_compras.user'
+        ])->findOrFail($id);
         return view('perfil', compact('user'));
     }
 
@@ -22,7 +26,13 @@ class UserController extends Controller
     {
         $user = Auth::guard('api')->user();
         if ($user) {
-            return User::with(['carros.marca', 'carrinho_compras.marca', 'carrinho_compras.user'])->findOrFail($user->id);
+            return User::with([
+                'carros.marca', 
+                'carrinho_compras.marca', 
+                'carrinho_compras.user', 
+                'compras.carros_comprados',
+                'carros_vendidos.compra.user'
+            ])->findOrFail($user->id);
         } else {
             return response()->json(['erro' => 'Access-Token inválido.'], 401);
         }
