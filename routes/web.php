@@ -34,7 +34,6 @@ Route::get('/compra/{compra_id}', 'CarController@verRecibo')->name('verRecibo')-
 Route::post('/utilizador/{user_id}/avaliar', 'UserController@avaliar')->name('avaliar')->middleware('auth');
 Route::get('/carro/{carro_id}/eliminar', 'CarController@eliminarCarro')->name('eliminarCarro')->middleware('auth');
 Route::get('/facebook/login/{access_token}', 'UserController@facebookLogin');
-Route::get('/utilizar/compras_vendas', 'UserController@verComprasVendas')->name('verComprasVendas')->middleware('auth');
-
+Route::get('/compras_vendas', 'UserController@verComprasVendas')->name('verComprasVendas')->middleware('auth');
 
 Auth::routes();
