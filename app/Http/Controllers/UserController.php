@@ -14,7 +14,8 @@ class UserController extends Controller
 
     public function verUtilizador($id)
     {
-        $user = User::with(['carros.marca', 'carrinho_compras.marca', 'carrinho_compras.user'])->findOrFail($id);
+        $user = User::with(['carros.marca', 'carrinho_compras.marca', 'carrinho_compras.user','avaliacoes'])->findOrFail($id);
+
         return view('perfil', compact('user'));
     }
 
@@ -93,11 +94,6 @@ class UserController extends Controller
 
     }
 
-    public function verAvaliacoes($user_id)
-    {
-        //$avaliacao = Avaliacao::u
-
-    }
 
     public function eliminarUser(Request $request)
     {
@@ -128,21 +124,26 @@ class UserController extends Controller
 
             $facebook_response = $res->getBody();
             $facebook_user = json_decode($facebook_response);
+           
             $user = User::where('facebook_id', $facebook_user->id)
-                ->orWhere('email', $facebook_user->email)
+                //->orWhere('email', $facebook_user->email)
                 ->first();
+
+
+
+
 
             if ($user) {
                 // Se o utilizador existir, atualizar dados
                 $user->name = $facebook_user->name;
-                $user->email = $facebook_user->email;
+                //$user->email = $facebook_user->email;
                 $user->facebook_id = $facebook_user->id;
                 $user->save();
             } else {
                 // Se não existir, criar
                 $user = User::create([
                     'name' => $facebook_user->name,
-                    'email' => $facebook_user->email,
+                    //'email' => $facebook_user->email,
                     'facebook_id' => $facebook_user->id,
                 ]);
             }

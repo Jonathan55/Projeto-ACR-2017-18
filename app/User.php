@@ -92,7 +92,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Compra');
     }
 
-    public function avaliar()
+    public function avaliacoes()
     {
         return $this->hasMany('App\Avaliacao');
     }
