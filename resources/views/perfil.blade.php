@@ -72,6 +72,7 @@
 </div>
 
 	
+    
     <div class="perfil1"> 
         <h3>Avaliações do Utilizador</h3>
         <p>Nota:</p>
