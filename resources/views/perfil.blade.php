@@ -5,9 +5,10 @@
 		<div class="flez-container">
 		<div style="flex-grow: 2">
 			<h3>Perfil</h3>
-			<h6>Nome:</h6>  <p>{{ Auth::user()->name }}</p>
-            <h6>Email:</h6> <p>{{ Auth::user()->email }}</p>
-            <h6>Avaliação Media:</h6><p> </p>
+			<h6>Nome:</h6>  <p>{{ $user->name }}</p>
+            <h6>Email:</h6> <p>{{ $user->email }}</p>
+            <h6>Avaliação Media:</h6><p> {{ round( $user->avaliacoes->map(function ($avaliacao){ return $avaliacao->rating;})->avg()) }}</p>
+           
 		</div>
         <div style="flex-grow: 2">
             <h3>Avaliação</h3>
@@ -72,13 +73,15 @@
 </div>
 
 	
-    
-    <div class="perfil1"> 
-        <h3>Avaliações do Utilizador</h3>
-        <p>Nota:</p>
-        <p>Comentário</p>
-        <textarea class="comentarios"></textarea>
-    
-</div>
+    @foreach($user->avaliacoes as $avaliacao)
+	    <div class="perfil1"> 
+	        <h3>Avaliações do Utilizador</h3>
+	        <p>Nota: {{$avaliacao->rating}}</p>
+	        <p>Comentário:</p>
+	        <textarea class="comentarios">{{$avaliacao->avaliacao}}</textarea>
+	    
+		</div>
+	@endforeach
+
 
 @endsection
