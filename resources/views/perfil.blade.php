@@ -78,12 +78,7 @@
         </div>
 </div>
 	
-    <div class="perfil1"> 
-        <h3>Avaliações do Utilizador</h3>
-        <p>Nota:</p>
-        <p>Comentário</p>
-        <textarea class="comentarios"></textarea>
-    </div>
+    
 
 
 @endsection
