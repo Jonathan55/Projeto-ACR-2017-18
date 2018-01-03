@@ -81,6 +81,7 @@ class User extends Authenticatable
         ];
 
         return Carro::whereIn('marca_id', $pesquisa['marcas_ids'])
+            ->where('quantidade','>',0)
             ->whereBetween('preco', [ $pesquisa['preco_min'], $pesquisa['preco_max'] ])
             ->orderBy('created_at', 'desc')
             ->take(3)

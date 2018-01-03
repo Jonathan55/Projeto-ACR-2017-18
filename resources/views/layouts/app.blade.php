@@ -35,7 +35,7 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
                         {{ csrf_field() }}
                     </form>
-                    <a href="{{ route('logout') }}" id="menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a>
+                    <a href="{{ route('logout') }}" id="menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Sair</a>
                     <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="menu">{{ Auth::user()->name }}</a>
                     <a href="{{ route('verComprasVendas') }}" id="menu">Compras/Vendas</a>
                     <a href="{{ route('verCarrinho') }}" id="menu">Carrinho ({{ Auth::user()->carrinho_compras()->count() }})</a>
@@ -66,7 +66,7 @@
                     <a href="{{ route('verCarrinho') }}" id="menu">Carrinho ({{ Auth::user()->carrinho_compras()->count() }})</a>
                     <a href="{{ route('verComprasVendas') }}" id="menu">Compras/Vendas</a>
                     <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="menu">{{ Auth::user()->name }}</a>
-                    <a href="{{ route('logout') }}" id="menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Logout</a>
+                    <a href="{{ route('logout') }}" id="menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: white;">Sair</a>
                     @if(Auth::user()->admin)
                     
                     @endif
@@ -87,7 +87,7 @@
 	@yield('content')
 
 		<div id="footer">
-			<p>© 2017 ACR</p>
+			<p>© 2018 {{ config('app.name', 'Laravel') }}</p>
 		</div>
 	</div>
 </body>

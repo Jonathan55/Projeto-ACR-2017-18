@@ -15,6 +15,10 @@
             <tbody class="table-hover">
                 <!-- Só Marca, Modelo, Preço, Usado ou Novo -->
                 <tr>
+                    <td class="text-left">Estado</td>
+                    <td class="text-right">{{  $carro->usado ? 'Usado' : 'Novo'  }}</td>
+                </tr>
+                <tr>
                     <td class="text-left">Marca</td>
                     <td class="text-right">{{  $carro->marca->marca  }}</td>
                 </tr>
@@ -32,10 +36,10 @@
                 </tr>
                 <tr>
                     <td class="text-left">Cilindrada</td>
-                    <td class="text-right"<{{  $carro->cilindrada  }}</td>
+                    <td class="text-right">{{  $carro->cilindrada  }}</td>
                 </tr>
                 <tr>
-                    <td class="text-left">Potencia</td>
+                    <td class="text-left">Potência</td>
                     <td class="text-right">{{  $carro->potencia  }}</td>
                 </tr>
                 <tr>
@@ -51,17 +55,34 @@
                     <td class="text-right">{{  $carro->preco  }}</td>
                 </tr>
                 <tr>
+                    <td class="text-left">Caixa</td>
+                    <td class="text-right">{{  $carro->caixa  }}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Lugares</td>
+                    <td class="text-right">{{  $carro->lugares  }}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Quantidade</td>
+                    <td class="text-right">{{  $carro->quantidade  }}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Visualizações</td>
+                    <td class="text-right">{{  $carro->visualizacoes  }}</td>
+                </tr>
+                <tr>
                     <td class="text-left">Descrição</td>
                     <td class="text-right">{{  $carro->descricao  }}</td>
-
-                <tr>
-                    <td class="text-left">Carrinho</td>
-                    <td class="text-right"><a href="{{ route('adicionarCarrinho', $carro->id) }}"><button class="button">Adicionar</button></a></td>
                 </tr>
             </tbody>
         </table>
+        @if(Auth::user() && Auth::user()->id != $carro->user->id)
+            <br>
+            <a href="{{ route('adicionarCarrinho', $carro->id) }}"><button class="button">Adicionar ao Carrinho</button></a>
+        @endif
         @if(Auth::user() && Auth::user()->id == $carro->user->id)
-           <br><br>
+           <br>
+           <a href="{{ route('editarCarro', $carro->id) }}"><button class="button">Editar</button></a>
            <a href="{{ route('eliminarCarro', $carro->id) }}"><button class="button">Eliminar</button></a>
         @endif
     </div>

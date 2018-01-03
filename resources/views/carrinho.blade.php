@@ -15,20 +15,19 @@
         @foreach(Auth::user()->carrinho_compras as $carro)
 		<div class="carrinhoProduto">
 			<h3>Carro</h3>
-			<p>{{  $carro->marca->marca  }} {{  $carro->modelo  }}</p>
+			<p><a href="{{ route('verCarro', $carro->id) }}">{{  $carro->marca->marca  }} {{  $carro->modelo  }}</a></p>
 		</div>
-		
+        <div class="carrinhoUPR">
+			<h3></h3>
+			<a href="{{ route('eliminarCarrinho',$carro->id) }}" ><input class="button" type="submit" value="Remover"></a>
+		</div>
 		<div class="carrinhoUPR">
 			<h3>Preço</h3>
-			<p>{{  $carro->preco  }}</p>
+			<p>{{ $carro->preco }}</p>
 		</div>
 		<div class="carrinhoUPR">
 			<h3>Utilizador</h3>
-			<p>{{  $carro->user->name  }}</p>
-		</div>
-		<div class="carrinhoUPR">
-			<h3></h3>
-			<a href="{{ route('eliminarCarrinho',$carro->id) }}" ><input class="button" type="submit" value="Remover"></a>
+			<p><a href="{{ route('verUtilizador', $carro->user->id) }}">{{ $carro->user->name }} ({{ $carro->user->email }})</a></p>
 		</div>
     @endforeach
 		<hr>

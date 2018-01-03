@@ -115,7 +115,7 @@ class CarController extends Controller
             'quilometros_max' => 'int',
         ]);
 
-        $carros_mais_vistos = Carro::with(['marca', 'user', 'fotos'])->orderBy('visualizacoes', 'desc')->take(3)->get();
+        $carros_mais_vistos = Carro::with(['marca', 'user', 'fotos'])->where('quantidade','>',0)->orderBy('visualizacoes', 'desc')->take(3)->get();
         $marcas = Marca::all();
 
         // Valores do formulário ou da Base de Dados
@@ -131,6 +131,7 @@ class CarController extends Controller
         $ordem = $request->ordem ?: 'ASC';
 
         $carros_pesquisados = Carro::with(['marca', 'user', 'fotos'])
+            ->where('quantidade','>',0)
             ->where('marca_id', $marca_escolhida->id)
             ->whereIn('usado', $estado)
             ->whereBetween('preco', [$preco_min, $preco_max])
@@ -189,6 +190,7 @@ class CarController extends Controller
         $ordem = $request->ordem ?: 'ASC';
 
         $carros_pesquisados = Carro::with(['marca', 'user', 'fotos'])
+            ->where('quantidade','>',0)
             ->whereIn('marca_id', $marca_id_escolhida)
             ->whereBetween('preco', [$preco_min, $preco_max])
             ->whereBetween('ano', [$ano_min, $ano_max])
@@ -381,7 +383,7 @@ class CarController extends Controller
             } else {
                 DB::rollback();
                 $errors = new MessageBag();
-                $errors->add('ERRO', 'O utilizador ' . $carro->user->name . ' não tem a quantidade suficiente de carros ' . $carro->marca->marca . ' ' . $carro->modelo . '.');
+                $errors->add('ERRO', 'O utilizador ' . $carro->user->name . ' (' . $carro->user->email . ') não tem a quantidade suficiente de carros ' . $carro->marca->marca . ' ' . $carro->modelo . '.');
                 return redirect()->route('verCarrinho')->withErrors($errors);
             }
         }

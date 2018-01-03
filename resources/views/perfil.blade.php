@@ -1,15 +1,16 @@
 @extends('layouts.app') @section('content')
 
 <div id="center">
-    <h2>Perfil de {{ $user->name }}</h2>
+
 		<div class="flez-container">
 		<div style="flex-grow: 2">
 			<h3>Perfil</h3>
 			<h6>Nome:</h6>  <p>{{ $user->name }}</p>
             <h6>Email:</h6> <p>{{ $user->email }}</p>
-            <h6>Avaliação Media:</h6><p> {{ round( $user->avaliacoes->map(function ($avaliacao){ return $avaliacao->rating;})->avg()) }}</p>
-           
+            <h6>Avaliação Média:</h6><p> {{ round( $user->avaliacoes->map(function ($avaliacao){ return $avaliacao->rating;})->avg()) }}</p>
+
 		</div>
+        @if(Auth::user() && $user->id != Auth::user()->id)
         <div style="flex-grow: 2">
             <h3>Avaliação</h3>
             <form method="POST" action="{{ route('avaliar',$user->id) }}" enctype="multipart/form-data">
@@ -20,7 +21,7 @@
                         <li style="color: red; font-size: 15px; text-align: left;">{{ $errors->first() }}</li>
                     </ul>
                 </div>
-            @endif 
+            @endif
             <select name="rating" style="{{ $errors->has('rating') ? ' border-color: red;' : '' }}">
             <option disabled selected>Avalie o Utilizador</option>
                 <option value="1" {{ old('rating') == '1' ? 'selected' : '' }}>1</option>
@@ -33,8 +34,9 @@
             <input class="button" type="submit" value="Avaliar">
             </form>
 		</div>
+        @endif
 		<div style="flex-grow: 6">
-			<h3>Anuncios</h3>
+			<h3>Anúncios</h3>
 			<ul class="flex-container">
 			@foreach($user->carros as $carro)
 				<div class="flex-item">
@@ -44,44 +46,46 @@
 						<img id="div1" src="{{asset('storage/'.$carro->fotos[0]->path)}}" alt="anuncio">
 					</a>
 					@endif
-					<hr>
-
+                    <h3>{{$carro->marca->marca}} {{$carro->modelo}}</h3>
 					<table class="table-fill">
 
 						<tbody class="table-hover">
 
-							<!-- Só Marca, Modelo, Preço, Usado ou Novo -->
+                        <tr>
+                            <td class="text-left">Preço</td>
+                            <td class="text-right">{{$carro->preco}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Ano</td>
+                            <td class="text-right">{{$carro->ano}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Quilómetros</td>
+                            <td class="text-right">{{$carro->quilometros}}</td>
+                        </tr>
 
-							<tr>
-								<td class="text-left">Utilizador</td>
-								<td class="text-left">{{$carro->user->name}}</td>
-							</tr>
-							<tr>
-								<td class="text-left">Combustível</td>
-								<td class="text-left">{{$carro->combustivel}}</td>
-							</tr>
-							<tr>
-								<td class="text-left">Cilindrada</td>
-								<td class="text-left">{{$carro->cilindrada}}</td>
-							</tr>
 						</tbody>
 					</table>
-				</div>      
+				</div>
 				@endforeach
 			</ul>
 		</div>
 </div>
 
-	
-    @foreach($user->avaliacoes as $avaliacao)
-	    <div class="perfil1"> 
+
+
+	    <div class="perfil1">
 	        <h3>Avaliações do Utilizador</h3>
-	        <p>Nota: {{$avaliacao->rating}}</p>
-	        <p>Comentário:</p>
-	        <textarea class="comentarios">{{$avaliacao->avaliacao}}</textarea>
-	    
+            @foreach($user->avaliacoes as $avaliacao)
+            <p><b>Utilizador:</b> <a href="{{ route('verUtilizador', $avaliacao->from_user->id) }}">{{ $avaliacao->from_user->name }}</a></p>
+	        <p><b>Nota:</b> {{$avaliacao->rating}}</p>
+            @if($avaliacao->avaliacao)
+	        <p><b>Comentário:</b> {{$avaliacao->avaliacao}}</p>
+            @endif
+            <hr>
+	    	@endforeach
 		</div>
-	@endforeach
+
 
 
 @endsection

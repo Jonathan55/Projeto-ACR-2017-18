@@ -46,7 +46,7 @@
 
             @if (Auth::user() && Auth::user()->id != $carro->user->id)
             <br>
-            <a href="{{ route('adicionarCarrinho', $carro->id) }}"><button>Adicionar ao carrinho</button></a>
+            <a href="{{ route('adicionarCarrinho', $carro->id) }}"><button class="button">Adicionar ao carrinho</button></a>
             <br><br>
             @endif
 

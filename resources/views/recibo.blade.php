@@ -16,7 +16,7 @@
 
 					<div class="recibo">
 						<h4>Preço</h4>
-                        <p>{{ $carro->preco }}</p>  
+                        <p>{{ $carro->preco }} €</p>  
                    </div>
 					<div class="recibo">
 						<h4>Utilizador</h4>
@@ -34,7 +34,7 @@
                                         $compra->carros_comprados->reduce(function ($carry, $item) {
 				                            return $carry + $item->preco; 
                                         })
-                                    }}
+                                    }} €
                 </h3>
 			</section>
         </div>

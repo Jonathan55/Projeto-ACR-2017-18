@@ -1,6 +1,6 @@
 @extends('layouts.app') @section('content')
 
-<div id="middle">
+<div id="addcarro">
     <h2>Editar Anuncio</h2>
 
     <form class="form-horizontal" method="POST" action="{{ route('editarCarro',$carro->id) }}" enctype="multipart/form-data">
@@ -14,10 +14,11 @@
                 </ul>
             </div>
         @endif 
-
+        <ul class="flex-container">
+        <div class="flex-item-anuncio">
         Marca:
         <br>
-        <select id="campreg" name="marca">
+        <select name="marca">
             @foreach ($marcas as $marca)
                 <option value="{{ $marca->id }}" {{ ($carro->marca->id == $marca->id ? 'selected' : '' ) }}>{{ $marca->marca }}</option>
             @endforeach
@@ -25,7 +26,7 @@
         <br>
         Modelo:
         <br>
-        <input id="campreg" type="text" name="modelo" value="{{ $carro->modelo }}" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
+        <input type="text" name="modelo" value="{{ $carro->modelo }}" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
         @if ($errors->has('modelo'))
             <br>
             <span>
@@ -36,7 +37,7 @@
         <br>
         Combustível:
         <br>
-        <select id="campreg" name="combustivel" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
+        <select name="combustivel" style="{{ $errors->has('modelo') ? ' border-color: red;' : '' }}">
             <option></option>
             <option {{ $carro->combustivel == 'Gasolina' ? 'selected' : '' }}>Gasolina</option>
             <option {{ $carro->combustivel == 'Diesel' ? 'selected' : '' }}>Diesel</option>
@@ -44,7 +45,7 @@
         <br>
         Quilómetros:
         <br>
-        <input id="campreg" type="text" name="quilometros" value="{{ $carro->quilometros }}" style="{{ $errors->has('quilometros') ? ' border-color: red;' : '' }}">
+        <input type="text" name="quilometros" value="{{ $carro->quilometros }}" style="{{ $errors->has('quilometros') ? ' border-color: red;' : '' }}">
          @if ($errors->has('quilometros'))
             <br>
             <span>
@@ -55,7 +56,7 @@
         <br>
         Potência:
         <br>
-        <input id="campreg" type="text" name="potencia" value="{{ $carro->potencia }}" style="{{ $errors->has('potencia') ? ' border-color: red;' : '' }}">
+        <input type="text" name="potencia" value="{{ $carro->potencia }}" style="{{ $errors->has('potencia') ? ' border-color: red;' : '' }}">
          @if ($errors->has('potencia'))
             <br>
             <span>
@@ -66,7 +67,7 @@
         <br>
         Cilindrada:
         <br>
-        <input id="campreg" type="text" name="cilindrada" value="{{ $carro->cilindrada }}" style="{{ $errors->has('cilindrada') ? ' border-color: red;' : '' }}">
+        <input type="text" name="cilindrada" value="{{ $carro->cilindrada }}" style="{{ $errors->has('cilindrada') ? ' border-color: red;' : '' }}">
          @if ($errors->has('cilindrada'))
             <br>
             <span>
@@ -77,7 +78,7 @@
         <br>
         Preço:
         <br>
-        <input id="campreg" type="text" name="preco" value="{{ $carro->preco }}" style="{{ $errors->has('preco') ? ' border-color: red;' : '' }}">
+        <input type="text" name="preco" value="{{ $carro->preco }}" style="{{ $errors->has('preco') ? ' border-color: red;' : '' }}">
          @if ($errors->has('preco'))
             <br>
             <span>
@@ -88,15 +89,21 @@
         <br>
         Estado:
         <br>
-        <select id="campreg" name="usado">
+        <select name="usado">
             <option></option>
             <option value="0" {{ $carro->usado == '0' ? 'selected' : ''}}>Novo</option>
             <option value="1" {{ $carro->usado == '1' ? 'selected' : ''}}>Usado</option>
         </select>
         <br>
+
+        </div>
+		
+		<!-- coluna 2 -->
+
+        <div class="flex-item-anuncio">
         Ano:
         <br>
-        <input id="campreg" type="text" name="ano" value="{{ $carro->ano}}" style="{{ $errors->has('ano') ? ' border-color: red;' : '' }}">
+        <input type="text" name="ano" value="{{ $carro->ano}}" style="{{ $errors->has('ano') ? ' border-color: red;' : '' }}">
          @if ($errors->has('ano'))
             <br>
             <span>
@@ -107,7 +114,7 @@
         <br>
         Lugares:
         <br>
-        <input id="campreg" type="text" name="lugares" value="{{ $carro->lugares}}" style="{{ $errors->has('lugares') ? ' border-color: red;' : '' }}">
+        <input type="text" name="lugares" value="{{ $carro->lugares}}" style="{{ $errors->has('lugares') ? ' border-color: red;' : '' }}">
          @if ($errors->has('lugares'))
             <br>
             <span>
@@ -118,7 +125,7 @@
         <br>
         Quantidade:
         <br>
-        <input id="campreg" type="text" name="quantidade" value="{{ $carro->quantidade}}" style="{{ $errors->has('quantidade') ? ' border-color: red;' : '' }}">
+        <input type="text" name="quantidade" value="{{ $carro->quantidade}}" style="{{ $errors->has('quantidade') ? ' border-color: red;' : '' }}">
          @if ($errors->has('quantidade'))
             <br>
             <span>
@@ -129,7 +136,7 @@
         <br>
         Cor:
         <br>
-        <input id="campreg" type="text" name="cor" value="{{ $carro->cor}}" style="{{ $errors->has('cor') ? ' border-color: red;' : '' }}">
+        <input type="text" name="cor" value="{{ $carro->cor}}" style="{{ $errors->has('cor') ? ' border-color: red;' : '' }}">
          @if ($errors->has('cor'))
             <br>
             <span>
@@ -141,7 +148,7 @@
         <br>
         Caixa de Velocidades:
         <br>
-        <select id="campreg" name="caixa">
+        <select name="caixa">
             <option></option>
             <option {{ $carro->caixa == 'Manual' ? 'selected' : ''}}>Manual</option>
             <option {{ $carro->caixa == 'Automatica' ? 'selected' : ''}}>Automática</option>
@@ -150,10 +157,12 @@
         <br>
         Descrição:
         <br>
-        <input id="campreg" type="text" name="descricao" value="{{ $carro->descricao}}">
+        <input type="text" name="descricao" value="{{ $carro->descricao}}">
         <br>
         <br>
-        <input id="campreg" type="submit" value="Submeter Anuncio">
+        <input class="button" type="submit" value="Editar Anuncio">
+        </div>
+    </ul>
     </form>
     <br>
     <br>
