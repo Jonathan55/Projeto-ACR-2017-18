@@ -5,6 +5,9 @@ header {
   padding: 10px;
   background-color: #2C2E30; }
 
+header img {
+  width: 14%; }
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #666;
@@ -13,6 +16,9 @@ body {
 #center {
   margin: 10px;
   margin-bottom: 60px; }
+
+#center hr {
+  width: 100%; }
 
 #paginaTotal {
   width: auto; }
@@ -373,8 +379,15 @@ MEDIA QUERIES
 *************************************************************************************/
 /* for 1024px or less */
 @media screen and (max-width: 1024px) {
+  header img {
+    width: 35%; }
+
   .flez-container {
     display: inline-block; }
+
+  .carrinhoUPR {
+    width: 100%;
+    float: left; }
 
   #campreg {
     width: 100%; }
