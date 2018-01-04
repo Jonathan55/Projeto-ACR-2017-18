@@ -1,35 +1,30 @@
 $font-body:    'Open Sans', sans-serif;
 $font-table: "Roboto", helvetica, arial, sans-serif;
-$primary-color: #666;
+$cor_cinzento_escuro: #666;
 $cor_branca: #fff;
 $cor_cinza: #ccc;
 
 
-/************************************************************************************
-Estrutura*/
+/*Estrutura************************************************************************************/
 
 header {
   padding: 10px;
   background-color: #2C2E30; }
 
 header img {
-	width:14%;
-  }
+	width:14%;}
 
-  
 body {
   font-family: $font-body;
-  color: $primary-color;
+  color: $cor_cinzento_escuro;
   margin: 0px; }
   
 #center {
   margin: 10px;
-  margin-bottom: 60px; }
+  margin-bottom: 60px; 
+  hr{ 
+	width:100%; }}
   
-#center hr {
-	width:100%;
-}
-
 #paginaTotal {
   width: auto; }
 
@@ -47,18 +42,16 @@ body {
   bottom: 0;
   width: 100%;
   height:25px;
-  text-align: center; }
-
-#footer p{
-  margin:5px;
-}
+  text-align: center; 
+  p{ 
+	margin:5px; }}
 
 #menu {
   float: right;
   color: white; }
 
 /*************************************************************************************/
-/*flexi qualquee coisa*/
+/*flex*/
 
 .flex-container {
   padding: 0px;
@@ -95,8 +88,6 @@ Botão*/
   color: $cor_branca;
   background-color: #4CAF50;
   border-radius: 8px; }  
-
-/*************************************************************************************/
   
 /*************************************************************************************
 Anuncio Detalhado*/
@@ -108,19 +99,17 @@ Anuncio Detalhado*/
   line-height: 10px;
   color: #3B4044;
   font-weight: bold;
-  text-align: center; }
-  
-.galeriaDet img {
-	  border-radius: 4px;
-  line-height: 10px;
+  text-align: center;
+	img {
+	border-radius: 4px;
+	line-height: 10px;
 	background: #E1E1E1;
 	padding: 5px;
-  max-width: 100%;
-  height: 270px;
-  margin-top: 10px;
-  border-radius: 4px; }
+	max-width: 100%;
+	height: 270px;
+	margin-top: 10px;
+	border-radius: 4px; }  }
 
- 
 .descricaoDet {
   background: #E1E1E1;
   padding: 5px;
@@ -133,23 +122,22 @@ Anuncio Detalhado*/
   font-weight: bold;
   text-align: center; }
   
- #text-left{
+#text-left{
 	float:left;
 	background: #EBEBEB;
 	text-align: left;
 	width: 90%;
-	font-size: 20px;
+	font-size: 20px;}
 	
- }
- #text-right{
+#text-right{
 	background: #EBEBEB;
 	text-align: left;
 	width: 90%;
 	font-size: 20px;
-	float:right;
- }
+	float:right;}
+	
 /***************************************************************************/  
-/* *------------------------  */
+
 input[type=text], select, input[type=password] {
   width: 100%;
   padding: 12px 20px;
@@ -188,7 +176,8 @@ div.table-title {
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
   text-transform: uppercase; }
 
-/*** Table Styles **/
+/***************************************************************************/ 
+/*Tabela*/
 .table-fill {
   width: 100%; }
 
@@ -203,41 +192,34 @@ td {
   background: #EBEBEB;
   padding: 5px;
   text-align: left;
-  
   font-size: 13px; }
 
 .flez-container {
   display: flex;
   align-items: stretch;
   background-color: #f1f1f1;
-}
 
-.flez-container>div {
-		  border-radius: 4px;
-  line-height: 10px;
-background-color:#eadede;
- 
-  margin: 10px;
-  text-align: center;
-  line-height: 40px;
-  font-size: 30px;
-}
-.flez-container p{
+   p{
 	font-size: 16px;
 	margin: 0;
-	padding:0;
-}
-.flez-container h6 {
-	margin:0;
-}
+	padding:0;}
+   h6 {
+	margin:0;}}
+
+.flez-container>div {
+	border-radius: 4px;
+	line-height: 10px;
+	background-color:#eadede;
+	margin: 10px;
+	text-align: center;
+	line-height: 40px;
+	font-size: 30px;}
+
 /************************************************************************************
 Pagina Admin*/
 
 .flex-container .admin {
   width: 40%; }
-
-  
-/*************************************************************************************/
   
 /************************************************************************************
 Pagina Registo*/
@@ -246,8 +228,6 @@ Pagina Registo*/
   width: 40%;
   margin-left: 30%; }
 
-/*************************************************************************************/ 
-  
 /**************************************************************************************
 Adicionar Carro*/
 
@@ -266,8 +246,6 @@ Adicionar Carro*/
   text-align: center; }
   
 /*************************************************************************************/  
-
-
 .perfil2 {
   float: left;
   width: 50%; }
@@ -278,6 +256,7 @@ Adicionar Carro*/
 
 .perfil1 {
   width: 100%; }
+  
 /************************************************************************************
 Carrinho de Compras*/
 
@@ -298,8 +277,6 @@ Carrinho de Compras*/
   float: right;
   padding: 10px 10px 10px 10px; }
 
-/*************************************************************************************/
-
 /************************************************************************************
 Perfil*/  
   
@@ -314,12 +291,9 @@ Perfil*/
   padding: 0px 10px 0px 10px; }
 
 .comentarios {
- 
   width: 98%;
   height: 100px;
   resize: none; }
-  
-/*************************************************************************************/
 
 /************************************************************************************
 Recibo*/
@@ -332,14 +306,12 @@ Recibo*/
   margin-right: auto;
   box-shadow: 0 0 50px $cor_cinza; }  
 
-.bordaRecibo section {
-  padding: 20px; }
-
 .bordaRecibo {
   border: 1px solid #000000;
   margin: 0;
   padding: 0;
-  height: 100%; }
+  height: 100%; 
+  section { padding: 20px; }}
 
 .recibo {
   padding: 10px 10px 10px 10px;
@@ -347,34 +319,31 @@ Recibo*/
   float: right;
   width: 33%; }
 
-/*************************************************************************************/  
-
 /**************************************************************************************
 Menu Hambueger*/
 
 .navbar {
   overflow: hidden;
   background-color: #333;
-  height: 48px;  }
+  height: 48px;  
+	a { 
+		float: left;
+		display: block;
+		color: #f2f2f2;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-size: 17px; }
+	ul {
+		padding: 0;
+		margin: 0;
+		list-style: none; }
+	a:hover {
+		background-color: #ddd;
+		color: #000; }
+  
+  }
  
-.navbar a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px; }
-
-.navbar ul {
-  padding: 0;
-  margin: 0;
-  list-style: none; }
-
-.navbar a:hover {
-  background-color: #ddd;
-  color: #000; }
-
 .side-nav {
   height: 100%;
   width: 0;
@@ -386,104 +355,96 @@ Menu Hambueger*/
   opacity: 0.9;
   overflow-x: hidden;
   padding-top: 60px;
-  transition: 0.5s; }
+  transition: 0.5s; 
+	  a {
+		padding: 10px 10px 10px 30px;
+		text-decoration: none;
+		font-size: 22px;
+		color: $cor_cinza;
+		display: block;
+		transition: 0.3s;
+		width: 209px; }
+		  a:hover {
+			color: $cor_branca; }
+			  .btn-close {
+				position: absolute;
+				top: 0;
+				right: 22px;
+				font-size: 36px;
+				margin-left: 50px; }
+  }
 
-.side-nav a {
-  padding: 10px 10px 10px 30px;
-  text-decoration: none;
-  font-size: 22px;
-  color: $cor_cinza;
-  display: block;
-  transition: 0.3s;
-  width: 209px; }
-
-.side-nav a:hover {
-  color: $cor_branca; }
-
-.side-nav .btn-close {
-  position: absolute;
-  top: 0;
-  right: 22px;
-  font-size: 36px;
-  margin-left: 50px; }
-
-/************************************************************************************/
 /************************************************************************************
 
 MEDIA QUERIES
 
 *************************************************************************************/
-/* for 1024px or less */
 @media screen and (max-width: 1024px) {
 header img {
-	width:35%;
-  }
- 
- .flez-container {
-  display: inline-block;
-
-}
+	width:35%;}
+.flez-container {
+	display: inline-block;}
+  
 .carrinhoUPR {
-  width:100%;
-  float: left;
-  }
+	width:100%;
+	float: left;}
+  
+#campreg {
+	width: 100%; }
 
- #campreg {
-    width: 100%; }
-
-  #content {
+#content {
     width: 20%;
     padding: 1% 4%; }
 
-  #middle {
+#middle {
     width: 63%;
     padding: 1% 4%;
     margin: 0px 0px 5px 5px;
     float: right; }
 
-
-
-  header, footer {
+header, footer {
     padding: 1% 4%; }
 
-  #pesquisa {
+#pesquisa {
     padding: 4% 4%; }
 
-  #imgBanner {
+#imgBanner {
     object-fit: cover;
     width: 100%; } }
-/* for 700px or less */
+
+	
 @media screen and (max-width: 600px) {
-  #content {
+#content {
     width: auto;
     float: none; }
 
-  #middle {
+#middle {
     width: auto;
     float: none;
     margin-left: 0px; }
 
-
-  #imgBanner {
+#imgBanner {
     object-fit: cover;
     width: 100%; } }
-/* for 480px or less */
+
 @media screen and (max-width: 480px) {
-  header {
+header {
     height: auto; }
 
-  h1 {
+h1 {
     font-size: 2em; }
 
-
-  #imgBanner {
+#imgBanner {
     object-fit: cover;
     width: 100%; } }
 	
-	@media (min-width: 568px) {
-  .open-slide {
+@media (min-width: 568px) {
+.open-slide {
     display: none; } }
+	
 @media (max-width: 568px) {
-  .navbar-nav {
-    display: none; } }
+.navbar-nav {
+	display: none; } }
+	
+	
 /*# sourceMappingURL=style.css.map */
