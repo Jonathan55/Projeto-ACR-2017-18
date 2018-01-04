@@ -44,6 +44,7 @@
 			<input type="password" name="password_confirmation" style="{{ $errors->has('password') ? ' border-color: red;' : '' }}">
 			<br>
 			<input class="button" type="submit" value="Registar">
+            <br><br><br>
 		</form>
 </div>
 
