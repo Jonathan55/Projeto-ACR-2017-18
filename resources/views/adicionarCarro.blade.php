@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('content')
 
 <div id="addcarro">
-    <h2>Adicionar Anuncio</h2>
+    <h2>Adicionar Anúncio</h2>
     <form method="POST" action="{{ route('adicionarCarro') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
         @if ($errors->any())
@@ -172,7 +172,6 @@
         </div>
     </ul>
 	</form>
-    <br>
     <br>
 </div>
 

@@ -39,7 +39,7 @@
                     <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="menu">{{ Auth::user()->name }}</a>
                     <a href="{{ route('verComprasVendas') }}" id="menu">Compras/Vendas</a>
                     <a href="{{ route('verCarrinho') }}" id="menu">Carrinho ({{ Auth::user()->carrinho_compras()->count() }})</a>
-                    <a href="{{ route('adicionarCarro') }}" id="menu">Adicionar Carro</a>
+                    <a href="{{ route('adicionarCarro') }}" id="menu">Adicionar Anúncio</a>
                     <a href="{{ route('home') }}">Página Inicial</a>
                     @if(Auth::user()->admin)
                     <a href="{{ route('verAdmin') }}" id="menu">Admin</a>
@@ -53,7 +53,7 @@
                 @guest
                 <a href="{{ route('login') }}" id="menu">Entrar</a>
                 <a href="{{ route('register') }}" id="menu">Registar</a>
-                <a href="{{ route('home') }}">Página Inicial</a>
+                <a href="{{ route('home') }}" id="menu">Página Inicial</a>
                 @else
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none; color: white;">
                         {{ csrf_field() }}
@@ -62,7 +62,7 @@
                     <a href="{{ route('verAdmin') }}" id="menu">Admin</a>
                     @endif
                     <a href="{{ route('home') }}" id="menu">Página Inicial</a>
-                    <a href="{{ route('adicionarCarro') }}" id="menu">Adicionar Carro</a>
+                    <a href="{{ route('adicionarCarro') }}" id="menu">Adicionar Anúncio</a>
                     <a href="{{ route('verCarrinho') }}" id="menu">Carrinho ({{ Auth::user()->carrinho_compras()->count() }})</a>
                     <a href="{{ route('verComprasVendas') }}" id="menu">Compras/Vendas</a>
                     <a href="{{ route('verUtilizador', Auth::user()->id ) }}" id="menu">{{ Auth::user()->name }}</a>

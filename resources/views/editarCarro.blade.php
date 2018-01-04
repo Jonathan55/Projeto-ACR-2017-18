@@ -165,7 +165,6 @@
     </ul>
     </form>
     <br>
-    <br>
 </div>
 
 @endsection
